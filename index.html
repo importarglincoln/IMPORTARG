@@ -2,122 +2,120 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
 <title>ImportArg | Lista Mayorista</title>
 
 <style>
-
 :root{
-  --negro:#111111;
-  --negro2:#1c1c1c;
-  --amarillo:#ffd51f;
-  --amarillo-suave:#fff4b8;
-  --gris:#f3f3f3;
-  --gris2:#e8e8e8;
-  --verde:#23a455;
+  --black:#111;
+  --black2:#1c1c1c;
+  --yellow:#ffd51f;
+  --green:#9ee8b3;
+  --bg:#f4f4f4;
+  --gray:#777;
 }
 
 *{
   box-sizing:border-box;
 }
 
+html{
+  -webkit-text-size-adjust:100%;
+}
+
 body{
   margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#eeeeee;
+  background:var(--bg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   color:#151515;
 }
 
+
 /* =========================
-   CABECERA
+   HEADER
 ========================= */
 
 header{
-  background:linear-gradient(135deg,#090909,#292929);
-  border-bottom:5px solid var(--amarillo);
-  padding:24px 20px;
+  background:linear-gradient(135deg,#090909,#242424);
+  border-bottom:4px solid var(--yellow);
+
+  /* importante para iPhone */
+  padding-top:calc(env(safe-area-inset-top) + 10px);
 }
 
-.header-inner{
-  max-width:1450px;
+.header{
+  max-width:1400px;
   margin:auto;
+  padding:8px 16px 13px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:25px;
+  gap:18px;
 }
 
 .logo{
   color:white;
-  font-size:36px;
+  font-size:25px;
   font-weight:900;
-  letter-spacing:-2px;
+  letter-spacing:-1px;
   white-space:nowrap;
 }
 
 .logo span{
-  color:var(--amarillo);
+  color:var(--yellow);
 }
 
 .logo small{
   display:block;
-  font-size:10px;
-  letter-spacing:6px;
-  font-weight:500;
+  font-size:7px;
+  letter-spacing:4px;
+  font-weight:600;
   text-align:center;
-  margin-top:1px;
 }
 
-.titulo{
-  text-align:center;
+.title{
   color:white;
+  text-align:center;
+  flex:1;
 }
 
-.titulo h1{
-  margin:0;
-  font-size:38px;
-  font-weight:900;
+.title strong{
+  font-size:22px;
 }
 
-.titulo h1 span{
-  color:var(--amarillo);
+.title strong span{
+  color:var(--yellow);
 }
 
-.titulo p{
-  margin:5px 0 0;
-  color:#bbb;
-  font-size:12px;
-  letter-spacing:2px;
-}
-
-.lista-diaria{
-  background:#151515;
+.daily{
   border:1px solid #555;
-  border-radius:12px;
-  padding:11px 18px;
+  background:#151515;
+  border-radius:9px;
+  padding:7px 11px;
   color:white;
-  font-size:12px;
-  font-weight:bold;
-  white-space:nowrap;
+  text-align:center;
+  font-size:9px;
+  font-weight:800;
 }
 
-.lista-diaria span{
+.daily span{
   display:block;
-  color:var(--amarillo);
-  margin-top:4px;
-  font-size:13px;
+  color:var(--yellow);
+  font-size:10px;
+  margin-top:2px;
 }
 
 
 /* =========================
-   CONTENIDO
+   MAIN
 ========================= */
 
-.contenedor{
-  max-width:1450px;
-  margin:22px auto;
-  padding:0 15px;
+main{
+  max-width:1400px;
+  margin:auto;
+  padding:13px;
 }
 
 
@@ -125,25 +123,34 @@ header{
    BUSCADOR
 ========================= */
 
-.buscador-box{
-  background:white;
-  padding:15px;
-  border-radius:14px;
-  box-shadow:0 3px 15px rgba(0,0,0,.08);
-  margin-bottom:14px;
+.search{
+  position:relative;
+  margin-bottom:10px;
 }
 
-#buscador{
+.search-icon{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:16px;
+  pointer-events:none;
+}
+
+#search{
   width:100%;
-  border:2px solid #ddd;
-  border-radius:10px;
-  padding:14px 16px;
-  font-size:15px;
+  height:45px;
+  border:1px solid #ddd;
+  background:white;
+  border-radius:12px;
   outline:none;
+  padding:0 14px 0 42px;
+  font-size:16px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
-#buscador:focus{
-  border-color:var(--amarillo);
+#search:focus{
+  border:2px solid var(--yellow);
 }
 
 
@@ -151,67 +158,55 @@ header{
    FILTROS
 ========================= */
 
-.filtros{
+.filters{
   display:flex;
-  gap:8px;
+  gap:7px;
   overflow-x:auto;
-  padding:2px 0 12px;
+  padding:1px 0 9px;
   scrollbar-width:none;
 }
 
-.filtros::-webkit-scrollbar{
+.filters::-webkit-scrollbar{
   display:none;
 }
 
-.filtro{
+.filter{
   border:0;
   background:white;
-  padding:10px 19px;
   border-radius:30px;
-  font-weight:800;
+  padding:9px 15px;
+  font-size:11px;
+  font-weight:900;
   cursor:pointer;
   white-space:nowrap;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  box-shadow:0 2px 7px rgba(0,0,0,.07);
 }
 
-.filtro:hover{
-  background:#222;
-  color:white;
-}
-
-.filtro.activo{
-  background:var(--amarillo);
-  color:#111;
+.filter.active{
+  background:var(--yellow);
 }
 
 
 /* =========================
-   INFORMACIÓN
+   RESULTADOS
 ========================= */
 
-.info{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:4px 2px 12px;
-  font-size:12px;
+.results{
   color:#777;
-}
-
-.actualizando{
-  display:none;
+  font-size:11px;
+  margin:0 2px 8px;
 }
 
 
 /* =========================
-   TABLA PC
+   DESKTOP TABLE
 ========================= */
 
-.tabla-wrapper{
+.table-wrap{
   background:white;
-  border-radius:14px;
+  border-radius:13px;
   overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,.10);
+  box-shadow:0 3px 15px rgba(0,0,0,.09);
 }
 
 table{
@@ -220,66 +215,63 @@ table{
 }
 
 thead{
-  background:var(--negro);
+  background:#111;
   color:white;
 }
 
 th{
-  padding:13px 9px;
-  font-size:13px;
-  font-weight:900;
-  border-right:1px solid #444;
+  padding:12px 8px;
+  font-size:12px;
 }
 
-th.precio-head{
-  background:var(--amarillo);
+th.price-head{
+  background:var(--yellow);
   color:#111;
 }
 
 td{
-  padding:9px;
   text-align:center;
+  padding:8px;
+  font-size:12px;
   border-bottom:1px solid #ddd;
-  font-size:13px;
 }
 
 tbody tr:nth-child(even){
-  background:#f3f3f3;
+  background:#f4f4f4;
 }
 
-tbody tr:hover{
-  background:#fff9da;
-}
-
-.producto{
+.desktop-price{
+  background:#fff3b8;
   font-weight:900;
-}
-
-.precio{
-  background:var(--amarillo-suave);
-  font-size:15px;
-  font-weight:900;
-}
-
-.stock{
-  display:inline-block;
-  min-width:85px;
-  padding:5px 13px;
-  border-radius:30px;
-  background:#a9eaba;
-  color:#075c25;
-  font-size:11px;
-  font-weight:900;
-}
-
-.sin-stock{
-  background:#ffd0d0;
-  color:#8b0000;
+  font-size:14px;
 }
 
 
 /* =========================
-   TARJETAS MOBILE
+   STOCK
+========================= */
+
+.stock{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 11px;
+  min-width:70px;
+  border-radius:30px;
+  background:var(--green);
+  color:#075b24;
+  font-size:10px;
+  font-weight:900;
+}
+
+.no-stock{
+  background:#ffd0d0;
+  color:#8c0000;
+}
+
+
+/* =========================
+   MOBILE CARDS
 ========================= */
 
 .cards{
@@ -288,171 +280,224 @@ tbody tr:hover{
 
 .card{
   background:white;
-  border-radius:15px;
+  border-radius:13px;
+  margin-bottom:8px;
   overflow:hidden;
-  margin-bottom:12px;
-  box-shadow:0 3px 12px rgba(0,0,0,.10);
   border:1px solid #e3e3e3;
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
 }
 
-.card-top{
-  background:#181818;
-  color:white;
-  padding:13px 15px;
-  display:flex;
-  justify-content:space-between;
+.card-main{
+  padding:11px 12px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
   align-items:center;
 }
 
-.card-modelo{
+.card-product{
+  color:#9b7d00;
+  font-size:9px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.card-model{
   font-size:17px;
   font-weight:900;
+  margin-top:1px;
 }
 
-.card-producto{
-  color:var(--amarillo);
-  font-size:11px;
-  font-weight:900;
-}
-
-.card-body{
-  padding:14px 15px;
-}
-
-.card-datos{
+.card-info{
+  padding:0 12px 10px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:6px;
 }
 
-.dato small{
+.info-item{
+  min-width:0;
+}
+
+.info-item small{
+  display:block;
+  color:#999;
+  font-size:8px;
+  font-weight:800;
+  margin-bottom:2px;
+}
+
+.info-item strong{
+  display:block;
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.card-footer{
+  border-top:1px solid #eee;
+  padding:9px 12px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.price small{
   display:block;
   color:#888;
-  font-size:10px;
-  font-weight:bold;
-  margin-bottom:3px;
+  font-size:8px;
+  font-weight:700;
 }
 
-.dato strong{
-  font-size:13px;
-}
-
-.card-bottom{
-  margin-top:15px;
-  border-top:1px solid #eee;
-  padding-top:13px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.card-precio small{
+.price strong{
   display:block;
+  font-size:20px;
+  font-weight:950;
+  letter-spacing:-.5px;
+}
+
+.consult{
+  border:0;
+  background:#111;
+  color:white;
+  border-radius:8px;
+  padding:8px 11px;
   font-size:10px;
-  color:#777;
-}
-
-.card-precio strong{
-  font-size:23px;
   font-weight:900;
+  cursor:pointer;
+  text-decoration:none;
+  white-space:nowrap;
 }
 
-.card-precio strong span{
-  color:#111;
+.consult span{
+  color:var(--yellow);
 }
 
 
 /* =========================
-   CARGANDO / ERROR
+   WHATSAPP FLOAT
 ========================= */
 
-.mensaje{
-  text-align:center;
-  padding:50px 20px;
-  background:white;
-  border-radius:15px;
-}
+.whatsapp{
+  position:fixed;
+  right:14px;
+  bottom:calc(14px + env(safe-area-inset-bottom));
 
-.loader{
-  width:35px;
-  height:35px;
-  border:4px solid #ddd;
-  border-top-color:var(--amarillo);
+  width:51px;
+  height:51px;
   border-radius:50%;
-  margin:0 auto 15px;
-  animation:girar .8s linear infinite;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:#25D366;
+  color:white;
+
+  text-decoration:none;
+  font-size:25px;
+
+  box-shadow:0 5px 20px rgba(0,0,0,.25);
+  z-index:100;
 }
 
-@keyframes girar{
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+  background:white;
+  border-radius:13px;
+  padding:35px 15px;
+  text-align:center;
+}
+
+.spinner{
+  width:30px;
+  height:30px;
+  margin:0 auto 10px;
+
+  border:4px solid #ddd;
+  border-top-color:var(--yellow);
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
   to{transform:rotate(360deg);}
 }
 
 
 /* =========================
-   FOOTER
-========================= */
-
-footer{
-  text-align:center;
-  padding:30px 15px;
-  color:#777;
-  font-size:11px;
-}
-
-
-/* =========================
-   CELULAR
+   MOBILE
 ========================= */
 
 @media(max-width:700px){
 
-  body{
-    background:#f2f2f2;
-  }
-
   header{
-    padding:17px 15px;
+    padding-top:calc(env(safe-area-inset-top) + 4px);
   }
 
-  .header-inner{
-    flex-direction:column;
-    gap:10px;
+  .header{
+    padding:5px 12px 9px;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:4px 10px;
   }
 
   .logo{
-    font-size:31px;
+    font-size:21px;
   }
 
-  .titulo h1{
-    font-size:25px;
+  .logo small{
+    font-size:6px;
+    letter-spacing:3px;
   }
 
-  .titulo p{
-    display:none;
+  .title{
+    text-align:right;
   }
 
-  .lista-diaria{
-    width:100%;
-    text-align:center;
-    padding:9px;
+  .title strong{
+    font-size:18px;
   }
 
-  .contenedor{
-    margin:12px auto;
-    padding:0 10px;
+  .daily{
+    grid-column:1 / -1;
+    padding:5px 8px;
+    display:flex;
+    justify-content:center;
+    gap:5px;
+    align-items:center;
+    font-size:9px;
   }
 
-  .buscador-box{
-    padding:10px;
-    border-radius:12px;
+  .daily span{
+    display:inline;
+    margin:0;
+    font-size:9px;
   }
 
-  #buscador{
-    font-size:16px;
-    padding:13px;
+  main{
+    padding:9px 9px 80px;
   }
 
-  .tabla-wrapper{
+  #search{
+    height:42px;
+    border-radius:10px;
+  }
+
+  .filter{
+    padding:8px 13px;
+    font-size:10px;
+  }
+
+  .table-wrap{
     display:none;
   }
 
@@ -460,54 +505,47 @@ footer{
     display:block;
   }
 
-  .info{
-    font-size:11px;
-  }
-
 }
 
 
-/* =========================
-   PANTALLAS MUY CHICAS
-========================= */
+/* very small phones */
 
-@media(max-width:380px){
+@media(max-width:370px){
+
+  .title strong{
+    font-size:16px;
+  }
 
   .logo{
-    font-size:27px;
+    font-size:19px;
   }
 
-  .titulo h1{
-    font-size:22px;
-  }
-
-  .card-precio strong{
-    font-size:20px;
+  .price strong{
+    font-size:18px;
   }
 
 }
-
 </style>
 </head>
+
 
 <body>
 
 
 <header>
 
-  <div class="header-inner">
+  <div class="header">
 
     <div class="logo">
       import<span>Arg</span>
       <small>PRECIOS</small>
     </div>
 
-    <div class="titulo">
-      <h1>LISTA <span>MAYORISTA</span></h1>
-      <p>TECNOLOGÍA · STOCK ACTUALIZADO</p>
+    <div class="title">
+      <strong>LISTA <span>MAYORISTA</span></strong>
     </div>
 
-    <div class="lista-diaria">
+    <div class="daily">
       LISTA DIARIA
       <span>APPLE / SAMSUNG / XIAOMI</span>
     </div>
@@ -517,202 +555,224 @@ footer{
 </header>
 
 
-<main class="contenedor">
+<main>
 
-  <div class="buscador-box">
+  <div class="search">
+
+    <span class="search-icon">⌕</span>
 
     <input
-      id="buscador"
+      id="search"
       type="search"
-      placeholder="🔎 Buscar iPhone, modelo, color, capacidad..."
+      placeholder="Buscar modelo, capacidad, color..."
       autocomplete="off"
     >
 
   </div>
 
 
-  <div class="filtros">
+  <div class="filters">
 
-    <button class="filtro activo" data-filtro="TODOS">
+    <button class="filter active" data-filter="TODOS">
       TODOS
     </button>
 
-    <button class="filtro" data-filtro="IPHONE">
+    <button class="filter" data-filter="IPHONE">
       APPLE
     </button>
 
-    <button class="filtro" data-filtro="SAMSUNG">
+    <button class="filter" data-filter="SAMSUNG">
       SAMSUNG
     </button>
 
-    <button class="filtro" data-filtro="XIAOMI">
+    <button class="filter" data-filter="XIAOMI">
       XIAOMI
     </button>
 
   </div>
 
 
-  <div class="info">
+  <div class="results" id="results">
+    Cargando productos...
+  </div>
 
-    <span id="cantidad">
-      Cargando productos...
-    </span>
 
-    <span class="actualizando" id="actualizando">
-      Actualizando...
-    </span>
+  <div class="loading" id="loading">
+
+    <div class="spinner"></div>
+
+    Actualizando lista...
 
   </div>
 
 
-  <div id="cargando" class="mensaje">
+  <!-- PC -->
 
-    <div class="loader"></div>
-
-    Cargando lista de precios...
-
-  </div>
-
-
-  <div class="tabla-wrapper" id="tablaWrapper" style="display:none">
+  <div class="table-wrap" id="tableWrap" style="display:none">
 
     <table>
 
       <thead>
 
         <tr>
+
           <th>PRODUCTO</th>
           <th>MODELO</th>
           <th>CAPACIDAD</th>
           <th>COLOR</th>
           <th>DETALLE</th>
-          <th class="precio-head">PRECIO</th>
+
+          <th class="price-head">
+            PRECIO
+          </th>
+
           <th>ESTADO</th>
+
         </tr>
 
       </thead>
 
-      <tbody id="tablaProductos"></tbody>
+      <tbody id="table"></tbody>
 
     </table>
 
   </div>
 
 
-  <div class="cards" id="cardsProductos"></div>
+  <!-- MOBILE -->
+
+  <div class="cards" id="cards"></div>
 
 </main>
 
 
-<footer>
-
-  importArg · Lista mayorista<br>
-  Precios y disponibilidad sujetos a modificación.
-
-</footer>
+<a
+  class="whatsapp"
+  href="https://wa.me/5491124014722"
+  target="_blank"
+  aria-label="WhatsApp"
+>
+  ☎
+</a>
 
 
 <script>
 
-/* =========================================
-   GOOGLE SHEETS
-========================================= */
+/* =====================================
+   CONFIGURACIÓN
+===================================== */
 
 const CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vT8v35uv1oCfpyY7_R0fSKYG08h43uApPtUIy-VBItP2Njs99BeXR5VkKeWtZ5L2w/pub?output=csv";
 
+const WHATSAPP =
+"5491124014722";
 
-let productos = [];
-let filtroActual = "TODOS";
+let products = [];
+let currentFilter = "TODOS";
 
 
-/* =========================================
-   LECTOR CSV
-========================================= */
+/* =====================================
+   CSV PARSER
+===================================== */
 
-function parseCSV(texto){
+function parseCSV(text){
 
-  const filas = [];
+  const rows = [];
 
-  let fila = [];
-  let campo = "";
-  let dentroComillas = false;
+  let row = [];
+  let field = "";
+  let quoted = false;
 
-  for(let i=0;i<texto.length;i++){
 
-    const c = texto[i];
+  for(let i=0;i<text.length;i++){
+
+    const c = text[i];
+
 
     if(c === '"'){
 
-      if(dentroComillas && texto[i+1] === '"'){
-        campo += '"';
+      if(quoted && text[i+1] === '"'){
+
+        field += '"';
         i++;
+
       }else{
-        dentroComillas = !dentroComillas;
+
+        quoted = !quoted;
+
       }
 
-    }else if(c === "," && !dentroComillas){
+    }
 
-      fila.push(campo);
-      campo = "";
+    else if(c === "," && !quoted){
 
-    }else if(
+      row.push(field);
+      field = "";
+
+    }
+
+    else if(
       (c === "\n" || c === "\r") &&
-      !dentroComillas
+      !quoted
     ){
 
-      if(c === "\r" && texto[i+1] === "\n"){
+      if(c === "\r" && text[i+1] === "\n"){
         i++;
       }
 
-      fila.push(campo);
+      row.push(field);
 
-      if(fila.some(x => x.trim() !== "")){
-        filas.push(fila);
+      if(row.some(x => x.trim() !== "")){
+        rows.push(row);
       }
 
-      fila = [];
-      campo = "";
+      row = [];
+      field = "";
 
-    }else{
+    }
 
-      campo += c;
+    else{
+
+      field += c;
 
     }
 
   }
 
-  if(campo.length || fila.length){
 
-    fila.push(campo);
+  if(field.length || row.length){
 
-    if(fila.some(x => x.trim() !== "")){
-      filas.push(fila);
+    row.push(field);
+
+    if(row.some(x => x.trim() !== "")){
+      rows.push(row);
     }
 
   }
 
-  return filas;
+
+  return rows;
 
 }
 
 
-/* =========================================
-   LIMPIEZA
-========================================= */
+/* =====================================
+   UTILIDADES
+===================================== */
 
-function limpiar(valor){
+function clean(v){
 
-  return String(valor ?? "")
+  return String(v ?? "")
     .replace(/\uFEFF/g,"")
     .trim();
 
 }
 
 
-function escapar(texto){
+function safe(v){
 
-  return String(texto ?? "")
+  return String(v ?? "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -722,116 +782,166 @@ function escapar(texto){
 }
 
 
-/* =========================================
-   CARGAR GOOGLE SHEETS
-========================================= */
+function available(status){
 
-async function cargarProductos(){
+  const s = status.toUpperCase();
+
+  return (
+    s.includes("STOCK") &&
+    !s.includes("SIN")
+  );
+
+}
+
+
+/* =====================================
+   WHATSAPP PRODUCTO
+===================================== */
+
+function whatsappLink(p){
+
+  const message =
+`Hola ImportArg! Quiero consultar por:
+
+${p.product} ${p.model}
+${p.capacity}
+Color: ${p.color}
+Precio: ${p.price}`;
+
+  return "https://wa.me/" +
+    WHATSAPP +
+    "?text=" +
+    encodeURIComponent(message);
+
+}
+
+
+/* =====================================
+   LOAD GOOGLE SHEETS
+===================================== */
+
+async function loadProducts(){
 
   try{
 
-    const respuesta = await fetch(
-      CSV_URL + "&t=" + Date.now(),
-      {cache:"no-store"}
-    );
-
-    if(!respuesta.ok){
-      throw new Error("No se pudo descargar Google Sheets");
-    }
-
-    const texto = await respuesta.text();
-
-    const filas = parseCSV(texto);
-
-    /*
-      Busca automáticamente la fila:
-      PRODUCTO | MODELO | CAPACIDAD...
-    */
-
-    const indiceEncabezado = filas.findIndex(fila =>
-      limpiar(fila[0]).toUpperCase() === "PRODUCTO" &&
-      limpiar(fila[1]).toUpperCase() === "MODELO"
-    );
-
-    if(indiceEncabezado === -1){
-      throw new Error(
-        "No encontré los encabezados PRODUCTO y MODELO."
+    const response =
+      await fetch(
+        CSV_URL + "&t=" + Date.now(),
+        {cache:"no-store"}
       );
+
+
+    if(!response.ok){
+      throw new Error("Error Google Sheets");
     }
 
 
-    const encabezados =
-      filas[indiceEncabezado]
-      .map(x => limpiar(x).toUpperCase());
+    const text =
+      await response.text();
 
 
-    const columna = nombre =>
-      encabezados.indexOf(nombre);
+    const rows =
+      parseCSV(text);
 
 
-    const iProducto = columna("PRODUCTO");
-    const iModelo = columna("MODELO");
-    const iCapacidad = columna("CAPACIDAD");
-    const iColor = columna("COLOR");
-    const iDetalle = columna("DETALLE");
-    const iPrecio = columna("PRECIO");
-    const iEstado = columna("ESTADO");
+    const headerIndex =
+      rows.findIndex(row =>
+        clean(row[0]).toUpperCase() === "PRODUCTO" &&
+        clean(row[1]).toUpperCase() === "MODELO"
+      );
 
 
-    productos =
-      filas
-      .slice(indiceEncabezado + 1)
-      .map(fila => ({
+    if(headerIndex === -1){
 
-        producto:
-          limpiar(fila[iProducto]),
+      throw new Error(
+        "No se encontró PRODUCTO / MODELO"
+      );
 
-        modelo:
-          limpiar(fila[iModelo]),
+    }
 
-        capacidad:
-          limpiar(fila[iCapacidad]),
+
+    const headers =
+      rows[headerIndex]
+      .map(x =>
+        clean(x).toUpperCase()
+      );
+
+
+    const col =
+      name => headers.indexOf(name);
+
+
+    const cProduct =
+      col("PRODUCTO");
+
+    const cModel =
+      col("MODELO");
+
+    const cCapacity =
+      col("CAPACIDAD");
+
+    const cColor =
+      col("COLOR");
+
+    const cDetail =
+      col("DETALLE");
+
+    const cPrice =
+      col("PRECIO");
+
+    const cStatus =
+      col("ESTADO");
+
+
+    products =
+      rows
+      .slice(headerIndex + 1)
+      .map(row => ({
+
+        product:
+          clean(row[cProduct]),
+
+        model:
+          clean(row[cModel]),
+
+        capacity:
+          clean(row[cCapacity]),
 
         color:
-          limpiar(fila[iColor]),
+          clean(row[cColor]),
 
-        detalle:
-          limpiar(fila[iDetalle]),
+        detail:
+          clean(row[cDetail]),
 
-        precio:
-          limpiar(fila[iPrecio]),
+        price:
+          clean(row[cPrice]),
 
-        estado:
-          limpiar(fila[iEstado])
+        status:
+          clean(row[cStatus])
 
       }))
       .filter(p =>
-        p.producto ||
-        p.modelo ||
-        p.precio
+        p.product ||
+        p.model ||
+        p.price
       );
 
 
     document
-      .getElementById("cargando")
+      .getElementById("loading")
       .style.display = "none";
 
-
-    /*
-      En PC mostramos tabla.
-      En celular CSS muestra cards.
-    */
 
     if(window.innerWidth > 700){
 
       document
-        .getElementById("tablaWrapper")
+        .getElementById("tableWrap")
         .style.display = "block";
 
     }
 
 
-    mostrarProductos();
+    render();
 
   }
 
@@ -839,172 +949,230 @@ async function cargarProductos(){
 
     console.error(error);
 
-    document.getElementById("cargando").innerHTML = `
-
-      <strong>No pude cargar la lista.</strong>
-
-      <br><br>
-
-      Revisá que Google Sheets continúe
-      publicado como CSV.
-
-    `;
-
-    document.getElementById("cantidad").textContent = "";
+    document.getElementById("loading").innerHTML =
+      "<strong>No se pudo cargar la lista.</strong><br><br>Revisá Google Sheets.";
 
   }
 
 }
 
 
-/* =========================================
-   FILTRAR
-========================================= */
+/* =====================================
+   FILTER
+===================================== */
 
-function productosFiltrados(){
+function filteredProducts(){
 
-  const busqueda =
+  const search =
     document
-    .getElementById("buscador")
+    .getElementById("search")
     .value
-    .toUpperCase()
-    .trim();
+    .trim()
+    .toUpperCase();
 
 
-  return productos.filter(p => {
+  return products.filter(p => {
 
-    const contenido = [
 
-      p.producto,
-      p.modelo,
-      p.capacidad,
+    const text = [
+
+      p.product,
+      p.model,
+      p.capacity,
       p.color,
-      p.detalle,
-      p.precio,
-      p.estado
+      p.detail,
+      p.price,
+      p.status
 
-    ].join(" ").toUpperCase();
-
-
-    const coincideBusqueda =
-      contenido.includes(busqueda);
+    ]
+    .join(" ")
+    .toUpperCase();
 
 
-    const producto =
-      p.producto.toUpperCase();
+    const searchOK =
+      text.includes(search);
 
 
-    let coincideFiltro = true;
+    const product =
+      p.product.toUpperCase();
 
 
-    if(filtroActual === "IPHONE"){
+    let filterOK = true;
 
-      coincideFiltro =
-        producto.includes("IPHONE") ||
-        producto.includes("APPLE");
 
-    }
+    if(currentFilter === "IPHONE"){
 
-    else if(filtroActual === "SAMSUNG"){
-
-      coincideFiltro =
-        producto.includes("SAMSUNG");
-
-    }
-
-    else if(filtroActual === "XIAOMI"){
-
-      coincideFiltro =
-        producto.includes("XIAOMI") ||
-        producto.includes("POCO") ||
-        producto.includes("REDMI");
+      filterOK =
+        product.includes("IPHONE") ||
+        product.includes("APPLE");
 
     }
 
 
-    return coincideBusqueda && coincideFiltro;
+    else if(currentFilter === "SAMSUNG"){
+
+      filterOK =
+        product.includes("SAMSUNG");
+
+    }
+
+
+    else if(currentFilter === "XIAOMI"){
+
+      filterOK =
+        product.includes("XIAOMI") ||
+        product.includes("POCO") ||
+        product.includes("REDMI");
+
+    }
+
+
+    return searchOK && filterOK;
 
   });
 
 }
 
 
-/* =========================================
-   MOSTRAR
-========================================= */
+/* =====================================
+   RENDER
+===================================== */
 
-function mostrarProductos(){
+function render(){
 
-  const lista = productosFiltrados();
-
-  document.getElementById("cantidad").textContent =
-    lista.length + " productos";
+  const list =
+    filteredProducts();
 
 
-  mostrarTabla(lista);
+  document.getElementById("results").textContent =
+    list.length +
+    (list.length === 1
+      ? " producto"
+      : " productos");
 
-  mostrarCards(lista);
+
+  renderCards(list);
+
+  renderTable(list);
 
 }
 
 
-/* =========================================
-   TABLA PC
-========================================= */
+/* =====================================
+   MOBILE CARDS
+===================================== */
 
-function mostrarTabla(lista){
+function renderCards(list){
 
-  const tbody =
-    document.getElementById("tablaProductos");
+  document.getElementById("cards").innerHTML =
 
+    list.map(p => {
 
-  tbody.innerHTML =
-    lista.map(p => {
-
-      const disponible =
-        p.estado.toUpperCase().includes("STOCK") &&
-        !p.estado.toUpperCase().includes("SIN");
+      const inStock =
+        available(p.status);
 
 
       return `
 
-        <tr>
+      <article class="card">
 
-          <td class="producto">
-            ${escapar(p.producto)}
-          </td>
+        <div class="card-main">
 
-          <td>
-            ${escapar(p.modelo)}
-          </td>
+          <div>
 
-          <td>
-            ${escapar(p.capacidad)}
-          </td>
+            <div class="card-product">
+              ${safe(p.product)}
+            </div>
 
-          <td>
-            ${escapar(p.color)}
-          </td>
+            <div class="card-model">
+              ${safe(p.model)}
+            </div>
 
-          <td>
-            ${escapar(p.detalle)}
-          </td>
+          </div>
 
-          <td class="precio">
-            ${escapar(p.precio)}
-          </td>
 
-          <td>
+          <span class="stock ${inStock ? "" : "no-stock"}">
 
-            <span class="stock ${disponible ? "" : "sin-stock"}">
+            ${safe(p.status || "CONSULTAR")}
 
-              ${escapar(p.estado || "CONSULTAR")}
+          </span>
 
-            </span>
+        </div>
 
-          </td>
 
-        </tr>
+        <div class="card-info">
+
+          <div class="info-item">
+
+            <small>CAPACIDAD</small>
+
+            <strong>
+              ${safe(p.capacity || "-")}
+            </strong>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <small>COLOR</small>
+
+            <strong>
+              ${safe(p.color || "-")}
+            </strong>
+
+          </div>
+
+
+          ${
+            p.detail
+            ?
+            `
+
+            <div class="info-item">
+
+              <small>DETALLE</small>
+
+              <strong>
+                ${safe(p.detail)}
+              </strong>
+
+            </div>
+
+            `
+            :
+            ""
+          }
+
+        </div>
+
+
+        <div class="card-footer">
+
+          <div class="price">
+
+            <small>PRECIO MAYORISTA</small>
+
+            <strong>
+              ${safe(p.price)}
+            </strong>
+
+          </div>
+
+
+          <a
+            class="consult"
+            href="${whatsappLink(p)}"
+            target="_blank"
+          >
+
+            CONSULTAR <span>›</span>
+
+          </a>
+
+        </div>
+
+      </article>
 
       `;
 
@@ -1013,122 +1181,59 @@ function mostrarTabla(lista){
 }
 
 
-/* =========================================
-   TARJETAS CELULAR
-========================================= */
+/* =====================================
+   DESKTOP TABLE
+===================================== */
 
-function mostrarCards(lista){
+function renderTable(list){
 
-  const contenedor =
-    document.getElementById("cardsProductos");
+  document.getElementById("table").innerHTML =
 
+    list.map(p => {
 
-  contenedor.innerHTML =
-    lista.map(p => {
-
-      const disponible =
-        p.estado.toUpperCase().includes("STOCK") &&
-        !p.estado.toUpperCase().includes("SIN");
+      const inStock =
+        available(p.status);
 
 
       return `
 
-        <article class="card">
+      <tr>
 
-          <div class="card-top">
+        <td>
+          <strong>${safe(p.product)}</strong>
+        </td>
 
-            <div>
+        <td>
+          ${safe(p.model)}
+        </td>
 
-              <div class="card-producto">
-                ${escapar(p.producto)}
-              </div>
+        <td>
+          ${safe(p.capacity)}
+        </td>
 
-              <div class="card-modelo">
-                ${escapar(p.modelo)}
-              </div>
+        <td>
+          ${safe(p.color)}
+        </td>
 
-            </div>
+        <td>
+          ${safe(p.detail)}
+        </td>
 
+        <td class="desktop-price">
+          ${safe(p.price)}
+        </td>
 
-            <span class="stock ${disponible ? "" : "sin-stock"}">
+        <td>
 
-              ${escapar(p.estado || "CONSULTAR")}
+          <span class="stock ${inStock ? "" : "no-stock"}">
 
-            </span>
+            ${safe(p.status || "CONSULTAR")}
 
-          </div>
+          </span>
 
+        </td>
 
-          <div class="card-body">
-
-
-            <div class="card-datos">
-
-
-              <div class="dato">
-
-                <small>CAPACIDAD</small>
-
-                <strong>
-                  ${escapar(p.capacidad || "-")}
-                </strong>
-
-              </div>
-
-
-              <div class="dato">
-
-                <small>COLOR</small>
-
-                <strong>
-                  ${escapar(p.color || "-")}
-                </strong>
-
-              </div>
-
-
-              ${
-                p.detalle
-                ?
-                `
-
-                <div class="dato">
-
-                  <small>DETALLE</small>
-
-                  <strong>
-                    ${escapar(p.detalle)}
-                  </strong>
-
-                </div>
-
-                `
-                :
-                ""
-              }
-
-
-            </div>
-
-
-            <div class="card-bottom">
-
-              <div class="card-precio">
-
-                <small>PRECIO MAYORISTA</small>
-
-                <strong>
-                  ${escapar(p.precio)}
-                </strong>
-
-              </div>
-
-            </div>
-
-
-          </div>
-
-        </article>
+      </tr>
 
       `;
 
@@ -1137,62 +1242,65 @@ function mostrarCards(lista){
 }
 
 
-/* =========================================
-   BUSCADOR
-========================================= */
+/* =====================================
+   SEARCH
+===================================== */
 
 document
-  .getElementById("buscador")
-  .addEventListener(
-    "input",
-    mostrarProductos
-  );
+.getElementById("search")
+.addEventListener(
+  "input",
+  render
+);
 
 
-/* =========================================
-   BOTONES FILTRO
-========================================= */
+/* =====================================
+   FILTER BUTTONS
+===================================== */
 
 document
-  .querySelectorAll(".filtro")
-  .forEach(boton => {
+.querySelectorAll(".filter")
+.forEach(button => {
 
-    boton.addEventListener("click", () => {
+  button.addEventListener(
+    "click",
+    () => {
 
       document
-        .querySelectorAll(".filtro")
-        .forEach(b =>
-          b.classList.remove("activo")
-        );
+      .querySelectorAll(".filter")
+      .forEach(b =>
+        b.classList.remove("active")
+      );
 
 
-      boton.classList.add("activo");
+      button
+      .classList
+      .add("active");
 
 
-      filtroActual =
-        boton.dataset.filtro;
+      currentFilter =
+        button.dataset.filter;
 
 
-      mostrarProductos();
+      render();
 
-    });
+    }
+  );
 
-  });
-
-
-/* =========================================
-   INICIAR
-========================================= */
-
-cargarProductos();
+});
 
 
-/*
-  Actualización automática cada 5 minutos.
-*/
+/* =====================================
+   START
+===================================== */
+
+loadProducts();
+
+
+/* refresca Google Sheets cada 5 min */
 
 setInterval(
-  cargarProductos,
+  loadProducts,
   300000
 );
 
