@@ -53,16 +53,35 @@ header{
   gap:10px 15px;
 }
 
+.brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:white;
+  border:2px solid var(--yellow);
+}
+
 .logo{
   color:white;
   font-size:24px;
-  font-weight:950;
+  font-weight:750;
   letter-spacing:-1px;
+  line-height:1;
   white-space:nowrap;
 }
 
 .logo span{
   color:var(--yellow);
+  font-weight:800;
 }
 
 .logo small{
@@ -471,18 +490,56 @@ tbody tr:nth-child(even){
     padding:7px 12px 9px;
   }
 
-  .logo{
-    font-size:21px;
-  }
+  .brand{
+  gap:6px;
+}
+
+.brand-logo{
+  width:34px;
+  height:34px;
+  flex-basis:34px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:750;
+}
+
+.logo span{
+  font-weight:800;
+}
+
+.title strong{
+  font-size:17px;
+}
 
   .logo small{
     font-size:5px;
     letter-spacing:3px;
   }
 
-  .title strong{
-    font-size:18px;
-  }
+  .brand{
+  gap:6px;
+}
+
+.brand-logo{
+  width:34px;
+  height:34px;
+  flex-basis:34px;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:750;
+}
+
+.logo span{
+  font-weight:800;
+}
+
+.title strong{
+  font-size:17px;
+}
 
   main{
     padding:10px 8px 75px;
@@ -571,16 +628,27 @@ tbody tr:nth-child(even){
 
   <div class="header">
 
+  <div class="brand">
+
+    <img
+      src="logo-importarg.png"
+      class="brand-logo"
+      alt="ImportARG Lincoln"
+    >
+
     <div class="logo">
       import<span>Arg</span>
-      <small>PRECIOS</small>
     </div>
 
-    <div class="title">
-      <strong>
-        LISTA <span>MAYORISTA</span>
-      </strong>
-    </div>
+  </div>
+
+  <div class="title">
+    <strong>
+      LISTA <span>DE PRECIOS</span>
+    </strong>
+  </div>
+
+</div>
 
   </div>
 
