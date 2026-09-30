@@ -8,12 +8,14 @@
 
 <style>
 :root{
-  --black:#111;
-  --black2:#1c1c1c;
-  --yellow:#ffd51f;
-  --green:#9ee8b3;
+  --black:#111111;
+  --yellow:#ffd400;
+  --green:#a7edba;
+  --green-dark:#075b24;
+  --whatsapp:#25D366;
   --bg:#f4f4f4;
-  --gray:#777;
+  --line:#e5e5e5;
+  --blue:#1687df;
 }
 
 *{
@@ -28,37 +30,34 @@ body{
   margin:0;
   background:var(--bg);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  color:#151515;
+  color:#111;
 }
 
 
-/* =========================
+/* ========================================
    HEADER
-========================= */
+======================================== */
 
 header{
-  background:linear-gradient(135deg,#090909,#242424);
+  background:linear-gradient(135deg,#090909,#202020);
   border-bottom:4px solid var(--yellow);
-
-  /* importante para iPhone */
-  padding-top:calc(env(safe-area-inset-top) + 10px);
+  padding-top:calc(env(safe-area-inset-top) + 5px);
 }
 
 .header{
-  max-width:1400px;
+  max-width:1450px;
   margin:auto;
-  padding:8px 16px 13px;
-
-  display:flex;
+  padding:7px 14px 10px;
+  display:grid;
+  grid-template-columns:auto 1fr;
   align-items:center;
-  justify-content:space-between;
-  gap:18px;
+  gap:6px 15px;
 }
 
 .logo{
   color:white;
-  font-size:25px;
-  font-weight:900;
+  font-size:24px;
+  font-weight:950;
   letter-spacing:-1px;
   white-space:nowrap;
 }
@@ -69,94 +68,135 @@ header{
 
 .logo small{
   display:block;
-  font-size:7px;
+  font-size:6px;
   letter-spacing:4px;
-  font-weight:600;
   text-align:center;
+  font-weight:700;
 }
 
 .title{
+  text-align:right;
   color:white;
-  text-align:center;
-  flex:1;
 }
 
 .title strong{
-  font-size:22px;
+  font-size:23px;
+  font-weight:950;
 }
 
-.title strong span{
+.title span{
   color:var(--yellow);
 }
 
 .daily{
+  grid-column:1/-1;
   border:1px solid #555;
-  background:#151515;
-  border-radius:9px;
-  padding:7px 11px;
+  border-radius:10px;
+  padding:6px 10px;
   color:white;
   text-align:center;
-  font-size:9px;
+  font-size:10px;
   font-weight:800;
 }
 
 .daily span{
-  display:block;
   color:var(--yellow);
-  font-size:10px;
-  margin-top:2px;
+  margin-left:5px;
 }
 
 
-/* =========================
+/* ========================================
    MAIN
-========================= */
+======================================== */
 
 main{
-  max-width:1400px;
+  max-width:1450px;
   margin:auto;
-  padding:13px;
+  padding:12px 12px 80px;
 }
 
 
-/* =========================
-   BUSCADOR
-========================= */
+/* ========================================
+   BUSCADOR ESTILO YOUTUBE
+======================================== */
 
-.search{
-  position:relative;
-  margin-bottom:10px;
-}
-
-.search-icon{
-  position:absolute;
-  left:14px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:16px;
-  pointer-events:none;
+.search-wrapper{
+  width:100%;
+  display:flex;
+  height:48px;
+  margin-bottom:11px;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.07));
 }
 
 #search{
-  width:100%;
-  height:45px;
-  border:1px solid #ddd;
+  flex:1;
+  min-width:0;
+
+  border:1px solid #d6d6d6;
+  border-right:0;
+
+  border-radius:24px 0 0 24px;
+
   background:white;
-  border-radius:12px;
-  outline:none;
-  padding:0 14px 0 42px;
+
+  padding:0 17px;
+
   font-size:16px;
-  box-shadow:0 2px 8px rgba(0,0,0,.06);
+  color:#111;
+
+  outline:none;
+}
+
+#search::placeholder{
+  color:#8b8b8b;
 }
 
 #search:focus{
-  border:2px solid var(--yellow);
+  border-color:#aaa;
+}
+
+.search-button{
+  width:62px;
+  flex:0 0 62px;
+
+  border:1px solid #d6d6d6;
+
+  border-radius:0 24px 24px 0;
+
+  background:#f8f8f8;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  padding:0;
+}
+
+.search-button:hover{
+  background:#eeeeee;
+}
+
+.search-button:active{
+  background:#e3e3e3;
+}
+
+.search-button svg{
+  width:25px;
+  height:25px;
+
+  fill:none;
+  stroke:#222;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
 
-/* =========================
+/* ========================================
    FILTROS
-========================= */
+======================================== */
 
 .filters{
   display:flex;
@@ -173,40 +213,79 @@ main{
 .filter{
   border:0;
   background:white;
-  border-radius:30px;
-  padding:9px 15px;
+  color:var(--blue);
+
+  border-radius:22px;
+
+  padding:9px 17px;
+
   font-size:11px;
   font-weight:900;
+
   cursor:pointer;
   white-space:nowrap;
+
   box-shadow:0 2px 7px rgba(0,0,0,.07);
 }
 
 .filter.active{
   background:var(--yellow);
+  color:#111;
 }
 
 
-/* =========================
+/* ========================================
    RESULTADOS
-========================= */
+======================================== */
 
 .results{
-  color:#777;
   font-size:11px;
-  margin:0 2px 8px;
+  color:#777;
+  font-weight:600;
+  margin:1px 3px 9px;
 }
 
 
-/* =========================
-   DESKTOP TABLE
-========================= */
+/* ========================================
+   LOADING
+======================================== */
+
+.loading{
+  background:white;
+  padding:35px 15px;
+  text-align:center;
+  border-radius:12px;
+}
+
+.spinner{
+  width:30px;
+  height:30px;
+  margin:0 auto 10px;
+
+  border:4px solid #ddd;
+  border-top-color:var(--yellow);
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+
+/* ========================================
+   PC TABLE
+======================================== */
 
 .table-wrap{
   background:white;
-  border-radius:13px;
+  border-radius:12px;
   overflow:hidden;
-  box-shadow:0 3px 15px rgba(0,0,0,.09);
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
 }
 
 table{
@@ -220,7 +299,7 @@ thead{
 }
 
 th{
-  padding:12px 8px;
+  padding:11px 8px;
   font-size:12px;
 }
 
@@ -230,237 +309,244 @@ th.price-head{
 }
 
 td{
-  text-align:center;
   padding:8px;
+  text-align:center;
   font-size:12px;
   border-bottom:1px solid #ddd;
 }
 
 tbody tr:nth-child(even){
-  background:#f4f4f4;
+  background:#f5f5f5;
 }
 
 .desktop-price{
-  background:#fff3b8;
   font-weight:900;
-  font-size:14px;
 }
 
 
-/* =========================
+/* ========================================
    STOCK
-========================= */
+======================================== */
 
 .stock{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:5px 11px;
-  min-width:70px;
-  border-radius:30px;
+
+  min-width:67px;
+
+  padding:5px 9px;
+
+  border-radius:20px;
+
   background:var(--green);
-  color:#075b24;
+  color:var(--green-dark);
+
   font-size:10px;
   font-weight:900;
 }
 
 .no-stock{
   background:#ffd0d0;
-  color:#8c0000;
+  color:#8b0000;
 }
 
 
-/* =========================
-   MOBILE CARDS
-========================= */
+/* ========================================
+   MOBILE LIST
+======================================== */
 
-.cards{
+.mobile-list{
   display:none;
 }
 
-.card{
+.product-row{
   background:white;
-  border-radius:13px;
-  margin-bottom:8px;
-  overflow:hidden;
-  border:1px solid #e3e3e3;
-  box-shadow:0 2px 8px rgba(0,0,0,.07);
-}
 
-.card-main{
-  padding:11px 12px;
+  border:1px solid #e7e7e7;
+
+  border-radius:11px;
+
+  min-height:58px;
+
+  margin-bottom:7px;
+
+  padding:7px 7px 7px 10px;
+
   display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px;
+
+  grid-template-columns:
+    minmax(78px,1.15fr)
+    minmax(53px,.8fr)
+    minmax(62px,1fr)
+    minmax(42px,.7fr)
+    minmax(65px,.85fr)
+    minmax(67px,.95fr)
+    39px;
+
   align-items:center;
+
+  column-gap:0;
+
+  box-shadow:0 2px 7px rgba(0,0,0,.055);
 }
 
-.card-product{
-  color:#9b7d00;
-  font-size:9px;
-  font-weight:900;
-  text-transform:uppercase;
-}
 
-.card-model{
-  font-size:17px;
-  font-weight:900;
-  margin-top:1px;
-}
+/* divisores */
 
-.card-info{
-  padding:0 12px 10px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-}
-
-.info-item{
+.cell{
   min-width:0;
+  padding:0 6px;
+  border-right:1px solid var(--line);
+  text-align:center;
 }
 
-.info-item small{
-  display:block;
-  color:#999;
+.cell:first-child{
+  text-align:left;
+  padding-left:1px;
+}
+
+.cell:last-of-type{
+  border-right:0;
+}
+
+
+/* PRODUCTO */
+
+.product-name{
+  color:#b28b00;
   font-size:8px;
-  font-weight:800;
-  margin-bottom:2px;
+  font-weight:950;
+  line-height:1.1;
 }
 
-.info-item strong{
-  display:block;
+.product-model{
+  margin-top:2px;
+
+  color:#111;
+
   font-size:12px;
+  font-weight:950;
+
+  line-height:1.05;
+
+  word-break:normal;
+}
+
+
+/* CAPACIDAD / COLOR / DETALLE */
+
+.value{
+  font-size:10px;
+  font-weight:850;
+
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
-.card-footer{
-  border-top:1px solid #eee;
-  padding:9px 12px;
 
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:8px;
-}
+/* PRECIO */
 
-.price small{
-  display:block;
-  color:#888;
-  font-size:8px;
-  font-weight:700;
-}
-
-.price strong{
-  display:block;
-  font-size:20px;
-  font-weight:950;
-  letter-spacing:-.5px;
-}
-
-.consult{
-  border:0;
-  background:#111;
-  color:white;
-  border-radius:8px;
-  padding:8px 11px;
+.mobile-price{
   font-size:10px;
   font-weight:900;
-  cursor:pointer;
-  text-decoration:none;
   white-space:nowrap;
 }
 
-.consult span{
-  color:var(--yellow);
+.mobile-price .currency{
+  color:#555;
+  font-size:8px;
+  margin-right:2px;
 }
 
 
-/* =========================
-   WHATSAPP FLOAT
-========================= */
+/* ========================================
+   WHATSAPP POR PRODUCTO
+======================================== */
 
-.whatsapp{
-  position:fixed;
-  right:14px;
-  bottom:calc(14px + env(safe-area-inset-bottom));
+.whatsapp-row{
+  width:34px;
+  height:34px;
 
-  width:51px;
-  height:51px;
-  border-radius:50%;
+  border-radius:9px;
+
+  background:var(--whatsapp);
 
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
-  background:#25D366;
-  color:white;
+  margin-left:auto;
 
   text-decoration:none;
-  font-size:25px;
 
-  box-shadow:0 5px 20px rgba(0,0,0,.25);
-  z-index:100;
+  box-shadow:0 2px 5px rgba(0,0,0,.12);
+}
+
+.whatsapp-row svg{
+  width:21px;
+  height:21px;
+  fill:white;
 }
 
 
-/* =========================
-   LOADING
-========================= */
+/* ========================================
+   WHATSAPP FLOTANTE
+======================================== */
 
-.loading{
-  background:white;
-  border-radius:13px;
-  padding:35px 15px;
-  text-align:center;
-}
+.whatsapp-floating{
+  position:fixed;
 
-.spinner{
-  width:30px;
-  height:30px;
-  margin:0 auto 10px;
+  right:15px;
+  bottom:calc(15px + env(safe-area-inset-bottom));
 
-  border:4px solid #ddd;
-  border-top-color:var(--yellow);
+  width:55px;
+  height:55px;
+
   border-radius:50%;
 
-  animation:spin .8s linear infinite;
+  background:var(--whatsapp);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  z-index:100;
+
+  box-shadow:0 5px 20px rgba(0,0,0,.24);
+
+  text-decoration:none;
 }
 
-@keyframes spin{
-  to{transform:rotate(360deg);}
+.whatsapp-floating svg{
+  width:33px;
+  height:33px;
+  fill:white;
 }
 
 
-/* =========================
+/* ========================================
    MOBILE
-========================= */
+======================================== */
 
 @media(max-width:700px){
 
   header{
-    padding-top:calc(env(safe-area-inset-top) + 4px);
+    padding-top:calc(env(safe-area-inset-top) + 3px);
   }
 
   .header{
-    padding:5px 12px 9px;
-    display:grid;
-    grid-template-columns:auto 1fr;
-    gap:4px 10px;
+    padding:4px 11px 8px;
   }
 
   .logo{
-    font-size:21px;
+    font-size:20px;
   }
 
   .logo small{
-    font-size:6px;
+    font-size:5px;
     letter-spacing:3px;
-  }
-
-  .title{
-    text-align:right;
   }
 
   .title strong{
@@ -468,32 +554,35 @@ tbody tr:nth-child(even){
   }
 
   .daily{
-    grid-column:1 / -1;
-    padding:5px 8px;
-    display:flex;
-    justify-content:center;
-    gap:5px;
-    align-items:center;
-    font-size:9px;
-  }
-
-  .daily span{
-    display:inline;
-    margin:0;
+    padding:5px 7px;
     font-size:9px;
   }
 
   main{
-    padding:9px 9px 80px;
+    padding:10px 8px 75px;
+  }
+
+  .search-wrapper{
+    height:46px;
+    margin-bottom:10px;
   }
 
   #search{
-    height:42px;
-    border-radius:10px;
+    font-size:15px;
+  }
+
+  .search-button{
+    width:58px;
+    flex-basis:58px;
+  }
+
+  .search-button svg{
+    width:26px;
+    height:26px;
   }
 
   .filter{
-    padding:8px 13px;
+    padding:8px 14px;
     font-size:10px;
   }
 
@@ -501,30 +590,61 @@ tbody tr:nth-child(even){
     display:none;
   }
 
-  .cards{
+  .mobile-list{
     display:block;
   }
-
 }
 
 
-/* very small phones */
+/* ========================================
+   TELÉFONOS ANGOSTOS
+======================================== */
 
-@media(max-width:370px){
+@media(max-width:390px){
 
-  .title strong{
-    font-size:16px;
+  .product-row{
+    grid-template-columns:
+      minmax(69px,1.1fr)
+      minmax(48px,.78fr)
+      minmax(55px,.95fr)
+      minmax(35px,.58fr)
+      minmax(58px,.85fr)
+      minmax(61px,.9fr)
+      35px;
+
+    padding-left:7px;
   }
 
-  .logo{
-    font-size:19px;
+  .cell{
+    padding:0 4px;
   }
 
-  .price strong{
-    font-size:18px;
+  .product-model{
+    font-size:11px;
   }
 
+  .value,
+  .mobile-price{
+    font-size:9px;
+  }
+
+  .stock{
+    min-width:55px;
+    padding:4px 5px;
+    font-size:8px;
+  }
+
+  .whatsapp-row{
+    width:31px;
+    height:31px;
+  }
+
+  .whatsapp-row svg{
+    width:19px;
+    height:19px;
+  }
 }
+
 </style>
 </head>
 
@@ -542,7 +662,9 @@ tbody tr:nth-child(even){
     </div>
 
     <div class="title">
-      <strong>LISTA <span>MAYORISTA</span></strong>
+      <strong>
+        LISTA <span>MAYORISTA</span>
+      </strong>
     </div>
 
     <div class="daily">
@@ -557,9 +679,10 @@ tbody tr:nth-child(even){
 
 <main>
 
-  <div class="search">
 
-    <span class="search-icon">⌕</span>
+  <!-- BUSCADOR YOUTUBE -->
+
+  <div class="search-wrapper">
 
     <input
       id="search"
@@ -568,8 +691,23 @@ tbody tr:nth-child(even){
       autocomplete="off"
     >
 
+    <button
+      class="search-button"
+      id="searchButton"
+      aria-label="Buscar"
+    >
+
+      <svg viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+      </svg>
+
+    </button>
+
   </div>
 
+
+  <!-- FILTROS -->
 
   <div class="filters">
 
@@ -608,7 +746,11 @@ tbody tr:nth-child(even){
 
   <!-- PC -->
 
-  <div class="table-wrap" id="tableWrap" style="display:none">
+  <div
+    class="table-wrap"
+    id="tableWrap"
+    style="display:none"
+  >
 
     <table>
 
@@ -639,28 +781,40 @@ tbody tr:nth-child(even){
   </div>
 
 
-  <!-- MOBILE -->
+  <!-- CELULAR -->
 
-  <div class="cards" id="cards"></div>
+  <div
+    class="mobile-list"
+    id="mobileList"
+  ></div>
+
 
 </main>
 
 
+<!-- WHATSAPP FLOTANTE -->
+
 <a
-  class="whatsapp"
+  class="whatsapp-floating"
   href="https://wa.me/5491124014722"
   target="_blank"
-  aria-label="WhatsApp"
+  aria-label="Contactar por WhatsApp"
 >
-  ☎
+
+  <svg viewBox="0 0 32 32">
+
+    <path d="M16.04 3C9.39 3 4 8.3 4 14.84c0 2.29.66 4.51 1.92 6.43L4 28l6.95-1.81a12.17 12.17 0 0 0 5.08 1.1h.01C22.68 27.29 28 22 28 15.45 28 8.91 22.68 3 16.04 3zm0 21.96h-.01a9.86 9.86 0 0 1-5.02-1.37l-.36-.21-4.12 1.07 1.1-4-.23-.37a9.65 9.65 0 0 1-1.5-5.24c0-5.29 4.55-9.6 10.15-9.6 5.58 0 10.12 4.31 10.12 9.6 0 5.3-4.54 10.12-10.13 10.12zm5.56-7.18c-.3-.15-1.8-.87-2.08-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.35.22-.65.07-.3-.15-1.27-.46-2.42-1.46-.89-.78-1.5-1.75-1.67-2.05-.18-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.62-.93-2.22-.25-.58-.5-.5-.68-.51h-.58c-.2 0-.53.07-.8.37-.28.3-1.06 1.02-1.06 2.49s1.09 2.89 1.24 3.09c.15.2 2.14 3.21 5.18 4.5.72.31 1.29.49 1.73.63.73.23 1.39.2 1.91.12.58-.09 1.8-.72 2.05-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35z"/>
+
+  </svg>
+
 </a>
 
 
 <script>
 
-/* =====================================
-   CONFIGURACIÓN
-===================================== */
+/* ========================================
+   CONFIG
+======================================== */
 
 const CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vT8v35uv1oCfpyY7_R0fSKYG08h43uApPtUIy-VBItP2Njs99BeXR5VkKeWtZ5L2w/pub?output=csv";
@@ -669,12 +823,14 @@ const WHATSAPP =
 "5491124014722";
 
 let products = [];
-let currentFilter = "TODOS";
+
+let currentFilter =
+"TODOS";
 
 
-/* =====================================
-   CSV PARSER
-===================================== */
+/* ========================================
+   CSV
+======================================== */
 
 function parseCSV(text){
 
@@ -692,12 +848,17 @@ function parseCSV(text){
 
     if(c === '"'){
 
-      if(quoted && text[i+1] === '"'){
+      if(
+        quoted &&
+        text[i+1] === '"'
+      ){
 
         field += '"';
         i++;
 
-      }else{
+      }
+
+      else{
 
         quoted = !quoted;
 
@@ -705,32 +866,51 @@ function parseCSV(text){
 
     }
 
-    else if(c === "," && !quoted){
+
+    else if(
+      c === "," &&
+      !quoted
+    ){
 
       row.push(field);
+
       field = "";
 
     }
+
 
     else if(
       (c === "\n" || c === "\r") &&
       !quoted
     ){
 
-      if(c === "\r" && text[i+1] === "\n"){
+      if(
+        c === "\r" &&
+        text[i+1] === "\n"
+      ){
         i++;
       }
 
+
       row.push(field);
 
-      if(row.some(x => x.trim() !== "")){
+
+      if(
+        row.some(
+          x => x.trim() !== ""
+        )
+      ){
+
         rows.push(row);
+
       }
+
 
       row = [];
       field = "";
 
     }
+
 
     else{
 
@@ -741,12 +921,22 @@ function parseCSV(text){
   }
 
 
-  if(field.length || row.length){
+  if(
+    field.length ||
+    row.length
+  ){
 
     row.push(field);
 
-    if(row.some(x => x.trim() !== "")){
+
+    if(
+      row.some(
+        x => x.trim() !== ""
+      )
+    ){
+
       rows.push(row);
+
     }
 
   }
@@ -757,22 +947,23 @@ function parseCSV(text){
 }
 
 
-/* =====================================
+/* ========================================
    UTILIDADES
-===================================== */
+======================================== */
 
-function clean(v){
+function clean(value){
 
-  return String(v ?? "")
+  return String(value ?? "")
     .replace(/\uFEFF/g,"")
     .trim();
 
 }
 
 
-function safe(v){
+function safe(value){
 
-  return String(v ?? "")
+  return String(value ?? "")
+
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -782,21 +973,44 @@ function safe(v){
 }
 
 
-function available(status){
+function inStock(status){
 
-  const s = status.toUpperCase();
+  const value =
+    status.toUpperCase();
 
-  return (
-    s.includes("STOCK") &&
-    !s.includes("SIN")
+
+  return(
+    value.includes("STOCK") &&
+    !value.includes("SIN")
   );
 
 }
 
 
-/* =====================================
-   WHATSAPP PRODUCTO
-===================================== */
+/* ========================================
+   PRECIO
+======================================== */
+
+function formatPrice(price){
+
+  let p =
+    clean(price);
+
+
+  /*
+    Si Sheets ya devuelve:
+    U$S 1.010
+    lo mantenemos.
+  */
+
+  return p;
+
+}
+
+
+/* ========================================
+   WHATSAPP
+======================================== */
 
 function whatsappLink(p){
 
@@ -804,21 +1018,43 @@ function whatsappLink(p){
 `Hola ImportArg! Quiero consultar por:
 
 ${p.product} ${p.model}
-${p.capacity}
+Capacidad: ${p.capacity}
 Color: ${p.color}
+${p.detail ? "Detalle: " + p.detail : ""}
 Precio: ${p.price}`;
 
-  return "https://wa.me/" +
+  return (
+    "https://wa.me/" +
     WHATSAPP +
     "?text=" +
-    encodeURIComponent(message);
+    encodeURIComponent(message)
+  );
 
 }
 
 
-/* =====================================
-   LOAD GOOGLE SHEETS
-===================================== */
+/* ========================================
+   WHATSAPP ICON
+======================================== */
+
+function whatsappIcon(){
+
+  return `
+
+  <svg viewBox="0 0 32 32">
+
+    <path d="M16.04 3C9.39 3 4 8.3 4 14.84c0 2.29.66 4.51 1.92 6.43L4 28l6.95-1.81a12.17 12.17 0 0 0 5.08 1.1h.01C22.68 27.29 28 22 28 15.45 28 8.91 22.68 3 16.04 3zm0 21.96h-.01a9.86 9.86 0 0 1-5.02-1.37l-.36-.21-4.12 1.07 1.1-4-.23-.37a9.65 9.65 0 0 1-1.5-5.24c0-5.29 4.55-9.6 10.15-9.6 5.58 0 10.12 4.31 10.12 9.6 0 5.3-4.54 10.12-10.13 10.12zm5.56-7.18c-.3-.15-1.8-.87-2.08-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.35.22-.65.07-.3-.15-1.27-.46-2.42-1.46-.89-.78-1.5-1.75-1.67-2.05-.18-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.62-.93-2.22-.25-.58-.5-.5-.68-.51h-.58c-.2 0-.53.07-.8.37-.28.3-1.06 1.02-1.06 2.49s1.09 2.89 1.24 3.09c.15.2 2.14 3.21 5.18 4.5.72.31 1.29.49 1.73.63.73.23 1.39.2 1.91.12.58-.09 1.8-.72 2.05-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35z"/>
+
+  </svg>
+
+  `;
+
+}
+
+
+/* ========================================
+   CARGAR SHEETS
+======================================== */
 
 async function loadProducts(){
 
@@ -826,13 +1062,21 @@ async function loadProducts(){
 
     const response =
       await fetch(
-        CSV_URL + "&t=" + Date.now(),
-        {cache:"no-store"}
+        CSV_URL +
+        "&t=" +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
       );
 
 
     if(!response.ok){
-      throw new Error("Error Google Sheets");
+
+      throw new Error(
+        "No se pudo cargar Google Sheets"
+      );
+
     }
 
 
@@ -845,16 +1089,25 @@ async function loadProducts(){
 
 
     const headerIndex =
-      rows.findIndex(row =>
-        clean(row[0]).toUpperCase() === "PRODUCTO" &&
-        clean(row[1]).toUpperCase() === "MODELO"
+      rows.findIndex(
+        row =>
+
+          clean(row[0])
+          .toUpperCase()
+          === "PRODUCTO"
+
+          &&
+
+          clean(row[1])
+          .toUpperCase()
+          === "MODELO"
       );
 
 
     if(headerIndex === -1){
 
       throw new Error(
-        "No se encontró PRODUCTO / MODELO"
+        "No encontré PRODUCTO / MODELO"
       );
 
     }
@@ -862,13 +1115,16 @@ async function loadProducts(){
 
     const headers =
       rows[headerIndex]
-      .map(x =>
-        clean(x).toUpperCase()
+      .map(
+        value =>
+          clean(value)
+          .toUpperCase()
       );
 
 
     const col =
-      name => headers.indexOf(name);
+      name =>
+        headers.indexOf(name);
 
 
     const cProduct =
@@ -895,48 +1151,57 @@ async function loadProducts(){
 
     products =
       rows
-      .slice(headerIndex + 1)
-      .map(row => ({
+      .slice(
+        headerIndex + 1
+      )
+      .map(
+        row => ({
 
-        product:
-          clean(row[cProduct]),
+          product:
+            clean(row[cProduct]),
 
-        model:
-          clean(row[cModel]),
+          model:
+            clean(row[cModel]),
 
-        capacity:
-          clean(row[cCapacity]),
+          capacity:
+            clean(row[cCapacity]),
 
-        color:
-          clean(row[cColor]),
+          color:
+            clean(row[cColor]),
 
-        detail:
-          clean(row[cDetail]),
+          detail:
+            clean(row[cDetail]),
 
-        price:
-          clean(row[cPrice]),
+          price:
+            clean(row[cPrice]),
 
-        status:
-          clean(row[cStatus])
+          status:
+            clean(row[cStatus])
 
-      }))
-      .filter(p =>
-        p.product ||
-        p.model ||
-        p.price
+        })
+      )
+      .filter(
+        p =>
+          p.product ||
+          p.model ||
+          p.price
       );
 
 
     document
       .getElementById("loading")
-      .style.display = "none";
+      .style.display =
+      "none";
 
 
-    if(window.innerWidth > 700){
+    if(
+      window.innerWidth > 700
+    ){
 
       document
         .getElementById("tableWrap")
-        .style.display = "block";
+        .style.display =
+        "block";
 
     }
 
@@ -945,98 +1210,139 @@ async function loadProducts(){
 
   }
 
+
   catch(error){
 
     console.error(error);
 
-    document.getElementById("loading").innerHTML =
-      "<strong>No se pudo cargar la lista.</strong><br><br>Revisá Google Sheets.";
+
+    document
+      .getElementById("loading")
+      .innerHTML =
+
+      `<strong>
+        No se pudo cargar la lista.
+      </strong>
+
+      <br><br>
+
+      Revisá que Google Sheets
+      siga publicado como CSV.`;
 
   }
 
 }
 
 
-/* =====================================
-   FILTER
-===================================== */
+/* ========================================
+   FILTRADO
+======================================== */
 
 function filteredProducts(){
 
   const search =
     document
-    .getElementById("search")
-    .value
-    .trim()
-    .toUpperCase();
+      .getElementById("search")
+      .value
+      .trim()
+      .toUpperCase();
 
 
-  return products.filter(p => {
+  return products.filter(
+    p => {
 
 
-    const text = [
+      const text = [
 
-      p.product,
-      p.model,
-      p.capacity,
-      p.color,
-      p.detail,
-      p.price,
-      p.status
+        p.product,
+        p.model,
+        p.capacity,
+        p.color,
+        p.detail,
+        p.price,
+        p.status
 
-    ]
-    .join(" ")
-    .toUpperCase();
-
-
-    const searchOK =
-      text.includes(search);
+      ]
+      .join(" ")
+      .toUpperCase();
 
 
-    const product =
-      p.product.toUpperCase();
+      const searchOK =
+        text.includes(search);
 
 
-    let filterOK = true;
+      const product =
+        p.product
+        .toUpperCase();
 
 
-    if(currentFilter === "IPHONE"){
+      let filterOK =
+        true;
 
-      filterOK =
-        product.includes("IPHONE") ||
-        product.includes("APPLE");
+
+      if(
+        currentFilter ===
+        "IPHONE"
+      ){
+
+        filterOK =
+
+          product.includes("IPHONE")
+
+          ||
+
+          product.includes("APPLE");
+
+      }
+
+
+      else if(
+        currentFilter ===
+        "SAMSUNG"
+      ){
+
+        filterOK =
+          product.includes(
+            "SAMSUNG"
+          );
+
+      }
+
+
+      else if(
+        currentFilter ===
+        "XIAOMI"
+      ){
+
+        filterOK =
+
+          product.includes("XIAOMI")
+
+          ||
+
+          product.includes("POCO")
+
+          ||
+
+          product.includes("REDMI");
+
+      }
+
+
+      return(
+        searchOK &&
+        filterOK
+      );
 
     }
-
-
-    else if(currentFilter === "SAMSUNG"){
-
-      filterOK =
-        product.includes("SAMSUNG");
-
-    }
-
-
-    else if(currentFilter === "XIAOMI"){
-
-      filterOK =
-        product.includes("XIAOMI") ||
-        product.includes("POCO") ||
-        product.includes("REDMI");
-
-    }
-
-
-    return searchOK && filterOK;
-
-  });
+  );
 
 }
 
 
-/* =====================================
+/* ========================================
    RENDER
-===================================== */
+======================================== */
 
 function render(){
 
@@ -1044,260 +1350,351 @@ function render(){
     filteredProducts();
 
 
-  document.getElementById("results").textContent =
+  document
+    .getElementById("results")
+    .textContent =
+
     list.length +
-    (list.length === 1
+
+    (
+      list.length === 1
       ? " producto"
-      : " productos");
+      : " productos"
+    );
 
 
-  renderCards(list);
+  renderMobile(list);
 
-  renderTable(list);
+  renderDesktop(list);
 
 }
 
 
-/* =====================================
-   MOBILE CARDS
-===================================== */
+/* ========================================
+   MOBILE
+======================================== */
 
-function renderCards(list){
+function renderMobile(list){
 
-  document.getElementById("cards").innerHTML =
-
-    list.map(p => {
-
-      const inStock =
-        available(p.status);
+  const container =
+    document.getElementById(
+      "mobileList"
+    );
 
 
-      return `
+  container.innerHTML =
 
-      <article class="card">
+    list.map(
+      p => {
 
-        <div class="card-main">
 
-          <div>
+        const stockOK =
+          inStock(p.status);
 
-            <div class="card-product">
+
+        const status =
+          p.status ||
+          "CONSULTAR";
+
+
+        const detail =
+          p.detail || "-";
+
+
+        return `
+
+        <div class="product-row">
+
+
+          <!-- PRODUCTO / MODELO -->
+
+          <div class="cell">
+
+            <div class="product-name">
+
               ${safe(p.product)}
+
             </div>
 
-            <div class="card-model">
+            <div class="product-model">
+
               ${safe(p.model)}
-            </div>
-
-          </div>
-
-
-          <span class="stock ${inStock ? "" : "no-stock"}">
-
-            ${safe(p.status || "CONSULTAR")}
-
-          </span>
-
-        </div>
-
-
-        <div class="card-info">
-
-          <div class="info-item">
-
-            <small>CAPACIDAD</small>
-
-            <strong>
-              ${safe(p.capacity || "-")}
-            </strong>
-
-          </div>
-
-
-          <div class="info-item">
-
-            <small>COLOR</small>
-
-            <strong>
-              ${safe(p.color || "-")}
-            </strong>
-
-          </div>
-
-
-          ${
-            p.detail
-            ?
-            `
-
-            <div class="info-item">
-
-              <small>DETALLE</small>
-
-              <strong>
-                ${safe(p.detail)}
-              </strong>
 
             </div>
 
-            `
-            :
-            ""
-          }
-
-        </div>
+          </div>
 
 
-        <div class="card-footer">
+          <!-- CAPACIDAD -->
 
-          <div class="price">
+          <div class="cell value">
 
-            <small>PRECIO MAYORISTA</small>
-
-            <strong>
-              ${safe(p.price)}
-            </strong>
+            ${safe(p.capacity || "-")}
 
           </div>
 
 
-          <a
-            class="consult"
-            href="${whatsappLink(p)}"
-            target="_blank"
+          <!-- COLOR -->
+
+          <div class="cell value">
+
+            ${safe(p.color || "-")}
+
+          </div>
+
+
+          <!-- DETALLE -->
+
+          <div
+            class="cell value"
+            title="${safe(detail)}"
           >
 
-            CONSULTAR <span>›</span>
+            ${safe(detail)}
+
+          </div>
+
+
+          <!-- STOCK -->
+
+          <div class="cell">
+
+            <span
+              class="stock
+              ${stockOK ? "" : "no-stock"}"
+            >
+
+              ${safe(status)}
+
+            </span>
+
+          </div>
+
+
+          <!-- PRECIO -->
+
+          <div class="cell mobile-price">
+
+            ${safe(
+              formatPrice(
+                p.price
+              )
+            )}
+
+          </div>
+
+
+          <!-- WHATSAPP -->
+
+          <a
+            class="whatsapp-row"
+            href="${whatsappLink(p)}"
+            target="_blank"
+            aria-label="Consultar por WhatsApp"
+          >
+
+            ${whatsappIcon()}
 
           </a>
 
+
         </div>
 
-      </article>
+        `;
 
-      `;
-
-    }).join("");
-
-}
-
-
-/* =====================================
-   DESKTOP TABLE
-===================================== */
-
-function renderTable(list){
-
-  document.getElementById("table").innerHTML =
-
-    list.map(p => {
-
-      const inStock =
-        available(p.status);
-
-
-      return `
-
-      <tr>
-
-        <td>
-          <strong>${safe(p.product)}</strong>
-        </td>
-
-        <td>
-          ${safe(p.model)}
-        </td>
-
-        <td>
-          ${safe(p.capacity)}
-        </td>
-
-        <td>
-          ${safe(p.color)}
-        </td>
-
-        <td>
-          ${safe(p.detail)}
-        </td>
-
-        <td class="desktop-price">
-          ${safe(p.price)}
-        </td>
-
-        <td>
-
-          <span class="stock ${inStock ? "" : "no-stock"}">
-
-            ${safe(p.status || "CONSULTAR")}
-
-          </span>
-
-        </td>
-
-      </tr>
-
-      `;
-
-    }).join("");
+      }
+    )
+    .join("");
 
 }
 
 
-/* =====================================
-   SEARCH
-===================================== */
+/* ========================================
+   DESKTOP
+======================================== */
 
-document
-.getElementById("search")
-.addEventListener(
+function renderDesktop(list){
+
+  document
+    .getElementById("table")
+    .innerHTML =
+
+    list.map(
+      p => {
+
+
+        const stockOK =
+          inStock(p.status);
+
+
+        return `
+
+        <tr>
+
+          <td>
+            <strong>
+              ${safe(p.product)}
+            </strong>
+          </td>
+
+          <td>
+            ${safe(p.model)}
+          </td>
+
+          <td>
+            ${safe(p.capacity)}
+          </td>
+
+          <td>
+            ${safe(p.color)}
+          </td>
+
+          <td>
+            ${safe(p.detail)}
+          </td>
+
+          <td class="desktop-price">
+            ${safe(p.price)}
+          </td>
+
+          <td>
+
+            <span
+              class="stock
+              ${stockOK ? "" : "no-stock"}"
+            >
+
+              ${safe(
+                p.status ||
+                "CONSULTAR"
+              )}
+
+            </span>
+
+          </td>
+
+        </tr>
+
+        `;
+
+      }
+    )
+    .join("");
+
+}
+
+
+/* ========================================
+   BUSCADOR
+======================================== */
+
+const searchInput =
+  document.getElementById(
+    "search"
+  );
+
+
+searchInput.addEventListener(
   "input",
   render
 );
 
 
-/* =====================================
-   FILTER BUTTONS
-===================================== */
+/*
+  Botón lupa estilo YouTube.
+*/
 
 document
-.querySelectorAll(".filter")
-.forEach(button => {
-
-  button.addEventListener(
+  .getElementById("searchButton")
+  .addEventListener(
     "click",
     () => {
 
-      document
-      .querySelectorAll(".filter")
-      .forEach(b =>
-        b.classList.remove("active")
-      );
-
-
-      button
-      .classList
-      .add("active");
-
-
-      currentFilter =
-        button.dataset.filter;
-
-
       render();
+
+      searchInput.focus();
 
     }
   );
 
-});
+
+/*
+  Enter también ejecuta búsqueda.
+*/
+
+searchInput.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Enter"
+    ){
+
+      render();
+
+      searchInput.blur();
+
+    }
+
+  }
+);
 
 
-/* =====================================
+/* ========================================
+   FILTROS
+======================================== */
+
+document
+  .querySelectorAll(".filter")
+  .forEach(
+    button => {
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+
+          document
+            .querySelectorAll(
+              ".filter"
+            )
+            .forEach(
+              b =>
+                b.classList
+                .remove("active")
+            );
+
+
+          button
+            .classList
+            .add("active");
+
+
+          currentFilter =
+            button.dataset.filter;
+
+
+          render();
+
+        }
+      );
+
+    }
+  );
+
+
+/* ========================================
    START
-===================================== */
+======================================== */
 
 loadProducts();
 
 
-/* refresca Google Sheets cada 5 min */
+/*
+  Actualiza los datos de Sheets
+  cada 5 minutos.
+*/
 
 setInterval(
   loadProducts,
