@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
 
 <title>ImportArg | Lista de Precios</title>
-<meta property="og:title" content="ImportArg | Lista de Precios">
-<meta property="og:description" content="Lista de precios actualizada de ImportArg">
-<meta property="og:url" content="https://importarg.com.ar/">
-<meta property="og:type" content="website">
+
+<meta
+  property="og:title"
+  content="ImportArg | Lista de Precios"
+>
+
+<meta
+  property="og:description"
+  content="Lista de precios actualizada de ImportArg"
+>
+
+<meta
+  property="og:url"
+  content="https://importarg.com.ar/"
+>
+
+<meta
+  property="og:type"
+  content="website"
+>
+
 <style>
+
 :root{
   --black:#111111;
   --yellow:#ffd400;
@@ -35,6 +59,7 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   color:#111;
 }
+
 
 /* ========================================
    HEADER
@@ -101,6 +126,7 @@ header{
   color:var(--yellow);
 }
 
+
 /* ========================================
    MAIN
 ======================================== */
@@ -110,6 +136,7 @@ main{
   margin:auto;
   padding:12px 12px 80px;
 }
+
 
 /* ========================================
    BUSCADOR
@@ -175,6 +202,7 @@ main{
   stroke-linejoin:round;
 }
 
+
 /* ========================================
    FILTROS
 ======================================== */
@@ -209,6 +237,7 @@ main{
   color:#111;
 }
 
+
 /* ========================================
    RESULTADOS
 ======================================== */
@@ -219,6 +248,7 @@ main{
   font-weight:600;
   margin:1px 3px 9px;
 }
+
 
 /* ========================================
    LOADING
@@ -246,6 +276,7 @@ main{
     transform:rotate(360deg);
   }
 }
+
 
 /* ========================================
    PC TABLE
@@ -293,7 +324,10 @@ tbody tr:nth-child(even){
   font-weight:900;
 }
 
-/* BOTÓN COMPRAR PC */
+
+/* ========================================
+   BOTÓN COMPRAR PC
+======================================== */
 
 .desktop-buy{
   display:inline-flex;
@@ -320,6 +354,7 @@ tbody tr:nth-child(even){
   transform:scale(.96);
 }
 
+
 /* ========================================
    STOCK
 ======================================== */
@@ -341,6 +376,7 @@ tbody tr:nth-child(even){
   background:#ffd0d0;
   color:#8b0000;
 }
+
 
 /* ========================================
    MOBILE
@@ -419,7 +455,10 @@ tbody tr:nth-child(even){
   text-align:right;
 }
 
-/* COMPRAR CELULAR */
+
+/* ========================================
+   COMPRAR CELULAR
+======================================== */
 
 .buy-button{
   grid-column:2;
@@ -459,6 +498,7 @@ tbody tr:nth-child(even){
   transform:scale(.96);
 }
 
+
 /* ========================================
    WHATSAPP FLOTANTE
 ======================================== */
@@ -493,8 +533,9 @@ tbody tr:nth-child(even){
   fill:white;
 }
 
+
 /* ========================================
-   MOBILE
+   MOBILE RESPONSIVE
 ======================================== */
 
 @media(max-width:700px){
@@ -572,7 +613,9 @@ tbody tr:nth-child(even){
     font-size:9px;
     line-height:1;
   }
+
 }
+
 
 /* ========================================
    TELÉFONOS ANGOSTOS
@@ -606,12 +649,16 @@ tbody tr:nth-child(even){
     padding:4px 6px;
     font-size:8px;
   }
+
 }
 
 </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -632,18 +679,24 @@ tbody tr:nth-child(even){
     </div>
 
     <div class="title">
+
       <strong>
         LISTA <span>DE PRECIOS</span>
       </strong>
+
     </div>
 
   </div>
 
 </header>
 
+
 <main>
 
-  <!-- BUSCADOR -->
+
+  <!-- =====================================
+       BUSCADOR
+  ====================================== -->
 
   <div class="search-wrapper">
 
@@ -661,20 +714,30 @@ tbody tr:nth-child(even){
     >
 
       <svg viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="7"></circle>
+
+        <circle
+          cx="11"
+          cy="11"
+          r="7"
+        ></circle>
+
         <line
           x1="16.65"
           y1="16.65"
           x2="21"
           y2="21"
         ></line>
+
       </svg>
 
     </button>
 
   </div>
 
-  <!-- FILTROS -->
+
+  <!-- =====================================
+       FILTROS
+  ====================================== -->
 
   <div class="filters">
 
@@ -689,7 +752,35 @@ tbody tr:nth-child(even){
       class="filter"
       data-filter="IPHONE"
     >
-      APPLE
+      IPHONE
+    </button>
+
+    <button
+      class="filter"
+      data-filter="MACBOOK"
+    >
+      MACBOOK
+    </button>
+
+    <button
+      class="filter"
+      data-filter="IPAD"
+    >
+      IPAD
+    </button>
+
+    <button
+      class="filter"
+      data-filter="AIRPODS"
+    >
+      AIRPODS
+    </button>
+
+    <button
+      class="filter"
+      data-filter="ACCESORIOS"
+    >
+      ACCESORIOS
     </button>
 
     <button
@@ -706,7 +797,15 @@ tbody tr:nth-child(even){
       XIAOMI
     </button>
 
+    <button
+      class="filter"
+      data-filter="SONY"
+    >
+      SONY
+    </button>
+
   </div>
+
 
   <div
     class="results"
@@ -714,6 +813,7 @@ tbody tr:nth-child(even){
   >
     Cargando productos...
   </div>
+
 
   <div
     class="loading"
@@ -726,7 +826,10 @@ tbody tr:nth-child(even){
 
   </div>
 
-  <!-- PC -->
+
+  <!-- =====================================
+       TABLA PC
+  ====================================== -->
 
   <div
     class="table-wrap"
@@ -741,9 +844,13 @@ tbody tr:nth-child(even){
         <tr>
 
           <th>PRODUCTO</th>
+
           <th>MODELO</th>
+
           <th>CAPACIDAD</th>
+
           <th>COLOR</th>
+
           <th>DETALLE</th>
 
           <th class="price-head">
@@ -751,6 +858,7 @@ tbody tr:nth-child(even){
           </th>
 
           <th>ESTADO</th>
+
           <th>COMPRAR</th>
 
         </tr>
@@ -763,21 +871,29 @@ tbody tr:nth-child(even){
 
   </div>
 
-  <!-- CELULAR -->
+
+  <!-- =====================================
+       LISTA CELULAR
+  ====================================== -->
 
   <div
     class="mobile-list"
     id="mobileList"
   ></div>
 
+
 </main>
 
-<!-- WHATSAPP FLOTANTE -->
+
+<!-- =====================================
+     WHATSAPP FLOTANTE
+====================================== -->
 
 <a
   class="whatsapp-floating"
   href="https://wa.me/5491124014722"
   target="_blank"
+  rel="noopener noreferrer"
   aria-label="Contactar por WhatsApp"
 >
 
@@ -789,22 +905,28 @@ tbody tr:nth-child(even){
 
 </a>
 
+
 <script>
 
+
 /* ========================================
-   CONFIG
+   CONFIGURACIÓN
 ======================================== */
 
 const CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vT8v35uv1oCfpyY7_R0fSKYG08h43uApPtUIy-VBItP2Njs99BeXR5VkKeWtZ5L2w/pub?output=csv";
 
-const WHATSAPP = "5491124014722";
+const WHATSAPP =
+"5491124014722";
 
 let products = [];
-let currentFilter = "TODOS";
+
+let currentFilter =
+"TODOS";
+
 
 /* ========================================
-   CSV
+   LEER CSV
 ======================================== */
 
 function parseCSV(text){
@@ -812,30 +934,46 @@ function parseCSV(text){
   const rows = [];
 
   let row = [];
+
   let field = "";
+
   let quoted = false;
 
-  for(let i=0;i<text.length;i++){
 
-    const c = text[i];
+  for(
+    let i = 0;
+    i < text.length;
+    i++
+  ){
 
-    if(c === '"'){
+    const c =
+      text[i];
+
+
+    if(
+      c === '"'
+    ){
 
       if(
         quoted &&
-        text[i+1] === '"'
+        text[i + 1] === '"'
       ){
 
         field += '"';
+
         i++;
 
-      }else{
+      }
 
-        quoted = !quoted;
+      else{
+
+        quoted =
+          !quoted;
 
       }
 
     }
+
 
     else if(
       c === "," &&
@@ -843,36 +981,51 @@ function parseCSV(text){
     ){
 
       row.push(field);
+
       field = "";
 
     }
 
+
     else if(
-      (c === "\n" || c === "\r") &&
+      (
+        c === "\n" ||
+        c === "\r"
+      )
+      &&
       !quoted
     ){
 
       if(
         c === "\r" &&
-        text[i+1] === "\n"
+        text[i + 1] === "\n"
       ){
+
         i++;
+
       }
 
       row.push(field);
 
+
       if(
         row.some(
-          x => x.trim() !== ""
+          x =>
+            x.trim() !== ""
         )
       ){
+
         rows.push(row);
+
       }
 
+
       row = [];
+
       field = "";
 
     }
+
 
     else{
 
@@ -882,6 +1035,7 @@ function parseCSV(text){
 
   }
 
+
   if(
     field.length ||
     row.length
@@ -889,19 +1043,25 @@ function parseCSV(text){
 
     row.push(field);
 
+
     if(
       row.some(
-        x => x.trim() !== ""
+        x =>
+          x.trim() !== ""
       )
     ){
+
       rows.push(row);
+
     }
 
   }
 
+
   return rows;
 
 }
+
 
 /* ========================================
    UTILIDADES
@@ -909,35 +1069,69 @@ function parseCSV(text){
 
 function clean(value){
 
-  return String(value ?? "")
-    .replace(/\uFEFF/g,"")
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /\uFEFF/g,
+      ""
+    )
     .trim();
 
 }
 
+
 function safe(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
+
 
 function inStock(status){
 
   const value =
-    String(status || "")
+    String(
+      status || ""
+    )
       .toUpperCase();
 
+
   return(
-    value.includes("STOCK") &&
+    value.includes("STOCK")
+    &&
     !value.includes("SIN")
   );
 
 }
+
 
 /* ========================================
    PRECIO
@@ -948,6 +1142,7 @@ function formatPrice(price){
   return clean(price);
 
 }
+
 
 /* ========================================
    WHATSAPP / COMPRAR
@@ -964,6 +1159,7 @@ Color: ${p.color}
 ${p.detail ? "Detalle: " + p.detail : ""}
 Precio: ${p.price}`;
 
+
   return (
     "https://wa.me/" +
     WHATSAPP +
@@ -973,6 +1169,7 @@ Precio: ${p.price}`;
 
 }
 
+
 /* ========================================
    CARGAR GOOGLE SHEETS
 ======================================== */
@@ -981,17 +1178,24 @@ async function loadProducts(){
 
   try{
 
+
     const response =
       await fetch(
+
         CSV_URL +
         "&t=" +
         Date.now(),
+
         {
           cache:"no-store"
         }
+
       );
 
-    if(!response.ok){
+
+    if(
+      !response.ok
+    ){
 
       throw new Error(
         "No se pudo cargar Google Sheets"
@@ -999,28 +1203,40 @@ async function loadProducts(){
 
     }
 
+
     const text =
       await response.text();
+
 
     const rows =
       parseCSV(text);
 
+
     const headerIndex =
       rows.findIndex(
+
         row =>
 
-          clean(row[0])
+          clean(
+            row[0]
+          )
             .toUpperCase()
             === "PRODUCTO"
 
           &&
 
-          clean(row[1])
+          clean(
+            row[1]
+          )
             .toUpperCase()
             === "MODELO"
+
       );
 
-    if(headerIndex === -1){
+
+    if(
+      headerIndex === -1
+    ){
 
       throw new Error(
         "No encontré PRODUCTO / MODELO"
@@ -1028,17 +1244,22 @@ async function loadProducts(){
 
     }
 
+
     const headers =
       rows[headerIndex]
         .map(
+
           value =>
             clean(value)
               .toUpperCase()
+
         );
+
 
     const col =
       name =>
         headers.indexOf(name);
+
 
     const cProduct =
       col("PRODUCTO");
@@ -1061,70 +1282,103 @@ async function loadProducts(){
     const cStatus =
       col("ESTADO");
 
+
     products =
       rows
+
         .slice(
           headerIndex + 1
         )
+
         .map(
+
           row => ({
 
             product:
-              clean(row[cProduct]),
+              clean(
+                row[cProduct]
+              ),
 
             model:
-              clean(row[cModel]),
+              clean(
+                row[cModel]
+              ),
 
             capacity:
-              clean(row[cCapacity]),
+              clean(
+                row[cCapacity]
+              ),
 
             color:
-              clean(row[cColor]),
+              clean(
+                row[cColor]
+              ),
 
             detail:
-              clean(row[cDetail]),
+              clean(
+                row[cDetail]
+              ),
 
             price:
-              clean(row[cPrice]),
+              clean(
+                row[cPrice]
+              ),
 
             status:
-              clean(row[cStatus])
+              clean(
+                row[cStatus]
+              )
 
           })
+
         )
+
         .filter(
+
           p =>
             p.product ||
             p.model ||
             p.price
+
         );
 
+
     document
-      .getElementById("loading")
+      .getElementById(
+        "loading"
+      )
       .style.display =
       "none";
+
 
     if(
       window.innerWidth > 700
     ){
 
       document
-        .getElementById("tableWrap")
+        .getElementById(
+          "tableWrap"
+        )
         .style.display =
         "block";
 
     }
 
+
     render();
 
   }
+
 
   catch(error){
 
     console.error(error);
 
+
     document
-      .getElementById("loading")
+      .getElementById(
+        "loading"
+      )
       .innerHTML =
 
       `<strong>
@@ -1140,6 +1394,7 @@ async function loadProducts(){
 
 }
 
+
 /* ========================================
    FILTRADO
 ======================================== */
@@ -1148,13 +1403,18 @@ function filteredProducts(){
 
   const search =
     document
-      .getElementById("search")
+      .getElementById(
+        "search"
+      )
       .value
       .trim()
       .toUpperCase();
 
+
   return products.filter(
+
     p => {
+
 
       const text = [
 
@@ -1167,63 +1427,256 @@ function filteredProducts(){
         p.status
 
       ]
+
         .join(" ")
         .toUpperCase();
+
 
       const searchOK =
         text.includes(search);
 
-      const product =
-        p.product
-          .toUpperCase();
 
-      let filterOK = true;
+      /*
+        Para los filtros miramos
+        PRODUCTO + MODELO + DETALLE.
+
+        De esta forma tenemos más
+        flexibilidad con Google Sheets.
+      */
+
+      const productText = [
+
+        p.product,
+        p.model,
+        p.detail
+
+      ]
+
+        .join(" ")
+        .toUpperCase();
+
+
+      let filterOK =
+        true;
+
+
+      /* ================================
+         IPHONE
+      ================================ */
 
       if(
-        currentFilter ===
-        "IPHONE"
+        currentFilter === "IPHONE"
       ){
 
         filterOK =
-
-          product.includes("IPHONE")
-
-          ||
-
-          product.includes("APPLE");
-
-      }
-
-      else if(
-        currentFilter ===
-        "SAMSUNG"
-      ){
-
-        filterOK =
-          product.includes(
-            "SAMSUNG"
+          productText.includes(
+            "IPHONE"
           );
 
       }
 
+
+      /* ================================
+         MACBOOK
+      ================================ */
+
       else if(
-        currentFilter ===
-        "XIAOMI"
+        currentFilter === "MACBOOK"
       ){
 
         filterOK =
 
-          product.includes("XIAOMI")
+          productText.includes(
+            "MACBOOK"
+          )
 
           ||
 
-          product.includes("POCO")
-
-          ||
-
-          product.includes("REDMI");
+          productText.includes(
+            "MAC BOOK"
+          );
 
       }
+
+
+      /* ================================
+         IPAD
+      ================================ */
+
+      else if(
+        currentFilter === "IPAD"
+      ){
+
+        filterOK =
+          productText.includes(
+            "IPAD"
+          );
+
+      }
+
+
+      /* ================================
+         AIRPODS
+      ================================ */
+
+      else if(
+        currentFilter === "AIRPODS"
+      ){
+
+        filterOK =
+
+          productText.includes(
+            "AIRPOD"
+          );
+
+      }
+
+
+      /* ================================
+         ACCESORIOS
+      ================================ */
+
+      else if(
+        currentFilter === "ACCESORIOS"
+      ){
+
+        filterOK =
+
+          productText.includes(
+            "ACCESORIO"
+          )
+
+          ||
+
+          productText.includes(
+            "CARGADOR"
+          )
+
+          ||
+
+          productText.includes(
+            "CABLE"
+          )
+
+          ||
+
+          productText.includes(
+            "ADAPTADOR"
+          )
+
+          ||
+
+          productText.includes(
+            "FUNDA"
+          )
+
+          ||
+
+          productText.includes(
+            "MAGSAFE"
+          )
+
+          ||
+
+          productText.includes(
+            "POWERBANK"
+          )
+
+          ||
+
+          productText.includes(
+            "POWER BANK"
+          );
+
+      }
+
+
+      /* ================================
+         SAMSUNG
+      ================================ */
+
+      else if(
+        currentFilter === "SAMSUNG"
+      ){
+
+        filterOK =
+
+          productText.includes(
+            "SAMSUNG"
+          )
+
+          ||
+
+          productText.includes(
+            "GALAXY"
+          );
+
+      }
+
+
+      /* ================================
+         XIAOMI
+      ================================ */
+
+      else if(
+        currentFilter === "XIAOMI"
+      ){
+
+        filterOK =
+
+          productText.includes(
+            "XIAOMI"
+          )
+
+          ||
+
+          productText.includes(
+            "POCO"
+          )
+
+          ||
+
+          productText.includes(
+            "REDMI"
+          );
+
+      }
+
+
+      /* ================================
+         SONY / PLAYSTATION
+      ================================ */
+
+      else if(
+        currentFilter === "SONY"
+      ){
+
+        filterOK =
+
+          productText.includes(
+            "SONY"
+          )
+
+          ||
+
+          productText.includes(
+            "PLAYSTATION"
+          )
+
+          ||
+
+          productText.includes(
+            "PLAY STATION"
+          )
+
+          ||
+
+          productText.includes(
+            "PS5"
+          );
+
+      }
+
 
       return(
         searchOK &&
@@ -1231,9 +1684,11 @@ function filteredProducts(){
       );
 
     }
+
   );
 
 }
+
 
 /* ========================================
    RENDER
@@ -1244,8 +1699,11 @@ function render(){
   const list =
     filteredProducts();
 
+
   document
-    .getElementById("results")
+    .getElementById(
+      "results"
+    )
     .textContent =
 
     list.length +
@@ -1256,11 +1714,13 @@ function render(){
         : " productos"
     );
 
+
   renderMobile(list);
 
   renderDesktop(list);
 
 }
+
 
 /* ========================================
    MOBILE
@@ -1273,57 +1733,90 @@ function renderMobile(list){
       "mobileList"
     );
 
+
   container.innerHTML =
 
     list.map(
+
       p => {
 
+
         const stockOK =
-          inStock(p.status);
+          inStock(
+            p.status
+          );
+
 
         const status =
           p.status ||
           "CONSULTAR";
 
+
         const detail =
-          p.detail || "";
+          p.detail ||
+          "";
+
 
         return `
 
         <div class="product-row">
 
+
           <div class="product-top">
 
+
             <span class="product-main">
+
               ${safe(p.product)}
               ${safe(p.model)}
+
             </span>
+
 
             ${
               p.capacity
+
                 ? `
-                  <span class="product-sep">·</span>
+
+                  <span class="product-sep">
+                    ·
+                  </span>
 
                   <span class="product-meta">
+
                     ${safe(p.capacity)}
+
                   </span>
+
                 `
+
                 : ""
             }
+
 
             ${
               p.color
+
                 ? `
-                  <span class="product-sep">·</span>
+
+                  <span class="product-sep">
+                    ·
+                  </span>
 
                   <span class="product-meta">
+
                     ${safe(p.color)}
+
                   </span>
+
                 `
+
                 : ""
             }
 
+
           </div>
+
 
           <div class="mobile-price">
 
@@ -1335,30 +1828,42 @@ function renderMobile(list){
 
           </div>
 
+
           <div class="product-bottom">
+
 
             ${
               detail
+
                 ? `
+
                   <span class="product-meta">
+
                     ${safe(detail)}
+
                   </span>
 
-                  <span class="product-sep">·</span>
+                  <span class="product-sep">
+                    ·
+                  </span>
+
                 `
+
                 : ""
             }
 
+
             <span
-              class="stock
-              ${stockOK ? "" : "no-stock"}"
+              class="stock ${stockOK ? "" : "no-stock"}"
             >
 
               ${safe(status)}
 
             </span>
 
+
           </div>
+
 
           <a
             class="buy-button"
@@ -1367,18 +1872,24 @@ function renderMobile(list){
             rel="noopener noreferrer"
             aria-label="Comprar ${safe(p.product)} ${safe(p.model)}"
           >
+
             COMPRAR
+
           </a>
+
 
         </div>
 
         `;
 
       }
+
     )
+
     .join("");
 
 }
+
 
 /* ========================================
    DESKTOP / PC
@@ -1387,40 +1898,66 @@ function renderMobile(list){
 function renderDesktop(list){
 
   document
-    .getElementById("table")
+    .getElementById(
+      "table"
+    )
     .innerHTML =
 
     list.map(
+
       p => {
 
+
         const stockOK =
-          inStock(p.status);
+          inStock(
+            p.status
+          );
+
 
         return `
 
+
         <tr>
 
+
           <td>
+
             <strong>
+
               ${safe(p.product)}
+
             </strong>
+
           </td>
 
+
           <td>
+
             ${safe(p.model)}
+
           </td>
 
+
           <td>
+
             ${safe(p.capacity)}
+
           </td>
 
+
           <td>
+
             ${safe(p.color)}
+
           </td>
 
+
           <td>
+
             ${safe(p.detail)}
+
           </td>
+
 
           <td class="desktop-price">
 
@@ -1432,11 +1969,11 @@ function renderDesktop(list){
 
           </td>
 
+
           <td>
 
             <span
-              class="stock
-              ${stockOK ? "" : "no-stock"}"
+              class="stock ${stockOK ? "" : "no-stock"}"
             >
 
               ${safe(
@@ -1448,6 +1985,7 @@ function renderDesktop(list){
 
           </td>
 
+
           <td>
 
             <a
@@ -1457,20 +1995,27 @@ function renderDesktop(list){
               rel="noopener noreferrer"
               aria-label="Comprar ${safe(p.product)} ${safe(p.model)}"
             >
+
               COMPRAR
+
             </a>
 
           </td>
 
+
         </tr>
+
 
         `;
 
       }
+
     )
+
     .join("");
 
 }
+
 
 /* ========================================
    BUSCADOR
@@ -1481,15 +2026,24 @@ const searchInput =
     "search"
   );
 
+
 searchInput.addEventListener(
+
   "input",
+
   render
+
 );
 
+
 document
-  .getElementById("searchButton")
+  .getElementById(
+    "searchButton"
+  )
   .addEventListener(
+
     "click",
+
     () => {
 
       render();
@@ -1497,10 +2051,14 @@ document
       searchInput.focus();
 
     }
+
   );
 
+
 searchInput.addEventListener(
+
   "keydown",
+
   event => {
 
     if(
@@ -1514,45 +2072,65 @@ searchInput.addEventListener(
     }
 
   }
+
 );
+
 
 /* ========================================
    FILTROS
 ======================================== */
 
 document
-  .querySelectorAll(".filter")
+  .querySelectorAll(
+    ".filter"
+  )
   .forEach(
+
     button => {
 
       button.addEventListener(
+
         "click",
+
         () => {
+
 
           document
             .querySelectorAll(
               ".filter"
             )
             .forEach(
+
               b =>
                 b.classList
-                  .remove("active")
+                  .remove(
+                    "active"
+                  )
+
             );
+
 
           button
             .classList
-            .add("active");
+            .add(
+              "active"
+            );
+
 
           currentFilter =
             button.dataset.filter;
 
+
           render();
 
         }
+
       );
 
     }
+
   );
+
 
 /* ========================================
    START
@@ -1560,17 +2138,24 @@ document
 
 loadProducts();
 
+
 /*
   Actualiza Google Sheets
   automáticamente cada 5 minutos.
 */
 
 setInterval(
+
   loadProducts,
+
   300000
+
 );
+
 
 </script>
 
+
 </body>
+
 </html>
