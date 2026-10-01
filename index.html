@@ -84,14 +84,6 @@ header{
   font-weight:800;
 }
 
-.logo small{
-  display:block;
-  font-size:6px;
-  letter-spacing:4px;
-  text-align:center;
-  font-weight:700;
-}
-
 .title{
   text-align:right;
   color:white;
@@ -117,7 +109,7 @@ main{
 }
 
 /* ========================================
-   BUSCADOR ESTILO YOUTUBE
+   BUSCADOR
 ======================================== */
 
 .search-wrapper{
@@ -298,6 +290,33 @@ tbody tr:nth-child(even){
   font-weight:900;
 }
 
+/* BOTÓN COMPRAR PC */
+
+.desktop-buy{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:82px;
+  height:30px;
+  padding:0 12px;
+  border-radius:8px;
+  background:var(--yellow);
+  color:#111;
+  font-size:10px;
+  font-weight:950;
+  text-decoration:none;
+  box-shadow:0 2px 5px rgba(0,0,0,.10);
+  transition:transform .08s ease, background .15s ease;
+}
+
+.desktop-buy:hover{
+  background:#ffdf35;
+}
+
+.desktop-buy:active{
+  transform:scale(.96);
+}
+
 /* ========================================
    STOCK
 ======================================== */
@@ -386,23 +405,18 @@ tbody tr:nth-child(even){
   font-weight:800;
 }
 
-/* PRECIO */
-
 .mobile-price{
   grid-column:2;
   grid-row:1;
-
   padding:0;
   border:0;
-
   font-size:14px;
   font-weight:950;
-
   white-space:nowrap;
   text-align:right;
 }
 
-/* COMPRAR */
+/* COMPRAR CELULAR */
 
 .buy-button{
   grid-column:2;
@@ -491,55 +505,27 @@ tbody tr:nth-child(even){
   }
 
   .brand{
-  gap:6px;
-}
-
-.brand-logo{
-  width:34px;
-  height:34px;
-  flex-basis:34px;
-}
-
-.logo{
-  font-size:20px;
-  font-weight:750;
-}
-
-.logo span{
-  font-weight:800;
-}
-
-.title strong{
-  font-size:17px;
-}
-
-  .logo small{
-    font-size:5px;
-    letter-spacing:3px;
+    gap:6px;
   }
 
-  .brand{
-  gap:6px;
-}
+  .brand-logo{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
 
-.brand-logo{
-  width:34px;
-  height:34px;
-  flex-basis:34px;
-}
+  .logo{
+    font-size:20px;
+    font-weight:750;
+  }
 
-.logo{
-  font-size:20px;
-  font-weight:750;
-}
+  .logo span{
+    font-weight:800;
+  }
 
-.logo span{
-  font-weight:800;
-}
-
-.title strong{
-  font-size:17px;
-}
+  .title strong{
+    font-size:17px;
+  }
 
   main{
     padding:10px 8px 75px;
@@ -570,7 +556,7 @@ tbody tr:nth-child(even){
   }
 
   .table-wrap{
-    display:none;
+    display:none !important;
   }
 
   .mobile-list{
@@ -628,27 +614,25 @@ tbody tr:nth-child(even){
 
   <div class="header">
 
-  <div class="brand">
+    <div class="brand">
 
-    <img
-      src="logo-importarg.png"
-      class="brand-logo"
-      alt="ImportARG Lincoln"
-    >
+      <img
+        src="logo-importarg.png"
+        class="brand-logo"
+        alt="ImportARG Lincoln"
+      >
 
-    <div class="logo">
-      import<span>Arg</span>
+      <div class="logo">
+        import<span>Arg</span>
+      </div>
+
     </div>
 
-  </div>
-
-  <div class="title">
-    <strong>
-      LISTA <span>DE PRECIOS</span>
-    </strong>
-  </div>
-
-</div>
+    <div class="title">
+      <strong>
+        LISTA <span>DE PRECIOS</span>
+      </strong>
+    </div>
 
   </div>
 
@@ -764,6 +748,7 @@ tbody tr:nth-child(even){
           </th>
 
           <th>ESTADO</th>
+          <th>COMPRAR</th>
 
         </tr>
 
@@ -801,7 +786,9 @@ tbody tr:nth-child(even){
 
 </a>
 
-<script>/* ========================================
+<script>
+
+/* ========================================
    CONFIG
 ======================================== */
 
@@ -812,7 +799,6 @@ const WHATSAPP = "5491124014722";
 
 let products = [];
 let currentFilter = "TODOS";
-
 
 /* ========================================
    CSV
@@ -914,7 +900,6 @@ function parseCSV(text){
 
 }
 
-
 /* ========================================
    UTILIDADES
 ======================================== */
@@ -927,7 +912,6 @@ function clean(value){
 
 }
 
-
 function safe(value){
 
   return String(value ?? "")
@@ -938,7 +922,6 @@ function safe(value){
     .replace(/'/g,"&#039;");
 
 }
-
 
 function inStock(status){
 
@@ -953,7 +936,6 @@ function inStock(status){
 
 }
 
-
 /* ========================================
    PRECIO
 ======================================== */
@@ -963,7 +945,6 @@ function formatPrice(price){
   return clean(price);
 
 }
-
 
 /* ========================================
    WHATSAPP / COMPRAR
@@ -989,7 +970,6 @@ Precio: ${p.price}`;
 
 }
 
-
 /* ========================================
    CARGAR GOOGLE SHEETS
 ======================================== */
@@ -1008,7 +988,6 @@ async function loadProducts(){
         }
       );
 
-
     if(!response.ok){
 
       throw new Error(
@@ -1017,14 +996,11 @@ async function loadProducts(){
 
     }
 
-
     const text =
       await response.text();
 
-
     const rows =
       parseCSV(text);
-
 
     const headerIndex =
       rows.findIndex(
@@ -1041,7 +1017,6 @@ async function loadProducts(){
             === "MODELO"
       );
 
-
     if(headerIndex === -1){
 
       throw new Error(
@@ -1049,7 +1024,6 @@ async function loadProducts(){
       );
 
     }
-
 
     const headers =
       rows[headerIndex]
@@ -1059,11 +1033,9 @@ async function loadProducts(){
               .toUpperCase()
         );
 
-
     const col =
       name =>
         headers.indexOf(name);
-
 
     const cProduct =
       col("PRODUCTO");
@@ -1085,7 +1057,6 @@ async function loadProducts(){
 
     const cStatus =
       col("ESTADO");
-
 
     products =
       rows
@@ -1125,12 +1096,10 @@ async function loadProducts(){
             p.price
         );
 
-
     document
       .getElementById("loading")
       .style.display =
       "none";
-
 
     if(
       window.innerWidth > 700
@@ -1143,16 +1112,13 @@ async function loadProducts(){
 
     }
 
-
     render();
 
   }
 
-
   catch(error){
 
     console.error(error);
-
 
     document
       .getElementById("loading")
@@ -1171,7 +1137,6 @@ async function loadProducts(){
 
 }
 
-
 /* ========================================
    FILTRADO
 ======================================== */
@@ -1185,10 +1150,8 @@ function filteredProducts(){
       .trim()
       .toUpperCase();
 
-
   return products.filter(
     p => {
-
 
       const text = [
 
@@ -1204,18 +1167,14 @@ function filteredProducts(){
         .join(" ")
         .toUpperCase();
 
-
       const searchOK =
         text.includes(search);
-
 
       const product =
         p.product
           .toUpperCase();
 
-
       let filterOK = true;
-
 
       if(
         currentFilter ===
@@ -1232,7 +1191,6 @@ function filteredProducts(){
 
       }
 
-
       else if(
         currentFilter ===
         "SAMSUNG"
@@ -1244,7 +1202,6 @@ function filteredProducts(){
           );
 
       }
-
 
       else if(
         currentFilter ===
@@ -1265,7 +1222,6 @@ function filteredProducts(){
 
       }
 
-
       return(
         searchOK &&
         filterOK
@@ -1276,7 +1232,6 @@ function filteredProducts(){
 
 }
 
-
 /* ========================================
    RENDER
 ======================================== */
@@ -1285,7 +1240,6 @@ function render(){
 
   const list =
     filteredProducts();
-
 
   document
     .getElementById("results")
@@ -1299,17 +1253,14 @@ function render(){
         : " productos"
     );
 
-
   renderMobile(list);
 
   renderDesktop(list);
 
 }
 
-
 /* ========================================
    MOBILE
-   NUEVO DISEÑO DE DOS LÍNEAS
 ======================================== */
 
 function renderMobile(list){
@@ -1319,31 +1270,24 @@ function renderMobile(list){
       "mobileList"
     );
 
-
   container.innerHTML =
 
     list.map(
       p => {
 
-
         const stockOK =
           inStock(p.status);
-
 
         const status =
           p.status ||
           "CONSULTAR";
 
-
         const detail =
           p.detail || "";
-
 
         return `
 
         <div class="product-row">
-
-          <!-- PRIMERA LÍNEA -->
 
           <div class="product-top">
 
@@ -1378,9 +1322,6 @@ function renderMobile(list){
 
           </div>
 
-
-          <!-- PRECIO -->
-
           <div class="mobile-price">
 
             ${safe(
@@ -1390,9 +1331,6 @@ function renderMobile(list){
             )}
 
           </div>
-
-
-          <!-- SEGUNDA LÍNEA -->
 
           <div class="product-bottom">
 
@@ -1408,7 +1346,6 @@ function renderMobile(list){
                 : ""
             }
 
-
             <span
               class="stock
               ${stockOK ? "" : "no-stock"}"
@@ -1420,9 +1357,6 @@ function renderMobile(list){
 
           </div>
 
-
-          <!-- COMPRAR -->
-
           <a
             class="buy-button"
             href="${whatsappLink(p)}"
@@ -1432,7 +1366,6 @@ function renderMobile(list){
           >
             COMPRAR
           </a>
-
 
         </div>
 
@@ -1444,9 +1377,8 @@ function renderMobile(list){
 
 }
 
-
 /* ========================================
-   DESKTOP
+   DESKTOP / PC
 ======================================== */
 
 function renderDesktop(list){
@@ -1458,10 +1390,8 @@ function renderDesktop(list){
     list.map(
       p => {
 
-
         const stockOK =
           inStock(p.status);
-
 
         return `
 
@@ -1515,6 +1445,20 @@ function renderDesktop(list){
 
           </td>
 
+          <td>
+
+            <a
+              class="desktop-buy"
+              href="${whatsappLink(p)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Comprar ${safe(p.product)} ${safe(p.model)}"
+            >
+              COMPRAR
+            </a>
+
+          </td>
+
         </tr>
 
         `;
@@ -1525,7 +1469,6 @@ function renderDesktop(list){
 
 }
 
-
 /* ========================================
    BUSCADOR
 ======================================== */
@@ -1535,14 +1478,10 @@ const searchInput =
     "search"
   );
 
-
 searchInput.addEventListener(
   "input",
   render
 );
-
-
-/* Botón lupa */
 
 document
   .getElementById("searchButton")
@@ -1556,9 +1495,6 @@ document
 
     }
   );
-
-
-/* Enter */
 
 searchInput.addEventListener(
   "keydown",
@@ -1577,7 +1513,6 @@ searchInput.addEventListener(
   }
 );
 
-
 /* ========================================
    FILTROS
 ======================================== */
@@ -1587,11 +1522,9 @@ document
   .forEach(
     button => {
 
-
       button.addEventListener(
         "click",
         () => {
-
 
           document
             .querySelectorAll(
@@ -1603,15 +1536,12 @@ document
                   .remove("active")
             );
 
-
           button
             .classList
             .add("active");
 
-
           currentFilter =
             button.dataset.filter;
-
 
           render();
 
@@ -1621,13 +1551,11 @@ document
     }
   );
 
-
 /* ========================================
    START
 ======================================== */
 
 loadProducts();
-
 
 /*
   Actualiza Google Sheets
