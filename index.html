@@ -1,613 +1,840 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
 
 <title>ImportArg | Lista de Precios</title>
-<meta property="og:title" content="ImportArg | Lista de Precios">
-<meta property="og:description" content="Lista de precios actualizada de ImportArg">
-<meta property="og:url" content="https://importarg.com.ar/">
-<meta property="og:type" content="website">
+
+<meta
+  property="og:title"
+  content="ImportArg | Lista de Precios"
+>
+
+<meta
+  property="og:description"
+  content="Lista de precios actualizada de ImportArg"
+>
+
+<meta
+  property="og:url"
+  content="https://importarg.com.ar/"
+>
+
+<meta
+  property="og:type"
+  content="website"
+>
 
 <style>
+
 :root{
---black:#111;
---yellow:#ffd400;
---green:#a7edba;
---green-dark:#075b24;
---whatsapp:#25D366;
---bg:#f4f4f4;
---blue:#1687df;
+  --black:#111111;
+  --yellow:#ffd400;
+  --green:#a7edba;
+  --green-dark:#075b24;
+  --orange:#ffe0a3;
+  --orange-dark:#8a4b00;
+  --blue-light:#cfe9ff;
+  --blue-dark:#07558c;
+  --red-light:#ffd0d0;
+  --red-dark:#8b0000;
+  --whatsapp:#25D366;
+  --bg:#f4f4f4;
+  --blue:#1687df;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
-html{-webkit-text-size-adjust:100%}
+html{
+  -webkit-text-size-adjust:100%;
+}
 
 body{
-margin:0;
-background:var(--bg);
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-color:#111;
+  margin:0;
+  background:var(--bg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:#111;
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
 header{
-background:linear-gradient(135deg,#090909,#202020);
-border-bottom:4px solid var(--yellow);
-padding-top:calc(env(safe-area-inset-top) + 5px);
+  background:linear-gradient(135deg,#090909,#202020);
+  border-bottom:4px solid var(--yellow);
+  padding-top:calc(env(safe-area-inset-top) + 5px);
 }
 
 .header{
-max-width:1450px;
-margin:auto;
-padding:8px 14px 10px;
-display:grid;
-grid-template-columns:auto 1fr;
-align-items:center;
-gap:10px 15px;
+  max-width:1450px;
+  margin:auto;
+  padding:8px 14px 10px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;
+  gap:10px 15px;
 }
 
 .brand{
-display:flex;
-align-items:center;
-gap:8px;
-min-width:0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
 }
 
 .brand-logo{
-width:42px;
-height:42px;
-flex:0 0 42px;
-border-radius:50%;
-object-fit:cover;
-background:white;
-border:2px solid var(--yellow);
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  border-radius:50%;
+  object-fit:cover;
+  background:white;
+  border:2px solid var(--yellow);
 }
 
 .logo{
-color:white;
-font-size:24px;
-font-weight:750;
-letter-spacing:-1px;
-line-height:1;
-white-space:nowrap;
+  color:white;
+  font-size:24px;
+  font-weight:750;
+  letter-spacing:-1px;
+  line-height:1;
+  white-space:nowrap;
 }
 
 .logo span{
-color:var(--yellow);
-font-weight:800;
+  color:var(--yellow);
+  font-weight:800;
 }
 
 .title{
-text-align:right;
-color:white;
+  text-align:right;
+  color:white;
 }
 
 .title strong{
-font-size:23px;
-font-weight:950;
+  font-size:23px;
+  font-weight:950;
 }
 
 .title span{
-color:var(--yellow);
+  color:var(--yellow);
 }
+
+
+/* =========================
+   MAIN
+========================= */
 
 main{
-max-width:1450px;
-margin:auto;
-padding:12px 12px 80px;
+  max-width:1450px;
+  margin:auto;
+  padding:12px 12px 80px;
 }
 
-/* BUSCADOR */
+
+/* =========================
+   BUSCADOR
+========================= */
 
 .search-wrapper{
-width:100%;
-display:flex;
-height:48px;
-margin-bottom:11px;
-filter:drop-shadow(0 2px 6px rgba(0,0,0,.07));
+  width:100%;
+  display:flex;
+  height:48px;
+  margin-bottom:11px;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.07));
 }
 
 #search{
-flex:1;
-min-width:0;
-border:1px solid #d6d6d6;
-border-right:0;
-border-radius:24px 0 0 24px;
-background:white;
-padding:0 17px;
-font-size:16px;
-color:#111;
-outline:none;
+  flex:1;
+  min-width:0;
+  border:1px solid #d6d6d6;
+  border-right:0;
+  border-radius:24px 0 0 24px;
+  background:white;
+  padding:0 17px;
+  font-size:16px;
+  color:#111;
+  outline:none;
 }
 
-#search::placeholder{color:#8b8b8b}
+#search::placeholder{
+  color:#8b8b8b;
+}
 
-#search:focus{border-color:#aaa}
+#search:focus{
+  border-color:#aaa;
+}
 
 .search-button{
-width:62px;
-flex:0 0 62px;
-border:1px solid #d6d6d6;
-border-radius:0 24px 24px 0;
-background:#f8f8f8;
-display:flex;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-padding:0;
+  width:62px;
+  flex:0 0 62px;
+  border:1px solid #d6d6d6;
+  border-radius:0 24px 24px 0;
+  background:#f8f8f8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  padding:0;
 }
-
-.search-button:hover{background:#eee}
-.search-button:active{background:#e3e3e3}
 
 .search-button svg{
-width:25px;
-height:25px;
-fill:none;
-stroke:#222;
-stroke-width:2;
-stroke-linecap:round;
-stroke-linejoin:round;
+  width:25px;
+  height:25px;
+  fill:none;
+  stroke:#222;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
 }
 
-/* FILTROS */
+
+/* =========================
+   OFERTAS
+========================= */
+
+.offer-area{
+  display:none;
+  margin:2px 0 10px;
+}
+
+.offer-filter{
+  width:100%;
+  border:2px solid var(--yellow);
+  background:#111;
+  color:var(--yellow);
+  border-radius:11px;
+  padding:10px 16px;
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+  letter-spacing:.2px;
+  box-shadow:0 3px 10px rgba(0,0,0,.10);
+}
+
+.offer-filter.active{
+  background:var(--yellow);
+  color:#111;
+  border-color:#111;
+}
+
+
+/* =========================
+   CATEGORÍAS
+========================= */
 
 .filters{
-display:flex;
-gap:7px;
-overflow-x:auto;
-padding:1px 0 9px;
-scrollbar-width:none;
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:1px 0 9px;
+  scrollbar-width:none;
 }
 
-.filters::-webkit-scrollbar{display:none}
+.filters::-webkit-scrollbar{
+  display:none;
+}
 
 .filter{
-border:0;
-background:white;
-color:var(--blue);
-border-radius:22px;
-padding:9px 17px;
-font-size:11px;
-font-weight:900;
-cursor:pointer;
-white-space:nowrap;
-box-shadow:0 2px 7px rgba(0,0,0,.07);
+  border:0;
+  background:white;
+  color:var(--blue);
+  border-radius:22px;
+  padding:9px 17px;
+  font-size:11px;
+  font-weight:900;
+  cursor:pointer;
+  white-space:nowrap;
+  box-shadow:0 2px 7px rgba(0,0,0,.07);
 }
 
 .filter.active{
-background:var(--yellow);
-color:#111;
+  background:var(--yellow);
+  color:#111;
 }
+
+
+/* =========================
+   RESULTADOS
+========================= */
 
 .results{
-font-size:11px;
-color:#777;
-font-weight:600;
-margin:1px 3px 9px;
+  font-size:11px;
+  color:#777;
+  font-weight:600;
+  margin:1px 3px 9px;
 }
 
-/* LOADING */
+
+/* =========================
+   LOADING
+========================= */
 
 .loading{
-background:white;
-padding:35px 15px;
-text-align:center;
-border-radius:12px;
+  background:white;
+  padding:35px 15px;
+  text-align:center;
+  border-radius:12px;
 }
 
 .spinner{
-width:30px;
-height:30px;
-margin:0 auto 10px;
-border:4px solid #ddd;
-border-top-color:var(--yellow);
-border-radius:50%;
-animation:spin .8s linear infinite;
+  width:30px;
+  height:30px;
+  margin:0 auto 10px;
+  border:4px solid #ddd;
+  border-top-color:var(--yellow);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
 }
 
 @keyframes spin{
-to{transform:rotate(360deg)}
+  to{
+    transform:rotate(360deg);
+  }
 }
 
-/* TABLA PC */
+
+/* =========================
+   TABLA PC
+========================= */
 
 .table-wrap{
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 3px 15px rgba(0,0,0,.08);
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
 }
 
 table{
-width:100%;
-border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
 }
 
 thead{
-background:#111;
-color:white;
+  background:#111;
+  color:white;
 }
 
 th{
-padding:11px 8px;
-font-size:12px;
+  padding:11px 8px;
+  font-size:12px;
 }
 
 th.price-head{
-background:var(--yellow);
-color:#111;
+  background:var(--yellow);
+  color:#111;
 }
 
 td{
-padding:8px;
-text-align:center;
-font-size:12px;
-border-bottom:1px solid #ddd;
+  padding:8px;
+  text-align:center;
+  font-size:12px;
+  border-bottom:1px solid #ddd;
 }
 
 tbody tr:nth-child(even){
-background:#f5f5f5;
+  background:#f5f5f5;
 }
 
-.desktop-price{font-weight:900}
+.desktop-price{
+  font-weight:900;
+}
+
+
+/* =========================
+   BOTONES PC
+========================= */
+
+.desktop-actions{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+}
+
+.desktop-buy,
+.desktop-share{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:75px;
+  height:30px;
+  padding:0 9px;
+  border-radius:8px;
+  font-size:9px;
+  font-weight:950;
+  text-decoration:none;
+  cursor:pointer;
+  border:0;
+  font-family:inherit;
+}
 
 .desktop-buy{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-min-width:82px;
-height:30px;
-padding:0 12px;
-border-radius:8px;
-background:var(--yellow);
-color:#111;
-font-size:10px;
-font-weight:950;
-text-decoration:none;
-box-shadow:0 2px 5px rgba(0,0,0,.10);
+  background:var(--yellow);
+  color:#111;
 }
 
-.desktop-buy:hover{background:#ffdf35}
-.desktop-buy:active{transform:scale(.96)}
+.desktop-share{
+  background:#111;
+  color:white;
+}
 
-/* STOCK */
+.desktop-buy:hover{
+  background:#ffdf35;
+}
+
+.desktop-share:hover{
+  background:#333;
+}
+
+
+/* =========================
+   STOCK
+========================= */
 
 .stock{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-min-width:67px;
-padding:5px 9px;
-border-radius:20px;
-background:var(--green);
-color:var(--green-dark);
-font-size:10px;
-font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:67px;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:9px;
+  font-weight:950;
+  white-space:nowrap;
 }
 
-.no-stock{
-background:#ffd0d0;
-color:#8b0000;
+.stock-in{
+  background:var(--green);
+  color:var(--green-dark);
 }
 
-/* MOBILE */
+.stock-last{
+  background:var(--orange);
+  color:var(--orange-dark);
+}
 
-.mobile-list{display:none}
+.stock-order{
+  background:var(--blue-light);
+  color:var(--blue-dark);
+}
+
+.stock-out{
+  background:var(--red-light);
+  color:var(--red-dark);
+}
+
+.stock-other{
+  background:#e5e5e5;
+  color:#444;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-list{
+  display:none;
+}
 
 .product-row{
-background:white;
-border:1px solid #e7e7e7;
-border-radius:11px;
-min-height:68px;
-margin-bottom:7px;
-padding:8px 9px 8px 10px;
-display:grid;
-grid-template-columns:minmax(0,1fr) auto;
-grid-template-rows:auto auto;
-column-gap:10px;
-row-gap:5px;
-align-items:center;
-box-shadow:0 2px 7px rgba(0,0,0,.055);
-}
-
-.product-top,
-.product-bottom{
-min-width:0;
-display:flex;
-align-items:center;
-gap:5px;
-flex-wrap:wrap;
+  background:white;
+  border:1px solid #e7e7e7;
+  border-radius:11px;
+  margin-bottom:7px;
+  padding:9px 9px 8px 10px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  column-gap:10px;
+  row-gap:6px;
+  align-items:center;
+  box-shadow:0 2px 7px rgba(0,0,0,.055);
 }
 
 .product-top{
-grid-column:1;
-grid-row:1;
-}
-
-.product-bottom{
-grid-column:1;
-grid-row:2;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
 }
 
 .product-main{
-color:#111;
-font-size:12px;
-line-height:1.15;
-font-weight:900;
+  color:#111;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:900;
 }
 
 .product-meta{
-color:#3b3b3b;
-font-size:12px;
-line-height:1.15;
-font-weight:850;
+  color:#3b3b3b;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:850;
 }
 
 .product-sep{
-color:#aaa;
-font-weight:800;
+  color:#aaa;
+  font-weight:800;
 }
 
 .mobile-price{
-grid-column:2;
-grid-row:1;
-font-size:14px;
-font-weight:950;
-white-space:nowrap;
-text-align:right;
+  font-size:14px;
+  font-weight:950;
+  white-space:nowrap;
+  text-align:right;
+}
+
+.product-bottom{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+.mobile-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:5px;
+}
+
+.buy-button,
+.share-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:29px;
+  border-radius:8px;
+  padding:0 9px;
+  font-size:9px;
+  font-weight:950;
+  text-decoration:none;
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
+  white-space:nowrap;
 }
 
 .buy-button{
-grid-column:2;
-grid-row:2;
-display:flex;
-align-items:center;
-justify-content:center;
-min-width:76px;
-height:29px;
-padding:0 10px;
-border-radius:8px;
-background:var(--yellow);
-color:#111;
-font-size:10px;
-font-weight:950;
-text-decoration:none;
-box-shadow:0 2px 5px rgba(0,0,0,.12);
+  background:var(--yellow);
+  color:#111;
 }
 
-.buy-button:hover{background:#ffdf35}
-.buy-button:active{transform:scale(.96)}
+.share-button{
+  background:#111;
+  color:white;
+}
 
-/* WHATSAPP */
+
+/* =========================
+   WHATSAPP FLOTANTE
+========================= */
 
 .whatsapp-floating{
-position:fixed;
-right:15px;
-bottom:calc(15px + env(safe-area-inset-bottom));
-width:55px;
-height:55px;
-border-radius:50%;
-background:var(--whatsapp);
-display:flex;
-align-items:center;
-justify-content:center;
-z-index:100;
-box-shadow:0 5px 20px rgba(0,0,0,.24);
-text-decoration:none;
+  position:fixed;
+  right:15px;
+  bottom:calc(15px + env(safe-area-inset-bottom));
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:var(--whatsapp);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  box-shadow:0 5px 20px rgba(0,0,0,.24);
+  text-decoration:none;
 }
 
 .whatsapp-floating svg{
-width:33px;
-height:33px;
-fill:white;
+  width:33px;
+  height:33px;
+  fill:white;
 }
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
 
 @media(max-width:700px){
 
-header{
-padding-top:calc(env(safe-area-inset-top) + 3px);
-}
+  header{
+    padding-top:calc(env(safe-area-inset-top) + 3px);
+  }
 
-.header{padding:7px 12px 9px}
+  .header{
+    padding:7px 12px 9px;
+  }
 
-.brand{gap:6px}
+  .brand{
+    gap:6px;
+  }
 
-.brand-logo{
-width:34px;
-height:34px;
-flex-basis:34px;
-}
+  .brand-logo{
+    width:34px;
+    height:34px;
+    flex-basis:34px;
+  }
 
-.logo{font-size:20px}
+  .logo{
+    font-size:20px;
+  }
 
-.title strong{font-size:17px}
+  .title strong{
+    font-size:17px;
+  }
 
-main{padding:10px 8px 75px}
+  main{
+    padding:10px 8px 75px;
+  }
 
-.search-wrapper{
-height:46px;
-margin-bottom:10px;
-}
+  .search-wrapper{
+    height:46px;
+    margin-bottom:10px;
+  }
 
-#search{font-size:15px}
+  #search{
+    font-size:15px;
+  }
 
-.search-button{
-width:58px;
-flex-basis:58px;
-}
+  .search-button{
+    width:58px;
+    flex-basis:58px;
+  }
 
-.filter{
-padding:8px 14px;
-font-size:10px;
-}
+  .offer-filter{
+    padding:9px 14px;
+    font-size:12px;
+  }
 
-.table-wrap{
-display:none!important;
-}
+  .filter{
+    padding:8px 14px;
+    font-size:10px;
+  }
 
-.mobile-list{display:block}
+  .table-wrap{
+    display:none!important;
+  }
 
-.stock{
-min-width:0;
-padding:4px 7px;
-font-size:9px;
-line-height:1;
-}
+  .mobile-list{
+    display:block;
+  }
+
+  .stock{
+    min-width:0;
+    padding:4px 7px;
+    font-size:8px;
+  }
 
 }
 
 @media(max-width:390px){
 
-.product-row{
-min-height:66px;
-padding:7px 7px 7px 9px;
-column-gap:7px;
-}
+  .product-row{
+    padding:8px 7px 7px 9px;
+    column-gap:7px;
+  }
 
-.product-main,
-.product-meta{
-font-size:11px;
-}
+  .product-main,
+  .product-meta{
+    font-size:11px;
+  }
 
-.mobile-price{font-size:13px}
+  .mobile-price{
+    font-size:13px;
+  }
 
-.buy-button{
-min-width:70px;
-height:28px;
-padding:0 8px;
-font-size:9px;
-}
-
-.stock{
-padding:4px 6px;
-font-size:8px;
-}
+  .buy-button,
+  .share-button{
+    height:28px;
+    padding:0 7px;
+    font-size:8px;
+  }
 
 }
+
 </style>
+
 </head>
 
 <body>
 
+
 <header>
+
 <div class="header">
 
-<div class="brand">
+  <div class="brand">
 
-<img
-src="logo-importarg.png"
-class="brand-logo"
-alt="ImportARG Lincoln"
->
+    <img
+      src="logo-importarg.png"
+      class="brand-logo"
+      alt="ImportArg Lincoln"
+    >
 
-<div class="logo">
-import<span>Arg</span>
+    <div class="logo">
+      import<span>Arg</span>
+    </div>
+
+  </div>
+
+  <div class="title">
+
+    <strong>
+      LISTA <span>DE PRECIOS</span>
+    </strong>
+
+  </div>
+
 </div>
 
-</div>
-
-<div class="title">
-<strong>
-LISTA <span>DE PRECIOS</span>
-</strong>
-</div>
-
-</div>
 </header>
 
+
 <main>
+
 
 <!-- BUSCADOR -->
 
 <div class="search-wrapper">
 
-<input
-id="search"
-type="search"
-placeholder="Buscar modelo, capacidad, color..."
-autocomplete="off"
->
+  <input
+    id="search"
+    type="search"
+    placeholder="Buscar modelo, capacidad, color..."
+    autocomplete="off"
+  >
 
-<button
-class="search-button"
-id="searchButton"
-aria-label="Buscar"
->
+  <button
+    class="search-button"
+    id="searchButton"
+    aria-label="Buscar"
+  >
 
-<svg viewBox="0 0 24 24">
-<circle cx="11" cy="11" r="7"></circle>
-<line x1="16.65" y1="16.65" x2="21" y2="21"></line>
-</svg>
+    <svg viewBox="0 0 24 24">
 
-</button>
+      <circle
+        cx="11"
+        cy="11"
+        r="7"
+      ></circle>
+
+      <line
+        x1="16.65"
+        y1="16.65"
+        x2="21"
+        y2="21"
+      ></line>
+
+    </svg>
+
+  </button>
 
 </div>
 
-<!--
-LAS SOLAPAS SE CREAN AUTOMÁTICAMENTE
-CON LOS PRODUCTOS DE GOOGLE SHEETS
--->
+
+<!-- OFERTAS SEPARADA -->
 
 <div
-class="filters"
-id="filters"
+  class="offer-area"
+  id="offerArea"
 >
-<button
-class="filter active"
-data-filter="TODOS"
->
-TODOS
-</button>
+
+  <button
+    class="offer-filter"
+    id="offerButton"
+  >
+    🔥 OFERTAS
+  </button>
+
 </div>
+
+
+<!-- CATEGORÍAS AUTOMÁTICAS -->
 
 <div
-class="results"
-id="results"
+  class="filters"
+  id="filters"
 >
-Cargando productos...
+
+  <button
+    class="filter active"
+    data-filter="TODOS"
+  >
+    TODOS
+  </button>
+
 </div>
+
 
 <div
-class="loading"
-id="loading"
+  class="results"
+  id="results"
+>
+  Cargando productos...
+</div>
+
+
+<div
+  class="loading"
+  id="loading"
 >
 
-<div class="spinner"></div>
+  <div class="spinner"></div>
 
-Actualizando lista...
+  Actualizando lista...
 
 </div>
+
 
 <!-- TABLA PC -->
 
 <div
-class="table-wrap"
-id="tableWrap"
-style="display:none"
+  class="table-wrap"
+  id="tableWrap"
+  style="display:none"
 >
 
 <table>
 
 <thead>
+
 <tr>
 
-<th>PRODUCTO</th>
-<th>MODELO</th>
-<th>CAPACIDAD</th>
-<th>COLOR</th>
-<th>DETALLE</th>
+  <th>PRODUCTO</th>
 
-<th class="price-head">
-PRECIO
-</th>
+  <th>MODELO</th>
 
-<th>ESTADO</th>
-<th>COMPRAR</th>
+  <th>CAPACIDAD</th>
+
+  <th>COLOR</th>
+
+  <th>DETALLE</th>
+
+  <th class="price-head">
+    PRECIO
+  </th>
+
+  <th>ESTADO</th>
+
+  <th>ACCIONES</th>
 
 </tr>
+
 </thead>
 
 <tbody id="table"></tbody>
@@ -616,36 +843,43 @@ PRECIO
 
 </div>
 
-<!-- CELULAR -->
+
+<!-- LISTA CELULAR -->
 
 <div
-class="mobile-list"
-id="mobileList"
+  class="mobile-list"
+  id="mobileList"
 ></div>
 
+
 </main>
+
 
 <!-- WHATSAPP FLOTANTE -->
 
 <a
-class="whatsapp-floating"
-href="https://wa.me/5491124014722"
-target="_blank"
-rel="noopener noreferrer"
-aria-label="Contactar por WhatsApp"
+  class="whatsapp-floating"
+  href="https://wa.me/5491124014722"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contactar por WhatsApp"
 >
 
 <svg viewBox="0 0 32 32">
+
 <path d="M16.04 3C9.39 3 4 8.3 4 14.84c0 2.29.66 4.51 1.92 6.43L4 28l6.95-1.81a12.17 12.17 0 0 0 5.08 1.1h.01C22.68 27.29 28 22 28 15.45 28 8.91 22.68 3 16.04 3zm0 21.96h-.01a9.86 9.86 0 0 1-5.02-1.37l-.36-.21-4.12 1.07 1.1-4-.23-.37a9.65 9.65 0 0 1-1.5-5.24c0-5.29 4.55-9.6 10.15-9.6 5.58 0 10.12 4.31 10.12 9.6 0 5.3-4.54 10.12-10.13 10.12zm5.56-7.18c-.3-.15-1.8-.87-2.08-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.35.22-.65.07-.3-.15-1.27-.46-2.42-1.46-.89-.78-1.5-1.75-1.67-2.05-.18-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.62-.93-2.22-.25-.58-.5-.5-.68-.51h-.58c-.2 0-.53.07-.8.37-.28.3-1.06 1.02-1.06 2.49s1.09 2.89 1.24 3.09c.15.2 2.14 3.21 5.18 4.5.72.31 1.29.49 1.73.63.73.23 1.39.2 1.91.12.58-.09 1.8-.72 2.05-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35z"/>
+
 </svg>
 
 </a>
 
+
 <script>
 
-/* =====================================
-CONFIGURACIÓN
-===================================== */
+
+/* =========================
+   CONFIGURACIÓN
+========================= */
 
 const CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vT8v35uv1oCfpyY7_R0fSKYG08h43uApPtUIy-VBItP2Njs99BeXR5VkKeWtZ5L2w/pub?output=csv";
@@ -653,971 +887,1699 @@ const CSV_URL =
 const WHATSAPP =
 "5491124014722";
 
+const SITE_URL =
+"https://importarg.com.ar/";
+
 let products = [];
 
 let currentFilter =
 "TODOS";
 
 
-/* =====================================
-LEER CSV
-===================================== */
+/* =========================
+   LEER CSV
+========================= */
 
 function parseCSV(text){
 
-const rows=[];
-let row=[];
-let field="";
-let quoted=false;
+  const rows = [];
 
-for(let i=0;i<text.length;i++){
+  let row = [];
 
-const c=text[i];
+  let field = "";
 
-if(c === '"'){
+  let quoted = false;
 
-if(quoted && text[i+1] === '"'){
-field+='"';
-i++;
-}else{
-quoted=!quoted;
+
+  for(
+    let i = 0;
+    i < text.length;
+    i++
+  ){
+
+    const c =
+      text[i];
+
+
+    if(c === '"'){
+
+      if(
+        quoted &&
+        text[i + 1] === '"'
+      ){
+
+        field += '"';
+
+        i++;
+
+      }
+
+      else{
+
+        quoted =
+          !quoted;
+
+      }
+
+    }
+
+
+    else if(
+      c === "," &&
+      !quoted
+    ){
+
+      row.push(field);
+
+      field = "";
+
+    }
+
+
+    else if(
+      (
+        c === "\n" ||
+        c === "\r"
+      )
+      &&
+      !quoted
+    ){
+
+      if(
+        c === "\r" &&
+        text[i + 1] === "\n"
+      ){
+
+        i++;
+
+      }
+
+      row.push(field);
+
+
+      if(
+        row.some(
+          x =>
+            x.trim() !== ""
+        )
+      ){
+
+        rows.push(row);
+
+      }
+
+
+      row = [];
+
+      field = "";
+
+    }
+
+
+    else{
+
+      field += c;
+
+    }
+
+  }
+
+
+  if(
+    field.length ||
+    row.length
+  ){
+
+    row.push(field);
+
+
+    if(
+      row.some(
+        x =>
+          x.trim() !== ""
+      )
+    ){
+
+      rows.push(row);
+
+    }
+
+  }
+
+
+  return rows;
+
 }
 
-}
 
-else if(c === "," && !quoted){
-
-row.push(field);
-field="";
-
-}
-
-else if(
-(c === "\n" || c === "\r")
-&& !quoted
-){
-
-if(
-c === "\r" &&
-text[i+1] === "\n"
-){
-i++;
-}
-
-row.push(field);
-
-if(
-row.some(
-x => x.trim() !== ""
-)
-){
-rows.push(row);
-}
-
-row=[];
-field="";
-
-}
-
-else{
-field+=c;
-}
-
-}
-
-if(field.length || row.length){
-
-row.push(field);
-
-if(
-row.some(
-x => x.trim() !== ""
-)
-){
-rows.push(row);
-}
-
-}
-
-return rows;
-
-}
-
-
-/* =====================================
-UTILIDADES
-===================================== */
+/* =========================
+   UTILIDADES
+========================= */
 
 function clean(value){
 
-return String(value ?? "")
-.replace(/\uFEFF/g,"")
-.trim();
+  return String(
+    value ?? ""
+  )
+    .replace(
+      /\uFEFF/g,
+      ""
+    )
+    .trim();
 
 }
+
 
 function safe(value){
 
-return String(value ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+  return String(
+    value ?? ""
+  )
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
-function inStock(status){
-
-const value=
-String(status || "")
-.toUpperCase();
-
-return(
-value.includes("STOCK")
-&&
-!value.includes("SIN")
-);
-
-}
 
 function formatPrice(price){
-return clean(price);
+
+  return clean(price);
+
 }
 
 
-/* =====================================
-WHATSAPP
-===================================== */
+/* =========================
+   OFERTA
+========================= */
+
+function isOffer(p){
+
+  const value =
+    clean(p.offer)
+      .toUpperCase();
+
+
+  return(
+    value === "SI" ||
+    value === "SÍ" ||
+    value === "YES" ||
+    value === "1"
+  );
+
+}
+
+
+/* =========================
+   STOCK
+========================= */
+
+function getStockInfo(status){
+
+  const value =
+    clean(status)
+      .toUpperCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      );
+
+
+  if(
+    value.includes("SIN STOCK") ||
+    value.includes("AGOTADO")
+  ){
+
+    return{
+      label:"SIN STOCK",
+      className:"stock-out",
+      available:false
+    };
+
+  }
+
+
+  if(
+    value.includes("ULTIMA UNIDAD") ||
+    value.includes("ULTIMO") ||
+    value.includes("ULTIMA")
+  ){
+
+    return{
+      label:"ÚLTIMA UNIDAD",
+      className:"stock-last",
+      available:true
+    };
+
+  }
+
+
+  if(
+    value.includes("A PEDIDO") ||
+    value.includes("PEDIDO")
+  ){
+
+    return{
+      label:"A PEDIDO",
+      className:"stock-order",
+      available:true
+    };
+
+  }
+
+
+  if(
+    value.includes("EN STOCK") ||
+    value === "STOCK" ||
+    value.includes("DISPONIBLE")
+  ){
+
+    return{
+      label:"EN STOCK",
+      className:"stock-in",
+      available:true
+    };
+
+  }
+
+
+  return{
+    label:
+      clean(status) ||
+      "CONSULTAR",
+
+    className:
+      "stock-other",
+
+    available:
+      true
+  };
+
+}
+
+
+/* =========================
+   WHATSAPP COMPRAR
+========================= */
 
 function whatsappLink(p){
 
-const message =
+  const stock =
+    getStockInfo(
+      p.status
+    );
+
+
+  const message =
 `Hola ImportArg! Quiero consultar por:
 
 ${p.product} ${p.model}
-Capacidad: ${p.capacity}
-Color: ${p.color}
+${p.capacity ? "Capacidad: " + p.capacity : ""}
+${p.color ? "Color: " + p.color : ""}
 ${p.detail ? "Detalle: " + p.detail : ""}
-Precio: ${p.price}`;
+Precio: ${p.price}
+Estado: ${stock.label}`;
 
-return(
-"https://wa.me/" +
-WHATSAPP +
-"?text=" +
-encodeURIComponent(message)
-);
+
+  return(
+    "https://wa.me/" +
+    WHATSAPP +
+    "?text=" +
+    encodeURIComponent(message)
+  );
 
 }
 
 
-/* =====================================
-CARGAR GOOGLE SHEETS
-===================================== */
+/* =========================
+   COMPARTIR
+========================= */
+
+function shareText(p){
+
+  const stock =
+    getStockInfo(
+      p.status
+    );
+
+
+  return(
+`ImportArg
+
+${p.product} ${p.model}
+${p.capacity ? p.capacity + "\n" : ""}${p.color ? p.color + "\n" : ""}${p.detail ? p.detail + "\n" : ""}Precio: ${p.price}
+${stock.label}
+
+Ver lista de precios:
+${SITE_URL}`
+  );
+
+}
+
+
+async function shareProduct(index){
+
+  const p =
+    products[index];
+
+
+  if(!p){
+    return;
+  }
+
+
+  const text =
+    shareText(p);
+
+
+  /*
+    CELULARES:
+    abre el menú nativo para compartir
+    por WhatsApp, Telegram, mensajes,
+    mail, etc.
+  */
+
+  if(
+    navigator.share
+  ){
+
+    try{
+
+      await navigator.share({
+
+        title:
+          `${p.product} ${p.model}`,
+
+        text:text
+
+      });
+
+      return;
+
+    }
+
+    catch(error){
+
+      if(
+        error.name === "AbortError"
+      ){
+
+        return;
+
+      }
+
+    }
+
+  }
+
+
+  /*
+    ALTERNATIVA:
+    abre WhatsApp SIN número definido,
+    para elegir a qué persona enviarlo.
+  */
+
+  const url =
+    "https://wa.me/?text=" +
+    encodeURIComponent(text);
+
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =========================
+   CARGAR GOOGLE SHEETS
+========================= */
 
 async function loadProducts(){
 
-try{
+  try{
 
-const response=
-await fetch(
-CSV_URL + "&t=" + Date.now(),
-{cache:"no-store"}
-);
 
-if(!response.ok){
-throw new Error(
-"No se pudo cargar Google Sheets"
-);
+    const response =
+      await fetch(
+
+        CSV_URL +
+        "&t=" +
+        Date.now(),
+
+        {
+          cache:"no-store"
+        }
+
+      );
+
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        "No se pudo cargar Google Sheets"
+      );
+
+    }
+
+
+    const text =
+      await response.text();
+
+
+    const rows =
+      parseCSV(text);
+
+
+    const headerIndex =
+      rows.findIndex(
+
+        row =>
+
+          clean(
+            row[0]
+          )
+            .toUpperCase()
+            === "PRODUCTO"
+
+          &&
+
+          clean(
+            row[1]
+          )
+            .toUpperCase()
+            === "MODELO"
+
+      );
+
+
+    if(
+      headerIndex === -1
+    ){
+
+      throw new Error(
+        "No encontré PRODUCTO / MODELO"
+      );
+
+    }
+
+
+    const headers =
+      rows[headerIndex]
+        .map(
+
+          value =>
+            clean(value)
+              .toUpperCase()
+
+        );
+
+
+    const col =
+      name =>
+        headers.indexOf(name);
+
+
+    const cProduct =
+      col("PRODUCTO");
+
+    const cModel =
+      col("MODELO");
+
+    const cCapacity =
+      col("CAPACIDAD");
+
+    const cColor =
+      col("COLOR");
+
+    const cDetail =
+      col("DETALLE");
+
+    const cPrice =
+      col("PRECIO");
+
+    const cStatus =
+      col("ESTADO");
+
+    const cOffer =
+      col("OFERTA");
+
+
+    products =
+      rows
+
+        .slice(
+          headerIndex + 1
+        )
+
+        .map(
+
+          (row,index) => ({
+
+            id:index,
+
+            product:
+              clean(
+                row[cProduct]
+              ),
+
+            model:
+              clean(
+                row[cModel]
+              ),
+
+            capacity:
+              clean(
+                row[cCapacity]
+              ),
+
+            color:
+              clean(
+                row[cColor]
+              ),
+
+            detail:
+              clean(
+                row[cDetail]
+              ),
+
+            price:
+              clean(
+                row[cPrice]
+              ),
+
+            status:
+              clean(
+                row[cStatus]
+              ),
+
+            offer:
+              cOffer >= 0
+                ? clean(
+                    row[cOffer]
+                  )
+                : ""
+
+          })
+
+        )
+
+        .filter(
+
+          p =>
+            p.product ||
+            p.model ||
+            p.price
+
+        );
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .style.display =
+      "none";
+
+
+    if(
+      window.innerWidth > 700
+    ){
+
+      document
+        .getElementById(
+          "tableWrap"
+        )
+        .style.display =
+        "block";
+
+    }
+
+
+    buildFilters();
+
+    buildOfferButton();
+
+    render();
+
+  }
+
+
+  catch(error){
+
+    console.error(error);
+
+
+    document
+      .getElementById(
+        "loading"
+      )
+      .innerHTML =
+
+      `<strong>
+        No se pudo cargar la lista.
+      </strong>
+
+      <br><br>
+
+      Revisá que Google Sheets
+      siga publicado como CSV.`;
+
+  }
+
 }
 
-const text=
-await response.text();
 
-const rows=
-parseCSV(text);
-
-const headerIndex=
-rows.findIndex(
-row =>
-clean(row[0]).toUpperCase() === "PRODUCTO"
-&&
-clean(row[1]).toUpperCase() === "MODELO"
-);
-
-if(headerIndex === -1){
-
-throw new Error(
-"No encontré PRODUCTO / MODELO"
-);
-
-}
-
-const headers=
-rows[headerIndex]
-.map(
-value =>
-clean(value).toUpperCase()
-);
-
-const col=
-name =>
-headers.indexOf(name);
-
-const cProduct=col("PRODUCTO");
-const cModel=col("MODELO");
-const cCapacity=col("CAPACIDAD");
-const cColor=col("COLOR");
-const cDetail=col("DETALLE");
-const cPrice=col("PRECIO");
-const cStatus=col("ESTADO");
-
-products=
-rows
-.slice(headerIndex+1)
-.map(
-row => ({
-
-product:
-clean(row[cProduct]),
-
-model:
-clean(row[cModel]),
-
-capacity:
-clean(row[cCapacity]),
-
-color:
-clean(row[cColor]),
-
-detail:
-clean(row[cDetail]),
-
-price:
-clean(row[cPrice]),
-
-status:
-clean(row[cStatus])
-
-})
-)
-.filter(
-p =>
-p.product ||
-p.model ||
-p.price
-);
-
-document
-.getElementById("loading")
-.style.display="none";
-
-if(window.innerWidth > 700){
-
-document
-.getElementById("tableWrap")
-.style.display="block";
-
-}
-
-/*
-IMPORTANTE:
-Cada vez que se cargan los productos,
-se vuelven a crear las solapas.
-*/
-
-buildFilters();
-
-render();
-
-}
-
-catch(error){
-
-console.error(error);
-
-document
-.getElementById("loading")
-.innerHTML=
-`<strong>No se pudo cargar la lista.</strong>
-<br><br>
-Revisá que Google Sheets siga publicado como CSV.`;
-
-}
-
-}
-
-
-/* =====================================
-DETECTAR CATEGORÍA AUTOMÁTICAMENTE
-===================================== */
+/* =========================
+   CATEGORÍA AUTOMÁTICA
+========================= */
 
 function getCategory(p){
 
-const product=
-clean(p.product).toUpperCase();
+  const product =
+    clean(
+      p.product
+    )
+      .toUpperCase();
 
-const model=
-clean(p.model).toUpperCase();
 
-const detail=
-clean(p.detail).toUpperCase();
+  const model =
+    clean(
+      p.model
+    )
+      .toUpperCase();
 
-const text=
-`${product} ${model} ${detail}`;
+
+  const detail =
+    clean(
+      p.detail
+    )
+      .toUpperCase();
+
+
+  const text =
+    `${product} ${model} ${detail}`;
+
+
+/* APPLE */
+
+  if(
+    text.includes("IPHONE")
+  ){
+
+    return "IPHONE";
+
+  }
+
+
+  if(
+    text.includes("MACBOOK") ||
+    text.includes("MAC BOOK")
+  ){
+
+    return "MACBOOK";
+
+  }
+
+
+  if(
+    text.includes("IPAD")
+  ){
+
+    return "IPAD";
+
+  }
+
+
+  if(
+    text.includes("AIRPOD") ||
+    text.includes("AIR POD")
+  ){
+
+    return "AIRPODS";
+
+  }
+
+
+/* ACCESORIOS */
+
+  if(
+
+    text.includes("ACCESORIO")
+
+    ||
+
+    text.includes("MAGSAFE")
+
+    ||
+
+    text.includes("AIRTAG")
+
+    ||
+
+    text.includes("APPLE PENCIL")
+
+    ||
+
+    (
+      text.includes("APPLE")
+      &&
+      (
+        text.includes("CARGADOR") ||
+        text.includes("ADAPTADOR") ||
+        text.includes("CABLE") ||
+        text.includes("FUNDA") ||
+        text.includes("PENCIL")
+      )
+    )
+
+  ){
+
+    return "ACCESORIOS";
+
+  }
+
+
+/* SONY */
+
+  if(
+    text.includes("SONY") ||
+    text.includes("PLAYSTATION") ||
+    text.includes("PLAY STATION") ||
+    text.includes("PS5") ||
+    text.includes("PS 5")
+  ){
+
+    return "SONY";
+
+  }
+
+
+/* SAMSUNG */
+
+  if(
+    text.includes("SAMSUNG") ||
+    text.includes("GALAXY")
+  ){
+
+    return "SAMSUNG";
+
+  }
+
+
+/* XIAOMI */
+
+  if(
+    text.includes("XIAOMI") ||
+    text.includes("POCO") ||
+    text.includes("REDMI")
+  ){
+
+    return "XIAOMI";
+
+  }
+
+
+/* RAYBAN META */
+
+  if(
+    text.includes("RAYBAN META") ||
+    text.includes("RAY-BAN META") ||
+    text.includes("RAY BAN META") ||
+    text.includes("META RAYBAN") ||
+    text.includes("META RAY-BAN") ||
+    text.includes("META RAY BAN")
+  ){
+
+    return "RAYBAN META";
+
+  }
 
 
 /*
-APPLE:
-Queremos estas categorías separadas.
+  CUALQUIER PRODUCTO NUEVO:
+
+  usa automáticamente el contenido
+  de la columna PRODUCTO como solapa.
+
+  JBL -> JBL
+  GARMIN -> GARMIN
+  NINTENDO -> NINTENDO
+  MOTOROLA -> MOTOROLA
 */
 
-if(
-text.includes("IPHONE")
-){
-return "IPHONE";
-}
-
-if(
-text.includes("MACBOOK") ||
-text.includes("MAC BOOK")
-){
-return "MACBOOK";
-}
-
-if(
-text.includes("IPAD")
-){
-return "IPAD";
-}
-
-if(
-text.includes("AIRPOD") ||
-text.includes("AIR POD")
-){
-return "AIRPODS";
-}
-
-
-/*
-ACCESORIOS APPLE
-*/
-
-if(
-
-text.includes("ACCESORIO")
-
-||
-
-text.includes("MAGSAFE")
-
-||
-
-text.includes("AIRTAG")
-
-||
-
-text.includes("APPLE PENCIL")
-
-||
-
-(
-text.includes("APPLE")
-&&
-(
-text.includes("CARGADOR") ||
-text.includes("ADAPTADOR") ||
-text.includes("CABLE") ||
-text.includes("FUNDA") ||
-text.includes("PENCIL")
-)
-)
-
-){
-
-return "ACCESORIOS";
+  return(
+    product ||
+    "OTROS"
+  );
 
 }
 
 
-/*
-ALGUNAS MARCAS QUE YA TENEMOS
-*/
-
-if(
-text.includes("SONY") ||
-text.includes("PLAYSTATION") ||
-text.includes("PLAY STATION") ||
-text.includes("PS5") ||
-text.includes("PS 5")
-){
-return "SONY";
-}
-
-
-if(
-text.includes("SAMSUNG") ||
-text.includes("GALAXY")
-){
-return "SAMSUNG";
-}
-
-
-if(
-text.includes("XIAOMI") ||
-text.includes("POCO") ||
-text.includes("REDMI")
-){
-return "XIAOMI";
-}
-
-
-/*
-RAYBAN META
-*/
-
-if(
-text.includes("RAYBAN META") ||
-text.includes("RAY-BAN META") ||
-text.includes("RAY BAN META") ||
-text.includes("META RAYBAN") ||
-text.includes("META RAY-BAN") ||
-text.includes("META RAY BAN")
-){
-return "RAYBAN META";
-}
-
-
-/*
-CLAVE DEL SISTEMA AUTOMÁTICO:
-
-Si no pertenece a ninguna categoría
-anterior, usa exactamente lo que hayas
-puesto en la columna PRODUCTO.
-
-Ejemplos:
-
-PRODUCTO = JBL
-=> aparece solapa JBL
-
-PRODUCTO = NINTENDO
-=> aparece solapa NINTENDO
-
-PRODUCTO = MOTOROLA
-=> aparece solapa MOTOROLA
-
-PRODUCTO = GARMIN
-=> aparece solapa GARMIN
-
-Así NO hay que volver a modificar
-el index para cada producto nuevo.
-*/
-
-return product || "OTROS";
-
-}
-
-
-/* =====================================
-CREAR SOLAPAS AUTOMÁTICAMENTE
-===================================== */
+/* =========================
+   CREAR CATEGORÍAS
+========================= */
 
 function buildFilters(){
 
-const preferred=[
-"IPHONE",
-"MACBOOK",
-"IPAD",
-"AIRPODS",
-"ACCESORIOS"
-];
+  const preferred = [
 
-const categories=[
-...new Set(
-products
-.map(getCategory)
-.filter(Boolean)
-)
-];
+    "IPHONE",
+    "MACBOOK",
+    "IPAD",
+    "AIRPODS",
+    "ACCESORIOS"
+
+  ];
 
 
-/*
-Primero ponemos las categorías Apple.
-Después el resto alfabéticamente.
-*/
+  const categories = [
 
-categories.sort(
-(a,b) => {
+    ...new Set(
 
-const ai=
-preferred.indexOf(a);
+      products
+        .map(
+          getCategory
+        )
+        .filter(
+          Boolean
+        )
 
-const bi=
-preferred.indexOf(b);
+    )
 
-if(
-ai !== -1 &&
-bi !== -1
-){
-return ai-bi;
+  ];
+
+
+  categories.sort(
+
+    (a,b) => {
+
+      const ai =
+        preferred.indexOf(a);
+
+      const bi =
+        preferred.indexOf(b);
+
+
+      if(
+        ai !== -1 &&
+        bi !== -1
+      ){
+
+        return ai - bi;
+
+      }
+
+
+      if(
+        ai !== -1
+      ){
+
+        return -1;
+
+      }
+
+
+      if(
+        bi !== -1
+      ){
+
+        return 1;
+
+      }
+
+
+      return a.localeCompare(
+        b,
+        "es"
+      );
+
+    }
+
+  );
+
+
+  if(
+    currentFilter !== "TODOS" &&
+    currentFilter !== "OFERTAS" &&
+    !categories.includes(
+      currentFilter
+    )
+  ){
+
+    currentFilter =
+      "TODOS";
+
+  }
+
+
+  const container =
+    document.getElementById(
+      "filters"
+    );
+
+
+  container.innerHTML =
+
+    [
+      "TODOS",
+      ...categories
+    ]
+
+    .map(
+
+      category => `
+
+        <button
+          class="filter ${
+            currentFilter === category
+              ? "active"
+              : ""
+          }"
+          data-filter="${safe(category)}"
+        >
+
+          ${safe(category)}
+
+        </button>
+
+      `
+
+    )
+
+    .join("");
+
 }
 
-if(ai !== -1){
-return -1;
+
+/* =========================
+   BOTÓN OFERTAS
+========================= */
+
+function buildOfferButton(){
+
+  const hasOffers =
+    products.some(
+      isOffer
+    );
+
+
+  const area =
+    document.getElementById(
+      "offerArea"
+    );
+
+
+  const button =
+    document.getElementById(
+      "offerButton"
+    );
+
+
+  if(
+    hasOffers
+  ){
+
+    area.style.display =
+      "block";
+
+  }
+
+  else{
+
+    area.style.display =
+      "none";
+
+
+    if(
+      currentFilter === "OFERTAS"
+    ){
+
+      currentFilter =
+        "TODOS";
+
+    }
+
+  }
+
+
+  button.classList.toggle(
+    "active",
+    currentFilter === "OFERTAS"
+  );
+
 }
 
-if(bi !== -1){
-return 1;
-}
 
-return a.localeCompare(
-b,
-"es"
-);
-
-}
-);
-
-
-/*
-Si se eliminó de Sheets una categoría
-que estaba seleccionada, vuelve a TODOS.
-*/
-
-if(
-currentFilter !== "TODOS"
-&&
-!categories.includes(currentFilter)
-){
-currentFilter="TODOS";
-}
-
-
-const container=
-document.getElementById("filters");
-
-
-container.innerHTML=
-["TODOS",...categories]
-
-.map(
-category => `
-
-<button
-class="filter ${currentFilter === category ? "active" : ""}"
-data-filter="${safe(category)}"
->
-${safe(category)}
-</button>
-
-`
-)
-
-.join("");
-
-}
-
-
-/* =====================================
-FILTRADO
-===================================== */
+/* =========================
+   FILTRAR PRODUCTOS
+========================= */
 
 function filteredProducts(){
 
-const search=
-document
-.getElementById("search")
-.value
-.trim()
-.toUpperCase();
+  const search =
+    document
+      .getElementById(
+        "search"
+      )
+      .value
+      .trim()
+      .toUpperCase();
 
 
-return products.filter(
-p => {
+  return products.filter(
 
-const text=[
-p.product,
-p.model,
-p.capacity,
-p.color,
-p.detail,
-p.price,
-p.status
-]
-.join(" ")
-.toUpperCase();
+    p => {
 
 
-const searchOK=
-text.includes(search);
+      const text = [
+
+        p.product,
+        p.model,
+        p.capacity,
+        p.color,
+        p.detail,
+        p.price,
+        p.status
+
+      ]
+
+        .join(" ")
+        .toUpperCase();
 
 
-const filterOK=
-currentFilter === "TODOS"
-||
-getCategory(p) === currentFilter;
+      const searchOK =
+        text.includes(
+          search
+        );
 
 
-return(
-searchOK &&
-filterOK
-);
+      let filterOK =
+        true;
+
+
+      if(
+        currentFilter === "OFERTAS"
+      ){
+
+        filterOK =
+          isOffer(p);
+
+      }
+
+
+      else if(
+        currentFilter !== "TODOS"
+      ){
+
+        filterOK =
+          getCategory(p) ===
+          currentFilter;
+
+      }
+
+
+      return(
+        searchOK &&
+        filterOK
+      );
+
+    }
+
+  );
 
 }
-);
-
-}
 
 
-/* =====================================
-RENDER GENERAL
-===================================== */
+/* =========================
+   RENDER
+========================= */
 
 function render(){
 
-const list=
-filteredProducts();
+  const list =
+    filteredProducts();
 
 
-document
-.getElementById("results")
-.textContent=
+  document
+    .getElementById(
+      "results"
+    )
+    .textContent =
 
-list.length +
+    list.length +
 
-(
-list.length === 1
-? " producto"
-: " productos"
-);
+    (
+      list.length === 1
+        ? " producto"
+        : " productos"
+    );
 
 
-renderMobile(list);
+  renderMobile(list);
 
-renderDesktop(list);
+  renderDesktop(list);
 
 }
 
 
-/* =====================================
-CELULAR
-===================================== */
+/* =========================
+   MOBILE
+========================= */
 
 function renderMobile(list){
 
-const container=
-document.getElementById(
-"mobileList"
-);
+  const container =
+    document.getElementById(
+      "mobileList"
+    );
 
 
-container.innerHTML=
-list.map(
-p => {
+  container.innerHTML =
 
-const stockOK=
-inStock(p.status);
+    list.map(
 
-const status=
-p.status ||
-"CONSULTAR";
-
-const detail=
-p.detail || "";
+      p => {
 
 
-return `
+        const stock =
+          getStockInfo(
+            p.status
+          );
+
+
+        const buyText =
+          stock.available
+            ? "COMPRAR"
+            : "CONSULTAR";
+
+
+        return `
 
 <div class="product-row">
 
-<div class="product-top">
 
-<span class="product-main">
-${safe(p.product)}
-${safe(p.model)}
-</span>
+  <div class="product-top">
 
-${
-p.capacity
-?
-`
-<span class="product-sep">·</span>
+    <span class="product-main">
 
-<span class="product-meta">
-${safe(p.capacity)}
-</span>
-`
-:
-""
-}
+      ${safe(p.product)}
+      ${safe(p.model)}
 
-${
-p.color
-?
-`
-<span class="product-sep">·</span>
+    </span>
 
-<span class="product-meta">
-${safe(p.color)}
-</span>
-`
-:
-""
-}
+
+    ${
+      p.capacity
+
+      ? `
+
+        <span class="product-sep">
+          ·
+        </span>
+
+        <span class="product-meta">
+          ${safe(p.capacity)}
+        </span>
+
+      `
+
+      : ""
+    }
+
+
+    ${
+      p.color
+
+      ? `
+
+        <span class="product-sep">
+          ·
+        </span>
+
+        <span class="product-meta">
+          ${safe(p.color)}
+        </span>
+
+      `
+
+      : ""
+    }
+
+  </div>
+
+
+  <div class="mobile-price">
+
+    ${safe(
+      formatPrice(
+        p.price
+      )
+    )}
+
+  </div>
+
+
+  <div class="product-bottom">
+
+
+    ${
+      p.detail
+
+      ? `
+
+        <span class="product-meta">
+          ${safe(p.detail)}
+        </span>
+
+      `
+
+      : ""
+    }
+
+
+    <span
+      class="stock ${stock.className}"
+    >
+
+      ${safe(stock.label)}
+
+    </span>
+
+  </div>
+
+
+  <div class="mobile-actions">
+
+
+    <a
+      class="buy-button"
+      href="${whatsappLink(p)}"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+
+      ${buyText}
+
+    </a>
+
+
+    <button
+      class="share-button"
+      onclick="shareProduct(${p.id})"
+    >
+
+      COMPARTIR
+
+    </button>
+
+
+  </div>
+
 
 </div>
 
+        `;
 
-<div class="mobile-price">
-${safe(formatPrice(p.price))}
-</div>
+      }
 
+    )
 
-<div class="product-bottom">
-
-${
-detail
-?
-`
-<span class="product-meta">
-${safe(detail)}
-</span>
-
-<span class="product-sep">·</span>
-`
-:
-""
-}
-
-<span
-class="stock ${stockOK ? "" : "no-stock"}"
->
-${safe(status)}
-</span>
-
-</div>
-
-
-<a
-class="buy-button"
-href="${whatsappLink(p)}"
-target="_blank"
-rel="noopener noreferrer"
->
-COMPRAR
-</a>
-
-</div>
-
-`;
-
-}
-)
-.join("");
+    .join("");
 
 }
 
 
-/* =====================================
-PC
-===================================== */
+/* =========================
+   DESKTOP
+========================= */
 
 function renderDesktop(list){
 
-document
-.getElementById("table")
-.innerHTML=
+  document
+    .getElementById(
+      "table"
+    )
+    .innerHTML =
 
-list.map(
-p => {
+    list.map(
 
-const stockOK=
-inStock(p.status);
+      p => {
 
-return `
+
+        const stock =
+          getStockInfo(
+            p.status
+          );
+
+
+        const buyText =
+          stock.available
+            ? "COMPRAR"
+            : "CONSULTAR";
+
+
+        return `
 
 <tr>
 
-<td>
-<strong>
-${safe(p.product)}
-</strong>
-</td>
 
-<td>
-${safe(p.model)}
-</td>
+  <td>
 
-<td>
-${safe(p.capacity)}
-</td>
+    <strong>
+      ${safe(p.product)}
+    </strong>
 
-<td>
-${safe(p.color)}
-</td>
+  </td>
 
-<td>
-${safe(p.detail)}
-</td>
 
-<td class="desktop-price">
-${safe(formatPrice(p.price))}
-</td>
+  <td>
+    ${safe(p.model)}
+  </td>
 
-<td>
 
-<span
-class="stock ${stockOK ? "" : "no-stock"}"
->
-${safe(
-p.status ||
-"CONSULTAR"
-)}
-</span>
+  <td>
+    ${safe(p.capacity)}
+  </td>
 
-</td>
 
-<td>
+  <td>
+    ${safe(p.color)}
+  </td>
 
-<a
-class="desktop-buy"
-href="${whatsappLink(p)}"
-target="_blank"
-rel="noopener noreferrer"
->
-COMPRAR
-</a>
 
-</td>
+  <td>
+    ${safe(p.detail)}
+  </td>
+
+
+  <td class="desktop-price">
+
+    ${safe(
+      formatPrice(
+        p.price
+      )
+    )}
+
+  </td>
+
+
+  <td>
+
+    <span
+      class="stock ${stock.className}"
+    >
+
+      ${safe(stock.label)}
+
+    </span>
+
+  </td>
+
+
+  <td>
+
+    <div class="desktop-actions">
+
+
+      <a
+        class="desktop-buy"
+        href="${whatsappLink(p)}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        ${buyText}
+
+      </a>
+
+
+      <button
+        class="desktop-share"
+        onclick="shareProduct(${p.id})"
+      >
+
+        COMPARTIR
+
+      </button>
+
+
+    </div>
+
+  </td>
+
 
 </tr>
 
-`;
+        `;
+
+      }
+
+    )
+
+    .join("");
 
 }
-)
-.join("");
-
-}
 
 
-/* =====================================
-BUSCADOR
-===================================== */
+/* =========================
+   BUSCADOR
+========================= */
 
-const searchInput=
-document.getElementById(
-"search"
-);
+const searchInput =
+  document.getElementById(
+    "search"
+  );
 
 
 searchInput.addEventListener(
-"input",
-render
+
+  "input",
+
+  render
+
 );
 
 
 document
-.getElementById("searchButton")
-.addEventListener(
-"click",
-() => {
+  .getElementById(
+    "searchButton"
+  )
+  .addEventListener(
 
-render();
+    "click",
 
-searchInput.focus();
+    () => {
 
-}
-);
+      render();
+
+      searchInput.focus();
+
+    }
+
+  );
 
 
 searchInput.addEventListener(
-"keydown",
-event => {
 
-if(event.key === "Enter"){
+  "keydown",
 
-render();
+  event => {
 
-searchInput.blur();
+    if(
+      event.key === "Enter"
+    ){
 
-}
+      render();
 
-}
+      searchInput.blur();
+
+    }
+
+  }
+
 );
 
 
-/* =====================================
-CLICKS EN SOLAPAS
-===================================== */
-
-/*
-Usamos un solo listener porque las
-solapas se crean automáticamente.
-*/
+/* =========================
+   CATEGORÍAS
+========================= */
 
 document
-.getElementById("filters")
-.addEventListener(
-"click",
-event => {
+  .getElementById(
+    "filters"
+  )
+  .addEventListener(
 
-const button=
-event.target.closest(
-".filter"
-);
+    "click",
 
-if(!button){
-return;
-}
+    event => {
 
 
-currentFilter=
-button.dataset.filter;
+      const button =
+        event.target.closest(
+          ".filter"
+        );
 
+
+      if(
+        !button
+      ){
+
+        return;
+
+      }
+
+
+      currentFilter =
+        button.dataset.filter;
+
+
+      document
+        .querySelectorAll(
+          ".filter"
+        )
+        .forEach(
+
+          b =>
+            b.classList.remove(
+              "active"
+            )
+
+        );
+
+
+      button
+        .classList
+        .add(
+          "active"
+        );
+
+
+      document
+        .getElementById(
+          "offerButton"
+        )
+        .classList
+        .remove(
+          "active"
+        );
+
+
+      render();
+
+    }
+
+  );
+
+
+/* =========================
+   OFERTAS
+========================= */
 
 document
-.querySelectorAll(".filter")
-.forEach(
-b =>
-b.classList.remove(
-"active"
-)
-);
+  .getElementById(
+    "offerButton"
+  )
+  .addEventListener(
+
+    "click",
+
+    () => {
 
 
-button.classList.add(
-"active"
-);
+      currentFilter =
+        "OFERTAS";
 
 
-render();
+      document
+        .querySelectorAll(
+          ".filter"
+        )
+        .forEach(
 
-}
-);
+          b =>
+            b.classList.remove(
+              "active"
+            )
+
+        );
 
 
-/* =====================================
-INICIAR
-===================================== */
+      document
+        .getElementById(
+          "offerButton"
+        )
+        .classList
+        .add(
+          "active"
+        );
+
+
+      render();
+
+    }
+
+  );
+
+
+/* =========================
+   INICIAR
+========================= */
 
 loadProducts();
 
 
 /*
-Cada 5 minutos vuelve a leer Sheets.
+  Actualiza Google Sheets
+  cada 5 minutos.
 
-Si agregaste una categoría/producto
-nuevo, también se vuelve a crear
-automáticamente la barra de solapas.
+  También detecta:
+  - productos nuevos
+  - categorías nuevas
+  - ofertas nuevas
+  - cambios de precio
+  - cambios de stock
 */
 
 setInterval(
-loadProducts,
-300000
+
+  loadProducts,
+
+  300000
+
 );
+
 
 </script>
 
+
 </body>
+
 </html>
