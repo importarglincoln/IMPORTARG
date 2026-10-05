@@ -1099,6 +1099,8 @@ function safe(value){
 
 function formatPrice(price){
 
+  // Mostrar EXACTAMENTE el precio que llega desde Lista Minorista.
+  // No sumar ni restar ningún margen en la web.
   return clean(price);
 
 }
@@ -1240,7 +1242,7 @@ ${p.product} ${p.model}
 ${p.capacity ? "Capacidad: " + p.capacity : ""}
 ${p.color ? "Color: " + p.color : ""}
 ${p.detail ? "Detalle: " + p.detail : ""}
-Precio: ${p.price}
+Precio: ${formatPrice(p.price)}
 Estado: ${stock.label}`;
 
 
@@ -1284,7 +1286,7 @@ function shareLink(p){
 `ImportArg
 
 ${p.product} ${p.model}
-${p.capacity ? p.capacity + "\n" : ""}${p.color ? p.color + "\n" : ""}${p.detail ? p.detail + "\n" : ""}Precio: ${p.price}${fire}
+${p.capacity ? p.capacity + "\n" : ""}${p.color ? p.color + "\n" : ""}${p.detail ? p.detail + "\n" : ""}Precio: ${formatPrice(p.price)}${fire}
 ${stock.label}${lastFire}
 
 Ver lista completa:
