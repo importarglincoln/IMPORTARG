@@ -814,7 +814,7 @@ main{
   overflow:hidden;
   background:
     linear-gradient(90deg,rgba(3,13,24,.68) 0%,rgba(3,13,24,.30) 34%,rgba(3,13,24,.05) 62%,rgba(3,13,24,.08) 100%),
-    url("assets/banner-importarg.png") center center / cover no-repeat;
+    url("assets/banner-importarg-final.png?v=3") center center / cover no-repeat;
 }
 
 .home-hero::after{
@@ -1072,142 +1072,40 @@ main{
 }
 
 
-/* ===== IMPORTARG HERO FINAL FIX ===== */
-header{
-  position:absolute !important;
-  top:0 !important; left:0 !important; right:0 !important;
-  z-index:30 !important;
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-}
-.header{
-  max-width:none !important;
-  height:88px !important;
-  padding:0 !important;
-  position:relative !important;
-  background:transparent !important;
-}
-.header .brand{display:none !important;}
-
-.home-screen{padding-top:0 !important;}
-.home-hero{
-  position:relative !important;
-  width:100% !important;
-  height:auto !important;
-  min-height:0 !important;
-  aspect-ratio:2048 / 691 !important;
-  padding:0 !important;
-  margin:0 !important;
-  background:
-    url("assets/banner-importarg.png?v=2") center center / cover no-repeat !important;
-}
-.home-hero::after{display:none !important;}
-.hero-inner{
-  position:absolute !important;
-  inset:0 !important;
-  max-width:none !important;
-  padding:0 !important;
-}
-.hero-copy{display:none !important;}
-
-/* The banner already contains the menu visually.
-   These buttons remain clickable, but their duplicate text is invisible. */
-.hero-category-nav{
-  position:absolute !important;
-  top:25px !important;
-  left:50.2% !important;
-  right:auto !important;
-  transform:translateX(-1%) !important;
-  display:flex !important;
-  align-items:center !important;
-  gap:0 !important;
-  height:48px !important;
-  z-index:40 !important;
-  background:transparent !important;
-}
-.hero-category-nav button,
-.hero-category-nav a{
-  color:transparent !important;
-  background:transparent !important;
-  border-color:transparent !important;
-  box-shadow:none !important;
-  text-shadow:none !important;
-  padding:10px 15px !important;
-  min-width:auto !important;
-}
-.hero-category-nav button::after{display:none !important;}
-.hero-category-nav .nav-whatsapp{
-  width:128px !important;
-  margin-left:7px !important;
-}
-
-/* Functional search placed directly over the search drawn in the banner. */
-.hero-search{
-  position:absolute !important;
-  z-index:45 !important;
-  top:17.8% !important;
-  right:6.2% !important;
-  width:33.4% !important;
-  max-width:none !important;
-  margin:0 !important;
-}
-#heroSearch{
-  width:100% !important;
-  height:54px !important;
-  border:0 !important;
-  border-radius:30px !important;
-  background:#fff !important;
-  box-shadow:none !important;
-  padding:0 58px 0 31px !important;
-  font-size:17px !important;
-}
-.hero-search button{
-  right:13px !important;
-  width:38px !important;
-  height:38px !important;
-}
-
-/* Apple Watch */
-.category-card[data-category="APPLE WATCH"] img{
-  object-fit:contain !important;
-  object-position:72% 50% !important;
-  mix-blend-mode:normal !important;
-  opacity:1 !important;
-}
-.category-card[data-category="APPLE WATCH"]{
-  background:#eef0f2 !important;
-}
-
-/* Mobile: keep one clean header/hero; no duplicate baked-overlaid text. */
-@media (max-width:760px){
-  header{display:none !important;}
-  .home-hero{
-    aspect-ratio:auto !important;
-    height:270px !important;
-    background-position:center center !important;
-  }
-  .hero-search{
-    top:auto !important;
-    bottom:16px !important;
-    left:5% !important;
-    right:auto !important;
-    width:90% !important;
-  }
-  #heroSearch{
-    height:46px !important;
-    font-size:13px !important;
-  }
+/* ===== AJUSTE APROBADO 06-10: SOLO PORTADA + WATCH + CATALOGO ===== */
+body.home-mode header{position:absolute;top:0;left:0;right:0;z-index:30;background:transparent;border:0;box-shadow:none}
+body.home-mode .header{max-width:none;height:78px;padding:0 4.5%;background:transparent}
+/* El banner aprobado ya contiene logo/menu. Conservamos las zonas funcionales sin duplicar texto. */
+body.home-mode .brand{opacity:0;pointer-events:none}
+body.home-mode .hero-category-nav{opacity:0}
+body.home-mode .hero-category-nav button,body.home-mode .hero-category-nav a{pointer-events:auto}
+body.home-mode .home-hero{min-height:0;aspect-ratio:2048/576;background-image:url("assets/banner-importarg-final.png?v=3")!important;background-size:cover!important;background-position:center!important}
+body.home-mode .home-hero::after{display:none}
+body.home-mode .hero-inner{max-width:none;padding:0;position:absolute;inset:0;display:block}
+body.home-mode .hero-copy{display:none}
+body.home-mode .hero-search{position:absolute;left:8%;top:70%;width:30%;height:48px;margin:0;opacity:.01;z-index:10}
+body.home-mode .hero-search input,body.home-mode .hero-search button{pointer-events:auto}
+body.home-mode .category-grid{position:relative;margin-top:-2px;padding-top:26px}
+body.home-mode .category-grid::before{content:"";position:absolute;left:0;right:0;top:-55px;height:80px;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0),#f6f6f6 78%,#f6f6f6)}
+/* En categorías se muestra sólo el listado correspondiente. */
+body.category-mode #offerArea,body.category-mode #filters{display:none!important}
+body.category-mode .catalog-screen{padding-top:104px}
+body.category-mode header,body.catalog-mode header{position:fixed;top:0;left:0;right:0;z-index:30;background:#111;border-bottom:2px solid #ffd400}
+body.category-mode .brand,body.catalog-mode .brand{opacity:1}
+body.category-mode .hero-category-nav,body.catalog-mode .hero-category-nav{opacity:1}
+@media(max-width:760px){
+ body.home-mode .home-hero{aspect-ratio:auto;min-height:420px;background-position:center center!important}
+ body.home-mode .hero-search{left:7%;right:7%;width:auto;top:69%;height:46px}
+ body.home-mode .category-grid{padding-top:18px}
+ body.category-mode .catalog-screen{padding-top:82px}
 }
 
 </style>
 
-
-\n<style>\n/* IMPORTARG — PORTADA FINAL APROBACIÓN\n   Solo modifica la portada y Apple Watch. El resto del sitio queda intacto. */\nheader{\n  position:absolute!important; top:0!important; left:0!important; right:0!important;\n  z-index:50!important; background:transparent!important; border:0!important; box-shadow:none!important;\n}\n.header{max-width:none!important;min-height:78px!important;padding:0!important;background:transparent!important;}\n.header .brand{visibility:hidden!important;}\n.home-screen{padding-top:0!important;}\n.home-hero{\n  position:relative!important; min-height:500px!important; height:500px!important; padding:0!important; overflow:hidden!important;\n  background:url("assets/banner-importarg-final.png?v=1") center top / cover no-repeat!important;\n}\n.home-hero::after{\n  content:""!important; display:block!important; position:absolute!important; left:0!important; right:0!important; bottom:-1px!important; top:auto!important;\n  height:86px!important; pointer-events:none!important;\n  background:linear-gradient(to bottom,rgba(255,255,255,0),#f5f5f5 92%)!important;\n}\n.hero-inner{position:absolute!important;inset:0!important;max-width:none!important;padding:0!important;display:block!important;}\n.hero-copy{display:none!important;}\n/* El menú visible está en el banner; estos controles quedan transparentes y clickeables. */\n.hero-category-nav{\n  position:absolute!important; top:0!important; left:25.5%!important; right:3.7%!important; height:72px!important;\n  display:flex!important; align-items:center!important; justify-content:space-between!important; gap:0!important; z-index:60!important;\n}\n.hero-category-nav button,.hero-category-nav a{\n  color:transparent!important; background:transparent!important; border-color:transparent!important; box-shadow:none!important; text-shadow:none!important;\n  padding:14px 10px!important; min-height:44px!important;\n}\n.hero-category-nav button::after{display:none!important;}\n.hero-category-nav .nav-whatsapp{width:142px!important;margin-left:18px!important;}\n/* Buscador funcional exactamente sobre el buscador visual del banner. */\n.hero-search{\n  position:absolute!important; z-index:65!important; left:7.8%!important; top:350px!important; width:30.2%!important; max-width:none!important; height:56px!important;\n  margin:0!important; border-radius:999px!important; background:transparent!important; box-shadow:none!important; overflow:hidden!important;\n}\n#heroSearch{\n  height:56px!important; padding:0 58px 0 22px!important; border:0!important; background:transparent!important; color:#222!important; font-size:16px!important;\n}\n#heroSearch::placeholder{color:transparent!important;}\n.hero-search button{width:58px!important;height:56px!important;background:transparent!important;}\n.hero-search svg{opacity:0!important;}\n/* Unión suave portada → productos. No cambia las tarjetas. */\n.category-grid{position:relative!important;z-index:5!important;padding-top:10px!important;}\n.category-card[data-category="APPLE WATCH"] img{object-fit:contain!important;object-position:72% 50%!important;opacity:1!important;mix-blend-mode:normal!important;}\n@media(max-width:700px){\n  header{display:none!important;}\n  .home-hero{height:360px!important;min-height:360px!important;background-position:center top!important;background-size:auto 360px!important;}\n  .hero-search{left:7%!important;top:auto!important;bottom:72px!important;width:86%!important;height:46px!important;}\n  #heroSearch{height:46px!important;font-size:14px!important;}\n  .hero-search button{height:46px!important;}\n}\n</style>\n
 </head>
 
 
-<body>
+<body class="home-mode">
 
 
 <header>
@@ -1219,7 +1117,6 @@ header{
   <nav class="site-nav hero-category-nav" aria-label="Categorías principales">
     <button class="hero-nav-category" data-category="TODOS">Todos</button>
     <button class="hero-nav-category" data-category="APPLE">Apple</button>
-    <button class="hero-nav-category" data-category="APPLE WATCH">Apple Watch</button>
     <button class="hero-nav-category" data-category="SAMSUNG">Samsung</button>
     <button class="hero-nav-category" data-category="XIAOMI">Xiaomi</button>
     <button class="hero-nav-category" data-category="SONY">PlayStation</button>
@@ -1258,7 +1155,7 @@ header{
     </div>
   </div>
   <div class="category-grid" id="categoryGrid"><button class="category-card" data-category="IPHONE">
-      <img src="assets/iphone.jpg" alt="iPhone">
+      <img src="assets/iPhone.jpg" alt="iPhone">
       <div class="category-copy"><h2>iPhone</h2><p>Últimos modelos y todas las versiones</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="MACBOOK">
@@ -1266,7 +1163,7 @@ header{
       <div class="category-copy"><h2>MacBooks</h2><p>Potencia y rendimiento para todo lo que hacés</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="IPAD">
-      <img src="assets/ipad.jpg" alt="iPad">
+      <img src="assets/iPad.jpg" alt="iPad">
       <div class="category-copy"><h2>iPad</h2><p>Rendimiento en todas partes</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="AIRPODS">
@@ -1274,7 +1171,7 @@ header{
       <div class="category-copy"><h2>AirPods</h2><p>Sonido premium en tu día a día</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="APPLE WATCH">
-      <img src="assets/reloj.jpg" alt="Apple Watch">
+      <img src="assets/reloj.jpg?v=3" alt="Apple Watch">
       <div class="category-copy"><h2>Apple Watch</h2><p>Tu día, tu salud y todo lo que importa en tu muñeca</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="ACCESORIOS">
@@ -1282,7 +1179,7 @@ header{
       <div class="category-copy"><h2>Accesorios</h2><p>Todo lo que necesitás para tu equipo</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="SAMSUNG">
-      <img src="assets/samsung.png" alt="Samsung">
+      <img src="assets/Samsung.png" alt="Samsung">
       <div class="category-copy"><h2>Samsung</h2><p>Innovación en cada detalle</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="XIAOMI">
@@ -2218,15 +2115,6 @@ function getCategory(p){
 
 
   if(
-    text.includes("APPLE WATCH") ||
-    product === "WATCH" ||
-    product === "APPLE WATCH"
-  ){
-    return "APPLE WATCH";
-  }
-
-
-  if(
 
     text.includes("ACCESORIO")
 
@@ -3155,12 +3043,18 @@ const catalogScreen=document.getElementById("catalogScreen");
 const comoScreen=document.getElementById("comoScreen");
 const catalogHeading=document.getElementById("catalogHeading");
 
+function setPageMode(mode){
+  document.body.classList.remove("home-mode","category-mode","catalog-mode");
+  document.body.classList.add(mode);
+}
+
 function hideScreens(){
   homeScreen.classList.add("hidden");
   catalogScreen.classList.remove("active");
   comoScreen.classList.remove("active");
 }
 function showHome(){
+  setPageMode("home-mode");
   currentFilter="TODOS";
   const s=document.getElementById("search"); if(s) s.value="";
   catalogScreen.classList.remove("active");
@@ -3169,6 +3063,7 @@ function showHome(){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function openCategory(category,label){
+  setPageMode("category-mode");
   hideScreens();
   currentFilter=category;
   const s=document.getElementById("search"); if(s) s.value="";
@@ -3178,6 +3073,7 @@ function openCategory(category,label){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function openCatalog(){
+  setPageMode("catalog-mode");
   hideScreens();
   currentFilter="TODOS";
   const s=document.getElementById("search"); if(s) s.value="";
@@ -3249,6 +3145,7 @@ document.querySelectorAll(".hero-nav-category").forEach(button=>{
   });
 });
 
+setPageMode("home-mode");
 loadProducts();
 
 
@@ -3263,4 +3160,3 @@ setInterval(
 </body>
 
 </html>
-
