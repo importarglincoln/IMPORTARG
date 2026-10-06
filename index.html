@@ -679,6 +679,57 @@ CELULAR
 
 }
 
+
+/* ===== PORTADA IMPORTARG 2026 ===== */
+.header{max-width:1240px}
+.header .title{display:none}
+.site-nav{display:flex;align-items:center;gap:28px;margin-left:auto}
+.site-nav button,.site-nav a{border:0;background:none;color:#fff;font:inherit;font-size:14px;font-weight:800;cursor:pointer;text-decoration:none;padding:10px 2px}
+.site-nav button:hover,.site-nav a:hover{color:#ffd400}
+.nav-whatsapp{border:2px solid #ffd400!important;border-radius:999px!important;padding:9px 16px!important}
+.home-screen{padding:28px 0 22px}
+.home-hero{text-align:center;padding:18px 10px 28px}
+.home-hero h1{margin:0;font-size:44px;line-height:1.05;letter-spacing:-1.7px;font-weight:950}
+.home-hero p{margin:10px 0 0;color:#666;font-size:16px}
+.category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.category-card{position:relative;min-height:235px;border:0;border-radius:18px;overflow:hidden;cursor:pointer;text-align:left;padding:0;background:linear-gradient(145deg,#aeb8c2 0%,#66717d 48%,#3d4650 100%);box-shadow:0 5px 20px rgba(0,0,0,.08);transition:transform .18s ease,box-shadow .18s ease}
+.category-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.15)}
+.category-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:72% 55%;mix-blend-mode:normal}
+.category-card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(55,64,74,.97) 0%,rgba(55,64,74,.82) 33%,rgba(55,64,74,.20) 62%,rgba(55,64,74,.02) 100%)}
+.category-copy{position:relative;z-index:2;width:43%;padding:28px 0 0 22px;color:#fff}
+.category-copy h2{margin:0;font-size:24px;line-height:1;font-weight:950;letter-spacing:-.5px}
+.category-copy p{margin:8px 0 0;font-size:13px;line-height:1.35;color:#f3f3f3}
+.category-arrow{position:absolute;z-index:3;left:22px;bottom:20px;width:42px;height:42px;border-radius:50%;background:#ffd400;color:#111;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:950}
+.catalog-screen,.info-screen{display:none}
+.catalog-screen.active,.info-screen.active{display:block}
+.home-screen.hidden{display:none}
+.catalog-toolbar{display:flex;align-items:center;gap:12px;margin:10px 0 12px}
+.back-home{border:0;border-radius:999px;background:#111;color:#fff;padding:10px 15px;font-size:11px;font-weight:900;cursor:pointer}
+.catalog-heading{font-size:18px;font-weight:900}
+.info-screen{max-width:850px;margin:28px auto 50px}
+.info-box{background:#fff;border:1px solid #e7e7e7;border-radius:18px;padding:28px;box-shadow:0 5px 20px rgba(0,0,0,.05)}
+.info-box h1{margin:0 0 18px;font-size:32px}
+.steps{display:grid;gap:12px}
+.step{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid #eee}
+.step:last-child{border-bottom:0}
+.step-num{width:36px;height:36px;border-radius:50%;background:#ffd400;display:flex;align-items:center;justify-content:center;font-weight:950}
+.step h3{margin:0 0 4px}.step p{margin:0;color:#666;line-height:1.45}
+.buy-wa{display:inline-block;margin-top:20px;background:#ffd400;color:#111;text-decoration:none;border-radius:999px;padding:13px 20px;font-weight:950}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:18px;background:#e7e7e7;border-radius:16px;overflow:hidden;border:1px solid #e7e7e7}
+.benefit{background:#fff;padding:16px;text-align:center}.benefit strong{display:block;font-size:13px}.benefit span{font-size:11px;color:#777}
+@media(max-width:900px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.site-nav{gap:13px}.site-nav button{font-size:12px}}
+@media(max-width:700px){
+  .header{padding:10px 12px}.brand-logo{max-height:34px}.logo{font-size:22px}
+  .site-nav{gap:8px}.site-nav button:not(.mobile-keep){display:none}.nav-whatsapp{font-size:11px!important;padding:8px 11px!important}
+  .home-screen{padding:10px 0 14px}.home-hero{padding:15px 5px 20px}.home-hero h1{font-size:29px;letter-spacing:-1px}.home-hero p{font-size:13px}
+  .category-grid{gap:8px}.category-card{min-height:165px;border-radius:14px}
+  .category-copy{width:48%;padding:16px 0 0 13px}.category-copy h2{font-size:17px}.category-copy p{font-size:10.5px;margin-top:5px}
+  .category-arrow{left:13px;bottom:12px;width:30px;height:30px;font-size:18px}
+  .category-card img{object-position:76% 55%}
+  .benefits{grid-template-columns:repeat(2,1fr)}
+  .info-box{padding:20px 16px}.info-box h1{font-size:26px}
+}
+
 </style>
 
 </head>
@@ -688,38 +739,72 @@ CELULAR
 
 
 <header>
-
 <div class="header">
-
   <div class="brand">
-
-    <img
-      src="logo-importarg.png"
-      class="brand-logo"
-      alt="ImportArg Lincoln"
-    >
-
-    <div class="logo">
-      import<span>Arg</span>
-    </div>
-
+    <img src="logo-importarg.png" class="brand-logo" alt="ImportArg" onerror="this.style.display='none'">
+    <div class="logo">import<span>Arg</span></div>
   </div>
-
-
-  <div class="title">
-
-    <strong>
-      LISTA <span>DE PRECIOS</span>
-    </strong>
-
-  </div>
-
+  <nav class="site-nav">
+    <button id="navInicio" class="mobile-keep">Inicio</button>
+    <button id="navCatalogo">Catálogo</button>
+    <button id="navComo">Cómo comprar</button>
+    <a class="nav-whatsapp mobile-keep" href="https://wa.me/5491124014722" target="_blank" rel="noopener">Escribinos</a>
+  </nav>
 </div>
-
 </header>
 
 
 <main>
+<section class="home-screen" id="homeScreen">
+  <div class="home-hero"><h1>¿Qué estás buscando?</h1><p>Elegí la categoría y encontrá todos los productos</p></div>
+  <div class="category-grid" id="categoryGrid"><button class="category-card" data-category="IPHONE">
+      <img src="assets/iphone.jpg" alt="iPhone">
+      <div class="category-copy"><h2>iPhone</h2><p>Últimos modelos y todas las versiones</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="MACBOOK">
+      <img src="assets/macbook.webp" alt="MacBooks">
+      <div class="category-copy"><h2>MacBooks</h2><p>Potencia y rendimiento para todo lo que hacés</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="IPAD">
+      <img src="assets/ipad.jpg" alt="iPad">
+      <div class="category-copy"><h2>iPad</h2><p>Rendimiento en todas partes</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="AIRPODS">
+      <img src="assets/airpods.png" alt="AirPods">
+      <div class="category-copy"><h2>AirPods</h2><p>Sonido premium en tu día a día</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="ACCESORIOS">
+      <img src="assets/accesorios.webp" alt="Accesorios">
+      <div class="category-copy"><h2>Accesorios</h2><p>Todo lo que necesitás para tu equipo</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="SAMSUNG">
+      <img src="assets/samsung.png" alt="Samsung">
+      <div class="category-copy"><h2>Samsung</h2><p>Innovación en cada detalle</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="XIAOMI">
+      <img src="assets/xiaomi.webp" alt="Xiaomi">
+      <div class="category-copy"><h2>Xiaomi</h2><p>Tecnología al mejor precio</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="SONY">
+      <img src="assets/ps5.png" alt="PlayStation 5">
+      <div class="category-copy"><h2>PlayStation 5</h2><p>Jugá sin límites</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="RAYBAN META">
+      <img src="assets/rayban.png" alt="Ray-Ban Meta">
+      <div class="category-copy"><h2>Ray-Ban Meta</h2><p>Tecnología que ves y vivís</p></div>
+      <span class="category-arrow">›</span>
+    </button></div>
+  <div class="benefits">
+    <div class="benefit"><strong>Envíos a todo el país</strong><span>Rápido y seguro</span></div>
+    <div class="benefit"><strong>Productos originales</strong><span>Con garantía</span></div>
+    <div class="benefit"><strong>Diferentes medios de pago</strong><span>USD, ARS, Transferencia, USDT</span></div>
+    <div class="benefit"><strong>Asesoramiento personalizado</strong><span>Escribinos y te ayudamos</span></div>
+  </div>
+</section>
+
+<section class="catalog-screen" id="catalogScreen">
+  <div class="catalog-toolbar"><button class="back-home" id="backHome">← VOLVER</button><div class="catalog-heading" id="catalogHeading">Catálogo</div></div>
+  
 
 
 <!-- BUSCADOR -->
@@ -866,6 +951,22 @@ CELULAR
 ></div>
 
 
+
+</section>
+
+<section class="info-screen" id="comoScreen">
+  <div class="info-box">
+    <button class="back-home" id="backComo">← VOLVER</button>
+    <h1>¿Cómo comprar en ImportArg?</h1>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><h3>Elegí tu producto</h3><p>Buscá el equipo que querés y revisá precio, color, capacidad y disponibilidad.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h3>Contactanos por WhatsApp</h3><p>Tocá COMPRAR y se abre WhatsApp automáticamente con los datos del producto.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div><h3>Coordinamos el pago y la entrega</h3><p>Te confirmamos disponibilidad, forma de pago y coordinamos retiro o envío.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div><h3>Recibí tu producto 🚀</h3><p>Realizamos envíos a todo el país y coordinamos cada operación personalmente.</p></div></div>
+    </div>
+    <a class="buy-wa" href="https://wa.me/5491124014722" target="_blank" rel="noopener">COMPRAR AHORA POR WHATSAPP</a>
+  </div>
+</section>
 </main>
 
 
@@ -2533,6 +2634,59 @@ document
 /* =========================
 INICIAR
 ========================= */
+
+
+/* ===== NAVEGACIÓN PORTADA ===== */
+const homeScreen=document.getElementById("homeScreen");
+const catalogScreen=document.getElementById("catalogScreen");
+const comoScreen=document.getElementById("comoScreen");
+const catalogHeading=document.getElementById("catalogHeading");
+
+function hideScreens(){
+  homeScreen.classList.add("hidden");
+  catalogScreen.classList.remove("active");
+  comoScreen.classList.remove("active");
+}
+function showHome(){
+  currentFilter="TODOS";
+  const s=document.getElementById("search"); if(s) s.value="";
+  catalogScreen.classList.remove("active");
+  comoScreen.classList.remove("active");
+  homeScreen.classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openCategory(category,label){
+  hideScreens();
+  currentFilter=category;
+  const s=document.getElementById("search"); if(s) s.value="";
+  catalogHeading.textContent=label||category;
+  catalogScreen.classList.add("active");
+  buildFilters(); buildOfferButton(); render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openCatalog(){
+  hideScreens();
+  currentFilter="TODOS";
+  const s=document.getElementById("search"); if(s) s.value="";
+  catalogHeading.textContent="Catálogo completo";
+  catalogScreen.classList.add("active");
+  buildFilters(); buildOfferButton(); render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openComo(){
+  hideScreens();
+  comoScreen.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.getElementById("categoryGrid").addEventListener("click",e=>{
+  const card=e.target.closest(".category-card"); if(!card)return;
+  openCategory(card.dataset.category,card.querySelector("h2").textContent);
+});
+document.getElementById("navInicio").addEventListener("click",showHome);
+document.getElementById("navCatalogo").addEventListener("click",openCatalog);
+document.getElementById("navComo").addEventListener("click",openComo);
+document.getElementById("backHome").addEventListener("click",showHome);
+document.getElementById("backComo").addEventListener("click",showHome);
 
 loadProducts();
 
