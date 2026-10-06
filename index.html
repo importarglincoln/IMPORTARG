@@ -2919,13 +2919,16 @@ const homeScreen=document.getElementById("homeScreen");
 const catalogScreen=document.getElementById("catalogScreen");
 const comoScreen=document.getElementById("comoScreen");
 const catalogHeading=document.getElementById("catalogHeading");
+const siteHeader=document.querySelector("body > header");
 
 function hideScreens(){
+  if(siteHeader) siteHeader.style.display="none";
   homeScreen.classList.add("hidden");
   catalogScreen.classList.remove("active");
   comoScreen.classList.remove("active");
 }
 function showHome(){
+  if(siteHeader) siteHeader.style.display="block";
   currentFilter="TODOS";
   const s=document.getElementById("search"); if(s) s.value="";
   catalogScreen.classList.remove("active");
