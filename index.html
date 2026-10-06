@@ -814,7 +814,7 @@ main{
   overflow:hidden;
   background:
     linear-gradient(90deg,rgba(3,13,24,.68) 0%,rgba(3,13,24,.30) 34%,rgba(3,13,24,.05) 62%,rgba(3,13,24,.08) 100%),
-    url("assets/banner-portada.jpg.avif") center center / cover no-repeat;
+    url("assets/banner-importarg.png") center center / cover no-repeat;
 }
 
 .home-hero::after{
@@ -1081,7 +1081,7 @@ main{
     height:535px;
     background-image:
       linear-gradient(90deg,rgba(3,13,24,.60) 0%,rgba(3,13,24,.20) 32%,rgba(3,13,24,.02) 62%,rgba(3,13,24,.05) 100%),
-      url("assets/banner-portada.jpg.avif");
+      url("assets/banner-importarg.png");
     background-repeat:no-repeat;
     background-position:center center;
     background-size:100% 100%;
@@ -1142,6 +1142,7 @@ main{
   <nav class="site-nav hero-category-nav" aria-label="Categorías principales">
     <button class="hero-nav-category" data-category="TODOS">Todos</button>
     <button class="hero-nav-category" data-category="APPLE">Apple</button>
+    <button class="hero-nav-category" data-category="APPLE WATCH">Apple Watch</button>
     <button class="hero-nav-category" data-category="SAMSUNG">Samsung</button>
     <button class="hero-nav-category" data-category="XIAOMI">Xiaomi</button>
     <button class="hero-nav-category" data-category="SONY">PlayStation</button>
@@ -1194,6 +1195,10 @@ main{
     </button><button class="category-card" data-category="AIRPODS">
       <img src="assets/airpods.png" alt="AirPods">
       <div class="category-copy"><h2>AirPods</h2><p>Sonido premium en tu día a día</p></div>
+      <span class="category-arrow">›</span>
+    </button><button class="category-card" data-category="APPLE WATCH">
+      <img src="assets/reloj.jpg" alt="Apple Watch">
+      <div class="category-copy"><h2>Apple Watch</h2><p>Tu día, tu salud y todo lo que importa en tu muñeca</p></div>
       <span class="category-arrow">›</span>
     </button><button class="category-card" data-category="ACCESORIOS">
       <img src="assets/accesorios.webp" alt="Accesorios">
@@ -2132,6 +2137,15 @@ function getCategory(p){
 
     return "AIRPODS";
 
+  }
+
+
+  if(
+    text.includes("APPLE WATCH") ||
+    product === "WATCH" ||
+    product === "APPLE WATCH"
+  ){
+    return "APPLE WATCH";
   }
 
 
@@ -3172,4 +3186,3 @@ setInterval(
 </body>
 
 </html>
-
