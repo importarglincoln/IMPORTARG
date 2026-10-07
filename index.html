@@ -1149,6 +1149,7 @@ tbody tr:nth-child(even){background:#f7f7f8}
     <p>Elegí la categoría y encontrá todos los productos</p>
     <div class="hero-search">
       <input id="heroSearch" type="search" placeholder="Buscá productos, modelos, capacidad..." autocomplete="off">
+      <div id="heroSuggestions" class="hero-suggestions" role="listbox" aria-label="Sugerencias de productos"></div>
       <button id="heroSearchButton" type="button" aria-label="Buscar">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
       </button>
@@ -1364,7 +1365,7 @@ tbody tr:nth-child(even){background:#f7f7f8}
     <h1>¿Cómo comprar en ImportArg?</h1>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><h3>Elegí tu producto</h3><p>Buscá el equipo que querés y revisá precio, color, capacidad y disponibilidad.</p></div></div>
-      <div class="step"><div class="step-num">2</div><div><h3>Contactanos por WhatsApp</h3><p>Tocá RESERVAR y se abre WhatsApp automáticamente con los datos del producto.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><h3>Contactanos por WhatsApp</h3><p>Tocá COMPRAR y se abre WhatsApp automáticamente con los datos del producto.</p></div></div>
       <div class="step"><div class="step-num">3</div><div><h3>Coordinamos el pago y la entrega</h3><p>Te confirmamos disponibilidad, forma de pago y coordinamos retiro o envío.</p></div></div>
       <div class="step"><div class="step-num">4</div><div><h3>Recibí tu producto 🚀</h3><p>Realizamos envíos a todo el país y coordinamos cada operación personalmente.</p></div></div>
     </div>
@@ -1986,9 +1987,10 @@ async function loadProducts(){
       .filter(
 
         p =>
-          p.product ||
-          p.model ||
-          p.price
+          (p.product || p.model || p.price) &&
+          !["SIN STOCK","AGOTADO"].includes(
+            clean(p.status).toUpperCase()
+          )
 
       );
 
@@ -2444,7 +2446,7 @@ function renderMobile(list){
 
         const buyText =
           stock.available
-            ? "RESERVAR"
+            ? "COMPRAR"
             : "CONSULTAR";
 
 
@@ -2629,7 +2631,7 @@ function renderDesktop(list){
 
       const buyText =
         stock.available
-          ? "RESERVAR"
+          ? "COMPRAR"
           : "CONSULTAR";
 
 
@@ -3032,6 +3034,132 @@ setInterval(
 
 </script>
 
+
+
+<style id="importarg-search-autocomplete">
+.hero-search{position:relative}
+.hero-suggestions{
+  position:absolute;
+  top:calc(100% + 7px);
+  left:0;
+  right:0;
+  z-index:80;
+  display:none;
+  overflow:hidden;
+  max-height:330px;
+  overflow-y:auto;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:16px;
+  box-shadow:0 14px 34px rgba(0,0,0,.18);
+  text-align:left;
+  -webkit-overflow-scrolling:touch;
+}
+.hero-suggestions.open{display:block}
+.hero-suggestion{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #eeeeef;
+  background:#fff;
+  color:#111;
+  padding:11px 15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  font:inherit;
+  text-align:left;
+}
+.hero-suggestion:last-child{border-bottom:0}
+.hero-suggestion:hover,.hero-suggestion:focus{background:#f5f5f7;outline:none}
+.hero-suggestion-icon{
+  width:28px;height:28px;flex:0 0 28px;border-radius:50%;
+  background:#f1f1f1;display:flex;align-items:center;justify-content:center
+}
+.hero-suggestion-icon svg{width:15px;height:15px;fill:none;stroke:#111;stroke-width:2}
+.hero-suggestion-copy{min-width:0}
+.hero-suggestion-title{display:block;font-size:13px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-suggestion-meta{display:block;margin-top:2px;font-size:11px;color:#777;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:760px){
+  .hero-suggestions{top:calc(100% + 5px);max-height:280px;border-radius:14px}
+  .hero-suggestion{padding:10px 12px}
+  .hero-suggestion-title{font-size:12px}
+  .hero-suggestion-meta{font-size:10px}
+}
+</style>
+
+
+<script id="importarg-search-autocomplete-js">
+(function(){
+  const input=document.getElementById("heroSearch");
+  const box=document.getElementById("heroSuggestions");
+  if(!input||!box) return;
+
+  const norm=v=>String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+
+  function labelFor(p){
+    return [p.product,p.model,p.capacity,p.color].filter(Boolean).join(" ");
+  }
+  function metaFor(p){
+    return [p.detail,p.price ? formatPrice(p.price) : ""].filter(Boolean).join(" · ");
+  }
+  function close(){box.classList.remove("open");box.innerHTML="";}
+  function choose(value){
+    input.value=value;
+    close();
+    searchFromHero();
+  }
+  function updateSuggestions(){
+    const q=norm(input.value);
+    if(!q){close();return;}
+
+    const words=q.split(/\s+/).filter(Boolean);
+    const seen=new Set();
+    const matches=products.filter(p=>{
+      const hay=norm([p.product,p.model,p.capacity,p.color,p.detail].join(" "));
+      return words.every(w=>hay.includes(w));
+    }).filter(p=>{
+      const key=norm(labelFor(p));
+      if(!key||seen.has(key)) return false;
+      seen.add(key); return true;
+    }).slice(0,8);
+
+    if(!matches.length){close();return;}
+    box.innerHTML=matches.map((p,i)=>`
+      <button type="button" class="hero-suggestion" data-i="${i}" role="option">
+        <span class="hero-suggestion-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"></circle><path d="M20 20l-4.5-4.5"></path></svg>
+        </span>
+        <span class="hero-suggestion-copy">
+          <span class="hero-suggestion-title">${safe(labelFor(p))}</span>
+          <span class="hero-suggestion-meta">${safe(metaFor(p))}</span>
+        </span>
+      </button>`).join("");
+    box.classList.add("open");
+    [...box.querySelectorAll(".hero-suggestion")].forEach((el,i)=>{
+      el.addEventListener("click",()=>choose(labelFor(matches[i])));
+    });
+  }
+
+  input.addEventListener("input",updateSuggestions,{passive:true});
+  input.addEventListener("focus",updateSuggestions);
+  input.addEventListener("keydown",e=>{if(e.key==="Escape") close();});
+  document.addEventListener("pointerdown",e=>{
+    if(!box.contains(e.target)&&e.target!==input) close();
+  },{passive:true});
+})();
+</script>
+
+
+<style id="importarg-mobile-scroll-smooth">
+@media(max-width:760px){
+  .home-hero .hero-scroll-block{
+    transform:none!important;
+    transition:none!important;
+    will-change:auto!important;
+  }
+}
+</style>
 
 <style id="hero-scroll-motion">
 /* El bloque de búsqueda acompaña suavemente el scroll dentro de la portada. */
