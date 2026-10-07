@@ -3138,7 +3138,6 @@ setInterval(
         </span>
         <span class="hero-suggestion-copy">
           <span class="hero-suggestion-title">${safe(labelFor(p))}</span>
-          <span class="hero-suggestion-meta">${safe(metaFor(p))}</span>
         </span>
       </button>`).join("");
     box.classList.add("open");
@@ -3312,6 +3311,81 @@ setInterval(
 }
 @media(max-width:760px){
   .hero-search .hero-suggestions .hero-suggestion{min-height:46px!important;padding:9px 12px!important}
+}
+</style>
+
+
+<style id="importarg-autocomplete-layer-fix">
+/* El desplegable debe quedar por encima de las tarjetas de categorías. */
+.home-screen{position:relative!important;overflow:visible!important}
+.home-hero{
+  position:relative!important;
+  z-index:50!important;
+  overflow:visible!important;
+}
+.home-hero .hero-scroll-block{
+  position:relative!important;
+  z-index:60!important;
+}
+.hero-search{
+  position:relative!important;
+  z-index:70!important;
+  overflow:visible!important;
+}
+.hero-search .hero-suggestions{
+  z-index:99999!important;
+}
+.category-grid{
+  position:relative!important;
+  z-index:1!important;
+}
+.category-card{
+  z-index:1!important;
+}
+</style>
+
+
+<style id="importarg-autocomplete-compact">
+.hero-search .hero-suggestions{
+  background:rgba(255,255,255,.88)!important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  max-height:245px!important;
+  border-radius:13px!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.14)!important;
+}
+.hero-search .hero-suggestions .hero-suggestion{
+  min-height:38px!important;
+  padding:6px 11px!important;
+  background:rgba(255,255,255,.58)!important;
+  gap:8px!important;
+}
+.hero-search .hero-suggestions .hero-suggestion:hover,
+.hero-search .hero-suggestions .hero-suggestion:focus{
+  background:rgba(255,255,255,.90)!important;
+}
+.hero-search .hero-suggestions .hero-suggestion-icon{
+  width:25px!important;
+  height:25px!important;
+  flex:0 0 25px!important;
+  background:rgba(245,245,245,.82)!important;
+}
+.hero-search .hero-suggestions .hero-suggestion-icon svg{
+  width:13px!important;
+  height:13px!important;
+}
+.hero-search .hero-suggestions .hero-suggestion-title{
+  font-size:11.5px!important;
+  line-height:1.15!important;
+  font-weight:850!important;
+}
+@media(max-width:760px){
+  .hero-search .hero-suggestions{max-height:220px!important}
+  .hero-search .hero-suggestions .hero-suggestion{
+    min-height:36px!important;
+    padding:5px 10px!important;
+  }
+  .hero-search .hero-suggestions .hero-suggestion-title{font-size:11px!important}
 }
 </style>
 
