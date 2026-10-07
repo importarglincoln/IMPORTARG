@@ -3101,13 +3101,17 @@ setInterval(
   const box=document.getElementById("heroSuggestions");
   if(!input||!box) return;
 
+  document.body.appendChild(box);
+
+  function place(){
+    const r=input.closest(".hero-search").getBoundingClientRect();
+    box.style.left=r.left+"px"; box.style.top=(r.bottom+6)+"px"; box.style.width=r.width+"px";
+  }
+
   const norm=v=>String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
 
   function labelFor(p){
     return [p.product,p.model,p.capacity,p.color].filter(Boolean).join(" ");
-  }
-  function metaFor(p){
-    return [p.detail,p.price ? formatPrice(p.price) : ""].filter(Boolean).join(" · ");
   }
   function close(){box.classList.remove("open");box.innerHTML="";}
   function choose(value){
@@ -3138,9 +3142,9 @@ setInterval(
         </span>
         <span class="hero-suggestion-copy">
           <span class="hero-suggestion-title">${safe(labelFor(p))}</span>
-          <span class="hero-suggestion-meta">${safe(metaFor(p))}</span>
         </span>
       </button>`).join("");
+    place();
     box.classList.add("open");
     [...box.querySelectorAll(".hero-suggestion")].forEach((el,i)=>{
       el.addEventListener("click",()=>choose(labelFor(matches[i])));
@@ -3150,6 +3154,8 @@ setInterval(
   input.addEventListener("input",updateSuggestions,{passive:true});
   input.addEventListener("focus",updateSuggestions);
   input.addEventListener("keydown",e=>{if(e.key==="Escape") close();});
+  window.addEventListener("resize",()=>{if(box.classList.contains("open")) place();},{passive:true});
+  window.addEventListener("scroll",()=>{if(box.classList.contains("open")) place();},{passive:true});
   document.addEventListener("pointerdown",e=>{
     if(!box.contains(e.target)&&e.target!==input) close();
   },{passive:true});
@@ -3313,6 +3319,20 @@ setInterval(
 @media(max-width:760px){
   .hero-search .hero-suggestions .hero-suggestion{min-height:46px!important;padding:9px 12px!important}
 }
+</style>
+
+
+<style id="importarg-suggestions-only-overlay">
+body > .hero-suggestions{position:fixed!important;right:auto!important;bottom:auto!important;z-index:2147483000!important;display:none;max-height:230px!important;overflow-y:auto!important;padding:3px 0!important;background:rgba(255,255,255,.78)!important;border:1px solid rgba(255,255,255,.60)!important;border-radius:13px!important;box-shadow:0 10px 26px rgba(0,0,0,.15)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;-webkit-overflow-scrolling:touch}
+body > .hero-suggestions.open{display:block!important}
+body > .hero-suggestions .hero-suggestion{box-sizing:border-box!important;width:100%!important;min-height:35px!important;height:auto!important;margin:0!important;padding:5px 11px!important;border:0!important;border-bottom:1px solid rgba(0,0,0,.06)!important;border-radius:0!important;background:rgba(255,255,255,.22)!important;color:#111!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;text-align:left!important;cursor:pointer!important}
+body > .hero-suggestions .hero-suggestion:last-child{border-bottom:0!important}
+body > .hero-suggestions .hero-suggestion:hover,body > .hero-suggestions .hero-suggestion:focus{background:rgba(255,255,255,.62)!important;outline:none!important}
+body > .hero-suggestions .hero-suggestion-icon{width:24px!important;height:24px!important;flex:0 0 24px!important;border-radius:50%!important;background:rgba(245,245,245,.72)!important;display:flex!important;align-items:center!important;justify-content:center!important}
+body > .hero-suggestions .hero-suggestion-icon svg{width:12px!important;height:12px!important;fill:none!important;stroke:#111!important;stroke-width:2!important}
+body > .hero-suggestions .hero-suggestion-copy{display:block!important;min-width:0!important;flex:1 1 auto!important}
+body > .hero-suggestions .hero-suggestion-title{display:block!important;font-size:11.5px!important;line-height:1.15!important;font-weight:800!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+@media(max-width:760px){body > .hero-suggestions{max-height:205px!important}body > .hero-suggestions .hero-suggestion{min-height:33px!important;padding:4px 9px!important}body > .hero-suggestions .hero-suggestion-title{font-size:10.8px!important}}
 </style>
 
 </body>
