@@ -3265,6 +3265,56 @@ setInterval(
 }
 </style>
 
+
+<style id="importarg-autocomplete-layout-fix">
+/* Evita que los botones de sugerencias hereden el estilo amarillo del botón Buscar. */
+.hero-search .hero-suggestions{
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+}
+.hero-search .hero-suggestions .hero-suggestion{
+  width:100%!important;
+  height:auto!important;
+  min-height:50px!important;
+  flex:0 0 auto!important;
+  padding:10px 14px!important;
+  border:0!important;
+  border-bottom:1px solid #eeeeef!important;
+  border-radius:0!important;
+  background:#fff!important;
+  color:#111!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:10px!important;
+  text-align:left!important;
+}
+.hero-search .hero-suggestions .hero-suggestion:last-child{
+  border-bottom:0!important;
+}
+.hero-search .hero-suggestions .hero-suggestion-icon{
+  width:30px!important;
+  height:30px!important;
+  flex:0 0 30px!important;
+  border-radius:50%!important;
+  background:#f2f2f2!important;
+}
+.hero-search .hero-suggestions .hero-suggestion-copy{
+  display:block!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+}
+.hero-search .hero-suggestions .hero-suggestion-title,
+.hero-search .hero-suggestions .hero-suggestion-meta{
+  width:auto!important;
+  color:inherit!important;
+}
+@media(max-width:760px){
+  .hero-search .hero-suggestions .hero-suggestion{min-height:46px!important;padding:9px 12px!important}
+}
+</style>
+
 </body>
 
 </html>
