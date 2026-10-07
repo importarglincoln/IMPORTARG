@@ -2003,6 +2003,12 @@ async function loadProducts(){
     "none";
 
 
+    const heroInputAfterLoad=document.getElementById("heroSearch");
+    if(heroInputAfterLoad && heroInputAfterLoad.value.trim()){
+      heroInputAfterLoad.dispatchEvent(new Event("input",{bubbles:true}));
+    }
+
+
     if(
       window.innerWidth > 700
     ){
@@ -3151,16 +3157,6 @@ setInterval(
 </script>
 
 
-<style id="importarg-mobile-scroll-smooth">
-@media(max-width:760px){
-  .home-hero .hero-scroll-block{
-    transform:none!important;
-    transition:none!important;
-    will-change:auto!important;
-  }
-}
-</style>
-
 <style id="hero-scroll-motion">
 /* El bloque de búsqueda acompaña suavemente el scroll dentro de la portada. */
 .home-hero{overflow:visible!important}
@@ -3257,6 +3253,18 @@ setInterval(
  #catalogScreen .buy-button{height:31px;padding:0 11px}
 }
 </style>
+
+<style id="importarg-search-final-fix">
+.hero-search{overflow:visible!important}
+.hero-search input{border-radius:999px 0 0 999px!important}
+.hero-search > button{border-radius:0 999px 999px 0!important}
+.hero-suggestions{z-index:9999!important}
+.home-hero .hero-scroll-block{
+  will-change:transform!important;
+  transition:none!important;
+}
+</style>
+
 </body>
 
 </html>
