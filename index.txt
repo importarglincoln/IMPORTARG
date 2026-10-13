@@ -1748,7 +1748,7 @@ ${p.product} ${p.model}
 ${p.capacity ? "Capacidad: " + p.capacity : ""}
 ${p.color ? "Color: " + p.color : ""}
 ${p.detail ? "Detalle: " + p.detail : ""}
-${stock.className === "stock-out" ? "" : "Precio: " + formatPrice(p.price) + "\n"}Estado: ${stock.label}`;
+${!stock.available ? "" : "Precio: " + formatPrice(p.price) + "\n"}Estado: ${stock.label}`;
 
 
   return(
@@ -1791,7 +1791,7 @@ function shareLink(p){
 `ImportArg
 
 ${p.product} ${p.model}
-${p.capacity ? p.capacity + "\n" : ""}${p.color ? p.color + "\n" : ""}${p.detail ? p.detail + "\n" : ""}${stock.className === "stock-out" ? "" : "Precio: " + formatPrice(p.price) + fire}
+${p.capacity ? p.capacity + "\n" : ""}${p.color ? p.color + "\n" : ""}${p.detail ? p.detail + "\n" : ""}${!stock.available ? "" : "Precio: " + formatPrice(p.price) + fire}
 ${stock.label}${lastFire}
 
 Ver lista completa:
@@ -2521,7 +2521,7 @@ function renderMobile(list){
 
   <div class="mobile-price">
 
-    ${stock.className === "stock-out" ? "" : safe(formatPrice(p.price)) + offerFire}
+    ${!stock.available ? "" : safe(formatPrice(p.price)) + offerFire}
 
   </div>
 
@@ -2681,7 +2681,7 @@ function renderDesktop(list){
 
   <td class="desktop-price">
 
-    ${stock.className === "stock-out" ? "" : safe(formatPrice(p.price)) + offerFire}
+    ${!stock.available ? "" : safe(formatPrice(p.price)) + offerFire}
 
   </td>
 
