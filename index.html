@@ -2568,6 +2568,9 @@ function render(){
 
   const raybanEmpty = currentFilter === "RAYBAN META" &&
     !list.some(p => getStockInfo(p.status).available);
+  // Ocultar la tabla vacía solo cuando Ray-Ban Meta no tiene stock.
+  const tableWrap = document.getElementById("tableWrap");
+  if(tableWrap) tableWrap.style.display = raybanEmpty ? "none" : (window.innerWidth > 700 ? "block" : "none");
   const emptyMessage = document.getElementById("raybanEmptyMessage");
   if(emptyMessage){
     emptyMessage.hidden = !raybanEmpty;
