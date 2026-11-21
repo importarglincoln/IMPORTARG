@@ -957,6 +957,13 @@ tbody tr:nth-child(even){background:#f7f7f8}
     padding:0 11px;
   }
 }
+
+/* Cotización informativa y equivalente en pesos */
+.fx-banner{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px;padding:10px 13px;background:#fff;border:1px solid #e5e5e5;border-radius:11px;font-size:12px;color:#444}
+.fx-banner strong{color:#111}
+.ars-price{display:block;font-size:11px;font-weight:650;color:#666;margin-top:3px;white-space:nowrap}
+.mobile-price .ars-price{font-size:10px}
+
 </style>
 
 
@@ -1242,6 +1249,8 @@ tbody tr:nth-child(even){background:#f7f7f8}
 
 <!-- BUSCADOR -->
 
+<div id="fxBanner" class="fx-banner" role="status" aria-live="polite">Cotización dólar blue: consultando… Los valores en pesos son orientativos.</div>
+
 <div class="search-wrapper">
 
   <input
@@ -1430,7 +1439,7 @@ CONFIGURACIÓN
 ========================= */
 
 const CSV_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vTaq6DfPZJ-czeBJJ-wHNQuyRPRt0Ax1An_cC7qPTZ3Nj4n5sBsrz4Dc2TTz1HxSr81KcAwbQgxQz5s/pub?gid=284410927&single=true&output=csv";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vTRPvBY4wW9XoqLS2eYw8jNo1tOPnqLdpO7IKbDSZVmqqNPJg739WcYWU8CW8etfVHhkOeYc5TNXlRL/pub?gid=284410927&single=true&output=csv";
 
 const WHATSAPP =
 "5491124014722";
@@ -1439,6 +1448,82 @@ const SITE_URL =
 "https://importarg.com.ar/";
 
 let products = [];
+let blueRate = null;
+const ARS_FORMAT = new Intl.NumberFormat("es-AR",{style:"currency",currency:"ARS",maximumFractionDigits:0});
+
+function usdNumber(value){
+  const raw=String(value??"").replace(/[^0-9.,]/g,"");
+  if(!raw)return NaN;
+  const comma=raw.lastIndexOf(","),dot=raw.lastIndexOf(".");
+  let n=raw;
+  if(comma>=0 && dot>=0)n=comma>dot?raw.replace(/\./g,"").replace(",","."):raw.replace(/,/g,"");
+  else if(comma>=0)n=/,\d{1,2}$/.test(raw)?raw.replace(",","."):raw.replace(/,/g,"");
+  else if(dot>=0 && /\.\d{3}$/.test(raw))n=raw.replace(/\./g,"");
+  return Number(n);
+}
+function arsEquivalent(price){
+  const usd=usdNumber(price);
+  if(!blueRate || !Number.isFinite(usd) || usd<=0)return "";
+  return `<span class="ars-price">≈ ${safe(ARS_FORMAT.format(Math.round(usd*blueRate)))}</span>`;
+}
+const COTIZACION_CSV_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vTRPvBY4wW9XoqLS2eYw8jNo1tOPnqLdpO7IKbDSZVmqqNPJg739WcYWU8CW8etfVHhkOeYc5TNXlRL/pub?gid=1117722567&single=true&output=csv";
+
+async function fetchWithTimeout(url, timeoutMs=8000){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),timeoutMs);
+  try{
+    const response=await fetch(url,{cache:"no-store",signal:controller.signal});
+    if(!response.ok)throw new Error("HTTP "+response.status);
+    return response;
+  }finally{clearTimeout(timer);}
+}
+
+async function loadBlueRate(){
+  const banner=document.getElementById("fxBanner");
+  let config={};
+  let configLoaded=false;
+  try{
+    const url=COTIZACION_CSV_URL+"&_="+Date.now();
+    const csv=await (await fetchWithTimeout(url)).text();
+    for(const row of parseCSV(csv).slice(1)){
+      if(row[0])config[String(row[0]).trim().toUpperCase()]=String(row[1]??"").trim();
+    }
+    configLoaded=Boolean(config.MODO_COTIZACION);
+  }catch(error){
+    console.warn("Configuración web no disponible; se usará dólar blue + $10.",error);
+  }
+
+  const modo=configLoaded?String(config.MODO_COTIZACION).toUpperCase():"AUTO";
+  if(modo==="MANUAL"){
+    const manual=Number(String(config.DOLAR_MANUAL??"").replace(",","."));
+    if(!Number.isFinite(manual)||manual<=0){
+      blueRate=null;
+      banner.textContent="Configuración MANUAL: ingresá una cotización válida en COTIZACION WEB!B3. Se muestran los precios en USD.";
+      render();
+      return;
+    }
+    blueRate=manual;
+    banner.innerHTML=`Dólar aplicado (manual): <strong>${safe(ARS_FORMAT.format(blueRate))}</strong> · Equivalentes en pesos orientativos. Consultá el tipo de cambio aplicado antes de pagar.`;
+    render();
+    return;
+  }
+
+  try{
+    const response=await fetchWithTimeout("https://dolarapi.com/v1/dolares/blue");
+    const data=await response.json();
+    const venta=Number(data.venta);
+    if(!Number.isFinite(venta)||venta<=0)throw new Error("Cotización inválida");
+    const recargo=configLoaded?Number(String(config.RECARGO_AUTO??"10").replace(",",".")):10;
+    if(!Number.isFinite(recargo)||recargo<0)throw new Error("Recargo inválido");
+    blueRate=venta+recargo;
+    banner.innerHTML=`Dólar aplicado (blue venta + $${safe(String(recargo))}): <strong>${safe(ARS_FORMAT.format(blueRate))}</strong> · Equivalentes en pesos orientativos. Consultá el tipo de cambio aplicado antes de pagar.`;
+  }catch(error){
+    blueRate=null;
+    banner.textContent="Cotización del dólar blue no disponible. Se muestran los precios en USD.";
+  }
+  render();
+}
 
 // Productos adicionales administrados en este HTML (precios finales en USD).
 const EXTRA_PRODUCTS = [
@@ -2589,7 +2674,7 @@ function renderMobile(list){
       formatPrice(
         p.price
       )
-    )}${offerFire}
+    )}${offerFire}${arsEquivalent(p.price)}
 
   </div>
 
@@ -2753,7 +2838,7 @@ function renderDesktop(list){
       formatPrice(
         p.price
       )
-    )}${offerFire}
+    )}${offerFire}${arsEquivalent(p.price)}
 
   </td>
 
@@ -3098,6 +3183,9 @@ setInterval(
 );
 
 
+
+loadBlueRate();
+setInterval(loadBlueRate,300000);
 </script>
 
 
