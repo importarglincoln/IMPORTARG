@@ -960,6 +960,8 @@ tbody tr:nth-child(even){background:#f7f7f8}
 
 /* Cotización informativa y equivalente en pesos */
 .fx-banner{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px;padding:10px 13px;background:#fff;border:1px solid #e5e5e5;border-radius:11px;font-size:12px;color:#444}
+/* Cotización interna: no mostrar el banner a los clientes */
+#fxBanner{display:none!important}
 .fx-banner strong{color:#111}
 .ars-price{display:block;font-size:11px;font-weight:650;color:#666;margin-top:3px;white-space:nowrap}
 .mobile-price .ars-price{font-size:10px}
@@ -2350,7 +2352,8 @@ function buildFilters(){
     currentFilter !== "OFERTAS" &&
     !categories.includes(
       currentFilter
-    )
+    ) &&
+    currentFilter !== "RAYBAN META"
   ){
 
     currentFilter =
@@ -2562,6 +2565,20 @@ function render(){
       : " productos"
   );
 
+
+  const raybanEmpty = currentFilter === "RAYBAN META" &&
+    !list.some(p => getStockInfo(p.status).available);
+  const emptyMessage = document.getElementById("raybanEmptyMessage");
+  if(emptyMessage){
+    emptyMessage.hidden = !raybanEmpty;
+    emptyMessage.style.display = raybanEmpty ? "block" : "none";
+  }
+  if(raybanEmpty){
+    document.getElementById("results").textContent = "Sin stock por el momento";
+    renderMobile([]);
+    renderDesktop([]);
+    return;
+  }
 
   renderMobile(list);
 
@@ -3136,6 +3153,15 @@ function openComo(){
   comoScreen.classList.add("active");
   window.scrollTo({top:0,behavior:"smooth"});
 }
+// Estado vacío exclusivo de Ray-Ban Meta, sin redirigir a todo el catálogo.
+const raybanEmptyMessage=document.createElement("section");
+raybanEmptyMessage.id="raybanEmptyMessage";
+raybanEmptyMessage.hidden=true;
+raybanEmptyMessage.style.cssText="display:none;background:#fff;border:1px solid #e5e5e5;border-radius:16px;padding:32px 20px;margin:20px 0;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.06)";
+raybanEmptyMessage.innerHTML='<h2 style="font-size:22px;margin:0 0 12px">Ray-Ban Meta — Sin stock por el momento</h2><p style="font-size:15px;color:#555;margin:0 0 22px">Consultanos por disponibilidad y próximos ingresos.</p><a href="https://wa.me/5491124014722?text=Hola%20ImportArg%2C%20quiero%20consultar%20por%20disponibilidad%20de%20Ray-Ban%20Meta" target="_blank" rel="noopener" style="display:inline-block;background:#ffd400;color:#111;border-radius:999px;padding:13px 20px;font-size:13px;font-weight:900;text-decoration:none">CONSULTAR POR WHATSAPP</a>';
+const raybanResults=document.getElementById("results");
+raybanResults.parentNode.insertBefore(raybanEmptyMessage,raybanResults.nextSibling);
+
 document.getElementById("categoryGrid").addEventListener("click",e=>{
   const card=e.target.closest(".category-card"); if(!card)return;
   openCategory(card.dataset.category,card.querySelector("h2").textContent);
