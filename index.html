@@ -2235,17 +2235,10 @@ async function loadProducts(){
 
 
   catch(error){
-
-    console.error(error);
-
-
-    // Conservar los productos del CSV y sumar JBL/DJI sin duplicar modelos.
-    const key = p => [p.product,p.model,p.capacity,p.color,p.detail].map(v=>clean(v).toUpperCase()).join("|");
-    const existing = new Set(products.map(key));
-    for (const item of EXTRA_PRODUCTS) {
-      if (!existing.has(key(item))) products.push(item);
-    }
-
+    console.error('ImportArg catálogo:',error);
+    // No mostrar artículos de respaldo como si fueran el catálogo actualizado.
+    products=[];
+    buildFilters();buildOfferButton();render();
     document
     .getElementById(
       "loading"
@@ -3190,46 +3183,76 @@ function usedImage(url){
   return '<div class="used-photo"><img loading="lazy" alt="Foto del equipo usado" src="'+usedHtml(value)+'" onerror="this.parentElement.textContent=\'FOTO PRÓXIMAMENTE\'"></div>';
 }
 function renderUsed(){
-  const filters=document.getElementById("usedFilters");
-  const categories=["TODOS",...new Set(usedProducts.map(p=>p.category).filter(Boolean))];
-  if(!categories.includes(usedCategory))usedCategory="TODOS";
-  filters.innerHTML=categories.map(c=>'<button type="button" class="used-filter '+(c===usedCategory?'active':'')+'" data-used-filter="'+usedHtml(c)+'">'+(c==="TODOS"?"TODOS":usedHtml(c))+'</button>').join("");
-  const list=usedProducts.filter(p=>usedCategory==="TODOS"||p.category===usedCategory);
-  const grid=document.getElementById("usedGrid");
-  if(!list.length){grid.innerHTML='<div class="used-empty">No hay productos usados disponibles en esta categoría por el momento.</div>';return;}
+  const filters=document.getElementById('usedFilters');
+  const categories=['TODOS',...new Set(usedProducts.map(p=>p.category).filter(Boolean))];
+  if(!categories.includes(usedCategory))usedCategory='TODOS';
+  filters.innerHTML=categories.map(c=>'<button type="button" class="used-filter '+(c===usedCategory?'active':'')+'" data-used-filter="'+usedHtml(c)+'">'+usedHtml(c)+'</button>').join('');
+  const list=usedProducts.filter(p=>usedCategory==='TODOS'||p.category===usedCategory);
+  const grid=document.getElementById('usedGrid');
+  if(!list.length){grid.innerHTML='<div class="used-empty">No hay productos usados publicados en esta categoría por el momento.</div>';return;}
   grid.innerHTML=list.map(p=>{
-    const label=[p.category,p.model,p.capacity,p.color].filter(Boolean).join(" ");
-    const available=p.stock==="EN STOCK";
+    const label=[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ');
+    const available=p.stock==='EN STOCK';
     const amount=usdNumber(p.price);
     const price=Number.isFinite(amount)?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(amount):'Consultar precio';
     const wa='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto usado: '+label+' (Código '+p.id+').');
-    return '<article class="used-card">'+usedImage(p.photo)+'<div class="used-body"><h2>'+usedHtml(p.category+' '+p.model)+'</h2><div class="used-detail">'+usedHtml([p.capacity,p.color].filter(Boolean).join(' · '))+'</div>'+
+    const mediaCount=p.photos.length+(p.video?1:0);
+    return '<article class="used-card">'+usedImage(p.photos[0])+'<div class="used-body"><h2>'+usedHtml(p.category+' '+p.model)+'</h2><div class="used-detail">'+usedHtml([p.capacity,p.color].filter(Boolean).join(' · '))+'</div>'+
       (p.battery?'<div class="used-detail">Batería: '+usedHtml(p.battery)+'%</div>':'')+
       (p.condition?'<div class="used-detail">Estado estético: '+usedHtml(p.condition)+'</div>':'')+
       (p.notes?'<div class="used-detail">'+usedHtml(p.notes)+'</div>':'')+
       '<div class="used-price">'+(available?price:'Sin stock')+'</div>'+
       (available&&Number.isFinite(amount)&&blueRate?'<span class="used-ars">≈ '+usedHtml(ARS_FORMAT.format(Math.round(amount*blueRate)))+'</span>':'')+
-      '<div class="used-status" style="color:'+(available?'#167d39':'#777')+'">'+usedHtml(p.stock)+'</div><a class="used-wa" href="'+wa+'" target="_blank" rel="noopener">CONSULTAR POR WHATSAPP</a></div></article>';
-  }).join("");
+      '<div class="used-status" style="color:'+(available?'#167d39':'#777')+'">'+usedHtml(p.stock)+'</div>'+
+      (mediaCount?'<button type="button" class="used-gallery-btn" data-used-gallery="'+usedHtml(p.id)+'">VER FOTOS'+(p.video?' Y VIDEO':'')+' ('+mediaCount+')</button>':'')+
+      '<a class="used-wa" href="'+wa+'" target="_blank" rel="noopener">CONSULTAR POR WHATSAPP</a></div></article>';
+  }).join('');
 }
+function usedMediaUrl(v){const u=String(v||'').trim();return /^https:\/\//i.test(u)?u:'';}
+function usedCell(row,head,...names){for(const name of names){const i=head.indexOf(usedNorm(name));if(i>=0)return String(row[i]??'').trim();}return '';}
 async function loadUsedProducts(){
   try{
     const response=await fetch(USED_CSV_URL+'&t='+Date.now(),{cache:'no-store'});
-    if(!response.ok)throw Error('Error al cargar CSV de usados');
+    if(!response.ok)throw Error('Error HTTP '+response.status+' al cargar CSV de usados');
     const rows=parseCSV(await response.text());
-    const head=rows[0].map(usedNorm);
-    const idx=name=>head.indexOf(name);
-    if(idx('ID')<0||idx('PUBLICAR WEB')<0||idx('MODELO')<0)throw Error('Columnas de usados no encontradas');
-    const cell=(r,name)=>idx(name)>=0?String(r[idx(name)]??'').trim():'';
-    usedProducts=rows.slice(1).filter(r=>usedNorm(cell(r,'PUBLICAR WEB'))==='SI'&&cell(r,'ID')).map(r=>({
-      id:cell(r,'ID'),category:usedNorm(cell(r,'CATEGORÍA')),model:cell(r,'MODELO'),capacity:cell(r,'CAPACIDAD'),color:cell(r,'COLOR'),battery:cell(r,'BATERÍA (%)'),condition:cell(r,'ESTADO ESTÉTICO'),price:cell(r,'PRECIO USD'),stock:usedNorm(cell(r,'DISPONIBILIDAD')),photo:cell(r,'FOTO 1 URL'),notes:cell(r,'OBSERVACIONES')
+    const headerIndex=rows.findIndex(r=>r.map(usedNorm).includes('ID')&&r.map(usedNorm).includes('MODELO'));
+    if(headerIndex<0)throw Error('No se encontraron las columnas ID y MODELO de usados');
+    const head=rows[headerIndex].map(usedNorm);
+    const cell=(r,...names)=>usedCell(r,head,...names);
+    const next=rows.slice(headerIndex+1).filter(r=>usedNorm(cell(r,'PUBLICAR WEB'))==='SI'&&cell(r,'ID')).map(r=>({
+      id:cell(r,'ID'),category:usedNorm(cell(r,'CATEGORÍA','CATEGORIA')),model:cell(r,'MODELO'),capacity:cell(r,'CAPACIDAD'),color:cell(r,'COLOR'),battery:cell(r,'BATERÍA (%)','BATERIA (%)'),condition:cell(r,'ESTADO ESTÉTICO','ESTADO ESTETICO'),price:cell(r,'PRECIO USD'),stock:usedNorm(cell(r,'DISPONIBILIDAD')),
+      photos:[cell(r,'FOTO 1 URL','FOTO 1'),cell(r,'FOTO 2 URL','FOTO 2'),cell(r,'FOTO 3 URL','FOTO 3')].map(usedMediaUrl).filter(Boolean),
+      video:usedMediaUrl(cell(r,'VIDEO URL','VÍDEO URL','VIDEO 1 URL','VIDEO')),notes:cell(r,'OBSERVACIONES')
     }));
-    usedLoaded=true;renderUsed();
+    usedProducts=next;usedLoaded=true;renderUsed();
   }catch(err){
-    if(!usedLoaded)document.getElementById('usedGrid').innerHTML='<div class="used-empty">No se pudo cargar la lista de usados. Intentá actualizar la página.</div>';
+    if(!usedLoaded)document.getElementById('usedGrid').innerHTML='<div class="used-empty">No se pudo cargar la lista de usados. Verificá la publicación de Google Sheets y probá desde la página web.</div>';
     console.warn('ImportArg usados:',err);
   }
 }
+let usedGalleryItems=[],usedGalleryIndex=0;
+function showUsedGallery(){
+  const modal=document.getElementById('usedGalleryModal');
+  if(!modal||!usedGalleryItems.length)return;
+  const item=usedGalleryItems[usedGalleryIndex];
+  const area=document.getElementById('usedGalleryMedia');
+  area.replaceChildren();
+  if(item.type==='video'){
+    const video=document.createElement('video');video.controls=true;video.playsInline=true;video.preload='metadata';video.src=item.url;area.append(video);
+  }else{
+    const img=document.createElement('img');img.alt='Foto '+(usedGalleryIndex+1)+' del equipo';img.src=item.url;area.append(img);
+  }
+  document.getElementById('usedGalleryCounter').textContent=(usedGalleryIndex+1)+' / '+usedGalleryItems.length;
+  modal.hidden=false;document.body.style.overflow='hidden';
+}
+function closeUsedGallery(){const modal=document.getElementById('usedGalleryModal');if(modal){modal.hidden=true;document.getElementById('usedGalleryMedia').replaceChildren();document.body.style.overflow='';}}
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('[data-used-gallery]');
+  if(btn){const p=usedProducts.find(x=>x.id===btn.dataset.usedGallery);if(!p)return;usedGalleryItems=[...p.photos.map(url=>({type:'photo',url})),...(p.video?[{type:'video',url:p.video}]:[])];usedGalleryIndex=0;showUsedGallery();return;}
+  if(e.target.closest('[data-used-gallery-close]')){closeUsedGallery();return;}
+  const nav=e.target.closest('[data-used-gallery-nav]');if(nav&&usedGalleryItems.length){usedGalleryIndex=(usedGalleryIndex+Number(nav.dataset.usedGalleryNav)+usedGalleryItems.length)%usedGalleryItems.length;showUsedGallery();}
+});
+document.addEventListener('keydown',e=>{const m=document.getElementById('usedGalleryModal');if(!m||m.hidden)return;if(e.key==='Escape')closeUsedGallery();if(e.key==='ArrowRight'||e.key==='ArrowLeft'){usedGalleryIndex=(usedGalleryIndex+(e.key==='ArrowRight'?1:-1)+usedGalleryItems.length)%usedGalleryItems.length;showUsedGallery();}});
 document.getElementById('usedFilters').addEventListener('click',e=>{const b=e.target.closest('[data-used-filter]');if(b){usedCategory=b.dataset.usedFilter;renderUsed();}});
 
 /* ===== NAVEGACIÓN PORTADA ===== */
@@ -3649,6 +3672,14 @@ body > .hero-suggestions .hero-suggestion-title{display:block!important;font-siz
 @media(max-width:760px){body > .hero-suggestions{max-height:205px!important}body > .hero-suggestions .hero-suggestion{min-height:33px!important;padding:4px 9px!important}body > .hero-suggestions .hero-suggestion-title{font-size:10.8px!important}}
 </style>
 
+
+<style id="used-gallery-styles">
+.used-gallery-btn{display:block;width:100%;margin:12px 0 8px;border:0;border-radius:10px;background:#ffd400;color:#111;font-weight:900;padding:12px;cursor:pointer}
+#usedGalleryModal[hidden]{display:none!important}#usedGalleryModal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:55px 12px 65px}
+#usedGalleryMedia{width:min(100%,950px);height:min(75vh,720px);display:flex;align-items:center;justify-content:center}#usedGalleryMedia img,#usedGalleryMedia video{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px}
+.used-gallery-close,.used-gallery-arrow{position:absolute;border:0;background:#ffd400;color:#111;font-size:22px;font-weight:900;border-radius:999px;cursor:pointer;width:42px;height:42px}.used-gallery-close{top:15px;right:15px}.used-gallery-arrow.prev{left:10px}.used-gallery-arrow.next{right:10px}#usedGalleryCounter{position:absolute;bottom:20px;color:white;font-weight:800}
+</style>
+<div id="usedGalleryModal" hidden role="dialog" aria-modal="true" aria-label="Galería de producto usado"><button type="button" class="used-gallery-close" data-used-gallery-close aria-label="Cerrar">×</button><button type="button" class="used-gallery-arrow prev" data-used-gallery-nav="-1" aria-label="Anterior">‹</button><div id="usedGalleryMedia"></div><button type="button" class="used-gallery-arrow next" data-used-gallery-nav="1" aria-label="Siguiente">›</button><div id="usedGalleryCounter"></div></div>
 </body>
 
 </html>
