@@ -991,6 +991,12 @@ tbody tr:nth-child(even){background:#f7f7f8}
 .used-empty{background:white;border-radius:16px;padding:30px;text-align:center;color:#555}
 @media(max-width:600px){.used-toolbar h1{font-size:20px}.used-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.used-photo{height:135px}.used-body{padding:12px}.used-body h2{font-size:16px}.used-price{font-size:18px}}
 
+
+/* Filtro de condición: integrado sin modificar los filtros de categorías */
+.condition-filters{display:flex;gap:7px;margin:0 0 12px;flex-wrap:wrap}
+.condition-filter{border:1px solid #dedede;background:#fff;color:#333;border-radius:22px;padding:9px 17px;font-size:11px;font-weight:900;cursor:pointer}
+.condition-filter.active{background:var(--yellow);color:#111;border-color:var(--yellow)}
+@media(max-width:700px){.condition-filters{gap:6px;margin-bottom:10px}.condition-filter{font-size:10px;padding:8px 14px}}
 </style>
 
 
@@ -1312,6 +1318,7 @@ tbody tr:nth-child(even){background:#f7f7f8}
 
 <section class="catalog-screen" id="catalogScreen">
   <div class="catalog-toolbar"><button class="back-home" id="backHome">← VOLVER</button><div class="catalog-heading" id="catalogHeading">Catálogo</div></div>
+<div class="condition-filters" id="conditionFilters" aria-label="Filtrar productos por condición"><button type="button" class="condition-filter active" data-condition="TODOS" aria-pressed="true">TODOS</button><button type="button" class="condition-filter" data-condition="NUEVOS" aria-pressed="false">NUEVOS</button><button type="button" class="condition-filter" data-condition="USADOS" aria-pressed="false">USADOS</button></div>
   
 
 
@@ -2523,6 +2530,22 @@ function buildOfferButton(){
 FILTRADO
 ========================= */
 
+let conditionFilter="TODOS";
+function setConditionFilter(value){
+  if(!["TODOS","NUEVOS","USADOS"].includes(value))return;
+  conditionFilter=value;
+  document.querySelectorAll('#conditionFilters [data-condition]').forEach(button=>{
+    const active=button.dataset.condition===value;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-pressed',String(active));
+  });
+  render();
+}
+document.getElementById('conditionFilters').addEventListener('click',event=>{
+  const button=event.target.closest('[data-condition]');
+  if(button)setConditionFilter(button.dataset.condition);
+});
+
 function filteredProducts(){
 
   const search =
@@ -2534,6 +2557,8 @@ function filteredProducts(){
     .trim()
     .toUpperCase();
 
+
+  if(conditionFilter==="USADOS")return [];
 
   return products.filter(
 
@@ -3212,6 +3237,7 @@ function renderUsed(){
 }
 /* Integración de usados en el catálogo de nuevos: sin fotos en las filas. */
 function appendUsedToCatalog(newCount){
+  if(conditionFilter==="NUEVOS")return;
   const search=(document.getElementById('search')?.value||'').trim().toUpperCase();
   const categoryMap={'IPHONE':'IPHONE','SAMSUNG':'SAMSUNG','MACBOOK':'MACBOOKS','MACBOOKS':'MACBOOKS','MAC':'MACBOOKS','IPAD':'IPAD','IPADS':'IPAD','XIAOMI':'XIAOMI','APPLE WATCH':'APPLE WATCH','AIRPODS':'AIRPODS'};
   const matches=usedProducts.filter(p=>{
@@ -3316,6 +3342,7 @@ function showHome(){
 }
 function openCategory(category,label){
   if(category==="USADOS"){openUsed();return;}
+  setConditionFilter("TODOS");
   hideScreens();
   currentFilter=category;
   const s=document.getElementById("search"); if(s) s.value="";
@@ -3333,6 +3360,7 @@ function openUsed(){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function openCatalog(){
+  setConditionFilter("TODOS");
   hideScreens();
   currentFilter="TODOS";
   const s=document.getElementById("search"); if(s) s.value="";
