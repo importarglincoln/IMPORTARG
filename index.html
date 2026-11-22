@@ -3231,7 +3231,7 @@ function appendUsedToCatalog(newCount){
   desktop.insertAdjacentHTML('beforeend',matches.map(p=>{
     const n=usdNumber(p.price),available=p.stock==='EN STOCK';
     const detail=[p.battery?'Batería '+p.battery+'%':'',p.condition].filter(Boolean).join(' · ');
-    return '<tr class="catalog-used-row"><td><strong>'+usedHtml(p.category)+'</strong></td><td>'+usedHtml(p.model)+'</td><td>'+usedHtml(p.capacity)+'</td><td>'+usedHtml(p.color)+'</td><td>'+usedHtml(detail)+'</td><td class="desktop-price">'+(available?fmt(n):'SIN STOCK')+(available&&Number.isFinite(n)?arsEquivalent(n):'')+'</td><td><span class="stock '+(available?'in-stock':'out-stock')+'">'+usedHtml(p.stock)+'</span></td><td><div class="desktop-actions"><a class="desktop-buy" href="'+wa(p)+'" target="_blank" rel="noopener">CONSULTAR</a>'+gallery(p)+'</div></td></tr>';
+    return '<tr class="catalog-used-row"><td><strong>'+usedHtml(p.category)+'</strong></td><td>'+usedHtml(p.model)+'</td><td>'+usedHtml(p.capacity)+'</td><td>'+usedHtml(p.color)+'</td><td><span class="catalog-condition catalog-condition-used">USADO</span>'+(detail?' <span class="catalog-condition-detail">'+usedHtml(detail)+'</span>':'')+'</td><td class="desktop-price">'+(available?fmt(n):'SIN STOCK')+(available&&Number.isFinite(n)?arsEquivalent(n):'')+'</td><td><span class="stock '+(available?'in-stock':'out-stock')+'">'+usedHtml(p.stock)+'</span></td><td><div class="desktop-actions"><a class="desktop-buy" href="'+wa(p)+'" target="_blank" rel="noopener">CONSULTAR</a>'+gallery(p)+'</div></td></tr>';
   }).join(''));
   mobile.insertAdjacentHTML('beforeend',matches.map(p=>{
     const n=usdNumber(p.price),available=p.stock==='EN STOCK';
