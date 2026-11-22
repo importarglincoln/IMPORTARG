@@ -3214,7 +3214,7 @@ function appendUsedToCatalog(newCount){
   const search=(document.getElementById('search')?.value||'').trim().toUpperCase();
   const categoryMap={'IPHONE':'IPHONE','SAMSUNG':'SAMSUNG','MACBOOK':'MACBOOKS','MACBOOKS':'MACBOOKS','MAC':'MACBOOKS','IPAD':'IPAD','IPADS':'IPAD','XIAOMI':'XIAOMI','APPLE WATCH':'APPLE WATCH','AIRPODS':'AIRPODS'};
   const matches=usedProducts.filter(p=>{
-    const category=categoryMap[p.category]||p.category;
+    const category=categoryMap[usedNorm(p.category)]||usedNorm(p.category);
     if(currentFilter==='OFERTAS'||currentFilter==='RAYBAN META')return false;
     if(currentFilter!=='TODOS' && category!==currentFilter)return false;
     return [p.category,p.model,p.capacity,p.color,p.battery,p.condition,p.price,'USADO'].join(' ').toUpperCase().includes(search);
@@ -3226,7 +3226,7 @@ function appendUsedToCatalog(newCount){
   const mobile=document.getElementById('mobileList');
   const fmt=n=>Number.isFinite(n)?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(n):'CONSULTAR';
   const wa=p=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto USADO: '+[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ')+' (Código '+p.id+').');
-  const gallery=p=>p.photos.length+(p.video?1:0)?'<button type="button" class="catalog-used-gallery" data-used-gallery="'+usedHtml(p.id)+'" title="Ver fotos y video">📷 Ver fotos</button>':'';
+  const gallery=p=>(p.photos.length+(p.video?1:0))?'<button type="button" class="catalog-used-gallery" data-used-gallery="'+usedHtml(p.id)+'" title="Ver fotos y video">📷 Ver fotos</button>':'';
   desktop.insertAdjacentHTML('beforeend',matches.map(p=>{
     const n=usdNumber(p.price),available=p.stock==='EN STOCK';
     const detail=['USADO',p.battery?'Batería '+p.battery+'%':'',p.condition].filter(Boolean).join(' · ');
@@ -3241,14 +3241,14 @@ function usedMediaUrl(v){const u=String(v||'').trim();return /^https:\/\//i.test
 function usedCell(row,head,...names){for(const name of names){const i=head.indexOf(usedNorm(name));if(i>=0)return String(row[i]??'').trim();}return '';}
 async function loadUsedProducts(){
   try{
-    const response=await fetch(USED_CSV_URL+'&t='+Date.now(),{cache:'no-store'});
+    const response=await fetchWithTimeout(USED_CSV_URL+'&t='+Date.now(),12000);
     if(!response.ok)throw Error('Error HTTP '+response.status+' al cargar CSV de usados');
     const rows=parseCSV(await response.text());
     const headerIndex=rows.findIndex(r=>r.map(usedNorm).includes('ID')&&r.map(usedNorm).includes('MODELO'));
     if(headerIndex<0)throw Error('No se encontraron las columnas ID y MODELO de usados');
     const head=rows[headerIndex].map(usedNorm);
     const cell=(r,...names)=>usedCell(r,head,...names);
-    const next=rows.slice(headerIndex+1).filter(r=>usedNorm(cell(r,'PUBLICAR WEB'))==='SI'&&cell(r,'ID')).map(r=>({
+    const next=rows.slice(headerIndex+1).filter(r=>['SI','SÍ','TRUE','VERDADERO'].includes(usedNorm(cell(r,'PUBLICAR WEB')))&&cell(r,'ID')).map(r=>({
       id:cell(r,'ID'),category:usedNorm(cell(r,'CATEGORÍA','CATEGORIA')),model:cell(r,'MODELO'),capacity:cell(r,'CAPACIDAD'),color:cell(r,'COLOR'),battery:cell(r,'BATERÍA (%)','BATERIA (%)'),condition:cell(r,'ESTADO ESTÉTICO','ESTADO ESTETICO'),price:cell(r,'PRECIO USD'),stock:usedNorm(cell(r,'DISPONIBILIDAD')),
       photos:[cell(r,'FOTO 1 URL','FOTO 1'),cell(r,'FOTO 2 URL','FOTO 2'),cell(r,'FOTO 3 URL','FOTO 3')].map(usedMediaUrl).filter(Boolean),
       video:usedMediaUrl(cell(r,'VIDEO URL','VÍDEO URL','VIDEO 1 URL','VIDEO')),notes:cell(r,'OBSERVACIONES')
