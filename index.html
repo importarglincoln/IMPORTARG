@@ -2645,6 +2645,7 @@ function render(){
   renderMobile(list);
 
   renderDesktop(list);
+  appendUsedToCatalog(list.length);
 
 }
 
@@ -3208,6 +3209,34 @@ function renderUsed(){
       '<a class="used-wa" href="'+wa+'" target="_blank" rel="noopener">CONSULTAR POR WHATSAPP</a></div></article>';
   }).join('');
 }
+/* Integración de usados en el catálogo de nuevos: sin fotos en las filas. */
+function appendUsedToCatalog(newCount){
+  const search=(document.getElementById('search')?.value||'').trim().toUpperCase();
+  const categoryMap={'IPHONE':'IPHONE','SAMSUNG':'SAMSUNG','MACBOOK':'MACBOOKS','MACBOOKS':'MACBOOKS','MAC':'MACBOOKS','IPAD':'IPAD','IPADS':'IPAD','XIAOMI':'XIAOMI','APPLE WATCH':'APPLE WATCH','AIRPODS':'AIRPODS'};
+  const matches=usedProducts.filter(p=>{
+    const category=categoryMap[p.category]||p.category;
+    if(currentFilter==='OFERTAS'||currentFilter==='RAYBAN META')return false;
+    if(currentFilter!=='TODOS' && category!==currentFilter)return false;
+    return [p.category,p.model,p.capacity,p.color,p.battery,p.condition,p.price,'USADO'].join(' ').toUpperCase().includes(search);
+  });
+  const results=document.getElementById('results');
+  const count=newCount+matches.length;
+  results.textContent=count+' producto'+(count===1?'':'s');
+  const desktop=document.getElementById('table');
+  const mobile=document.getElementById('mobileList');
+  const fmt=n=>Number.isFinite(n)?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(n):'CONSULTAR';
+  const wa=p=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto USADO: '+[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ')+' (Código '+p.id+').');
+  const gallery=p=>p.photos.length+(p.video?1:0)?'<button type="button" class="catalog-used-gallery" data-used-gallery="'+usedHtml(p.id)+'" title="Ver fotos y video">📷 Ver fotos</button>':'';
+  desktop.insertAdjacentHTML('beforeend',matches.map(p=>{
+    const n=usdNumber(p.price),available=p.stock==='EN STOCK';
+    const detail=['USADO',p.battery?'Batería '+p.battery+'%':'',p.condition].filter(Boolean).join(' · ');
+    return '<tr class="catalog-used-row"><td><strong>'+usedHtml(p.category)+'</strong></td><td>'+usedHtml(p.model)+'</td><td>'+usedHtml(p.capacity)+'</td><td>'+usedHtml(p.color)+'</td><td>'+usedHtml(detail)+'</td><td class="desktop-price">'+(available?fmt(n):'SIN STOCK')+(available&&Number.isFinite(n)?arsEquivalent(n):'')+'</td><td><span class="stock '+(available?'in-stock':'out-stock')+'">'+usedHtml(p.stock)+'</span></td><td><div class="desktop-actions"><a class="desktop-buy" href="'+wa(p)+'" target="_blank" rel="noopener">CONSULTAR</a>'+gallery(p)+'</div></td></tr>';
+  }).join(''));
+  mobile.insertAdjacentHTML('beforeend',matches.map(p=>{
+    const n=usdNumber(p.price),available=p.stock==='EN STOCK';
+    return '<div class="product-row catalog-used-row"><div class="product-top"><span class="product-main">'+usedHtml(p.category+' '+p.model)+'</span><span class="catalog-used-tag">USADO</span><span class="product-meta">'+usedHtml([p.capacity,p.color].filter(Boolean).join(' · '))+'</span></div><div class="mobile-price">'+(available?fmt(n):'SIN STOCK')+(available&&Number.isFinite(n)?arsEquivalent(n):'')+'</div><div class="product-bottom"><span class="product-meta">'+usedHtml([p.battery?'Batería '+p.battery+'%':'',p.condition].filter(Boolean).join(' · '))+'</span><span class="stock">'+usedHtml(p.stock)+'</span></div><div class="mobile-actions"><a class="buy-button" href="'+wa(p)+'" target="_blank" rel="noopener">CONSULTAR</a>'+gallery(p)+'</div></div>';
+  }).join(''));
+}
 function usedMediaUrl(v){const u=String(v||'').trim();return /^https:\/\//i.test(u)?u:'';}
 function usedCell(row,head,...names){for(const name of names){const i=head.indexOf(usedNorm(name));if(i>=0)return String(row[i]??'').trim();}return '';}
 async function loadUsedProducts(){
@@ -3224,7 +3253,7 @@ async function loadUsedProducts(){
       photos:[cell(r,'FOTO 1 URL','FOTO 1'),cell(r,'FOTO 2 URL','FOTO 2'),cell(r,'FOTO 3 URL','FOTO 3')].map(usedMediaUrl).filter(Boolean),
       video:usedMediaUrl(cell(r,'VIDEO URL','VÍDEO URL','VIDEO 1 URL','VIDEO')),notes:cell(r,'OBSERVACIONES')
     }));
-    usedProducts=next;usedLoaded=true;renderUsed();
+    usedProducts=next;usedLoaded=true;renderUsed();render();
   }catch(err){
     if(!usedLoaded)document.getElementById('usedGrid').innerHTML='<div class="used-empty">No se pudo cargar la lista de usados. Verificá la publicación de Google Sheets y probá desde la página web.</div>';
     console.warn('ImportArg usados:',err);
@@ -3673,6 +3702,15 @@ body > .hero-suggestions .hero-suggestion-title{display:block!important;font-siz
 </style>
 
 
+<style id="catalog-used-integration-styles">
+#catalogScreen .catalog-used-row{background:#fffdf3}
+#catalogScreen .catalog-used-gallery{border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#111;font-size:10px;font-weight:800;padding:7px 9px;cursor:pointer;white-space:nowrap}
+#catalogScreen .catalog-used-gallery:hover{background:#ffd400}
+#catalogScreen .catalog-used-row .desktop-actions{flex-wrap:wrap;justify-content:center;gap:5px}
+#catalogScreen .catalog-used-tag{display:inline-block;background:#171717;color:#fff;font-size:10px;font-weight:900;border-radius:6px;padding:4px 7px}
+#catalogScreen .catalog-used-row .mobile-actions{display:flex;align-items:center;flex-wrap:wrap}
+#catalogScreen .catalog-used-row .mobile-actions .catalog-used-gallery{min-height:35px}
+</style>
 <style id="used-gallery-styles">
 .used-gallery-btn{display:block;width:100%;margin:12px 0 8px;border:0;border-radius:10px;background:#ffd400;color:#111;font-weight:900;padding:12px;cursor:pointer}
 #usedGalleryModal[hidden]{display:none!important}#usedGalleryModal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;padding:55px 12px 65px}
