@@ -1381,11 +1381,7 @@ tbody tr:nth-child(even){background:#f7f7f8}
     <img src="logo-importarg.png" class="brand-logo" alt="ImportArg" onerror="this.style.display='none'">
     <div class="logo">import<span>Arg</span></div>
   </div>
-  <nav class="mobile-premium-nav" aria-label="Navegación rápida móvil">
-<button type="button" data-importarg-target="goNewProducts">Nuevos</button>
-<button type="button" data-importarg-target="goUsedProducts">Usados</button>
-</nav>
-<nav class="site-nav">
+  <nav class="site-nav">
     <button id="navCatalogo">Catálogo</button>
     <button id="navComo">Cómo comprar</button>
     <a class="nav-whatsapp mobile-keep" href="https://wa.me/5491124014722" target="_blank" rel="noopener">Escribinos</a>
@@ -3990,63 +3986,6 @@ body > .hero-suggestions .hero-suggestion-title{display:block!important;font-siz
 @media(max-height:600px) and (min-width:701px){.used-gallery-visual{min-height:280px}#usedGalleryMedia,#usedGalleryMedia img,#usedGalleryMedia video{max-height:calc(100dvh - 100px)}}
 </style>
 <div id="usedGalleryModal" hidden role="dialog" aria-modal="true" aria-label="Galería de producto usado"><div class="used-gallery-shell"><button type="button" class="used-gallery-close" data-used-gallery-close aria-label="Cerrar">×</button><div class="used-gallery-visual"><button type="button" class="used-gallery-arrow prev" data-used-gallery-nav="-1" aria-label="Anterior">‹</button><div id="usedGalleryMedia"></div><button type="button" class="used-gallery-arrow next" data-used-gallery-nav="1" aria-label="Siguiente">›</button><div id="usedGalleryCounter"></div></div><section id="usedGalleryInfo" aria-label="Detalle del producto usado"></section></div></div>
-
-<style id="importarg-v6-mobile-premium-nav-20261123">
-/* Solo portada y navegación móvil. No altera tarjetas, galerías ni carga de datos. */
-.mobile-premium-nav{display:none}
-@media(max-width:760px){
-  header{z-index:60!important}
-  .header{display:flex!important;align-items:center!important;gap:10px!important;padding:12px 16px!important;min-height:58px;box-sizing:border-box}
-  .brand{flex:0 0 auto;min-width:0}
-  .brand-logo{max-height:32px!important;max-width:105px;object-fit:contain}
-  .logo{font-size:21px!important;white-space:nowrap}
-  .mobile-premium-nav{display:flex;align-items:center;gap:5px;margin-left:auto;flex:0 0 auto;background:rgba(15,15,15,.74);border:1px solid rgba(255,255,255,.23);padding:4px;border-radius:999px}
-  .mobile-premium-nav button{appearance:none;border:0;background:transparent;color:#fff;font:inherit;font-size:12px;font-weight:800;line-height:1;padding:10px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
-  .mobile-premium-nav button:last-child{background:#ffd400;color:#111}
-  .mobile-premium-nav button:focus-visible{outline:2px solid #ffd400;outline-offset:2px}
-  .site-nav{display:none!important}
-  .home-screen{padding-top:0!important}
-  .home-hero{min-height:480px!important;padding:116px 16px 90px!important;box-sizing:border-box;background-position:center center!important}
-  .home-hero h1{font-size:clamp(31px,8vw,42px)!important;line-height:1.04!important;letter-spacing:-1.3px!important;max-width:390px;margin-left:auto!important;margin-right:auto!important}
-  .home-hero .product-paths{width:100%!important;max-width:480px!important;margin:22px auto 14px!important;padding:0!important;gap:9px!important}
-  .home-hero .product-path{min-height:76px!important;padding:12px 11px!important;border-radius:15px!important;gap:7px!important;box-shadow:0 5px 15px rgba(0,0,0,.12)!important;transition:none!important}
-  .home-hero .product-path-copy strong{font-size:12px!important;line-height:1.18!important}
-  .home-hero .product-path-copy small{font-size:10px!important;line-height:1.25!important;margin-top:4px!important}
-  .home-hero .product-path-icon{display:none!important}
-  .home-hero .product-path-arrow{width:25px!important;height:25px!important;font-size:19px!important}
-  .hero-search{height:48px!important;width:100%!important;max-width:480px!important;margin:0 auto!important;box-shadow:0 5px 16px rgba(0,0,0,.15)!important}
-  .hero-search input{font-size:14px!important}
-  .category-grid{gap:10px!important;margin-top:-34px!important;position:relative;z-index:6}
-  .category-card{border-radius:16px!important;min-height:160px!important;transition:none!important}
-  .category-card:hover{transform:none!important}
-  .home-offers-wrap{margin-top:12px!important;margin-bottom:12px!important}
-  .home-offers-button{transition:none!important}
-  .home-offers-button:hover{transform:none!important}
-}
-@media(max-width:370px){
-  .header{padding:10px 11px!important;gap:6px!important}
-  .mobile-premium-nav button{font-size:11px;padding:9px 9px}
-  .home-hero{min-height:465px!important;padding-left:11px!important;padding-right:11px!important}
-  .home-hero .product-path{padding:10px 8px!important}
-  .home-hero .product-path-copy strong{font-size:11px!important}
-  .home-hero .product-path-copy small{font-size:9px!important}
-}
-@media(prefers-reduced-motion:reduce){.mobile-premium-nav *{transition:none!important;animation:none!important}}
-</style>
-<script id="importarg-v6-mobile-premium-navigation">
-(function(){
-  function bind(){
-    document.querySelectorAll('.mobile-premium-nav [data-importarg-target]').forEach(function(button){
-      button.addEventListener('click',function(){
-        var target=document.getElementById(button.getAttribute('data-importarg-target'));
-        if(target)target.click();
-      });
-    });
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});
-  else bind();
-})();
-</script>
 </body>
 
 </html>
