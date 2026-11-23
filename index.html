@@ -3317,11 +3317,14 @@ function renderUsedGalleryInfo(){
   const stockClass=status.includes('ÚLTIMA')||status.includes('ULTIMA')?'stock-last':status.includes('PEDIDO')?'stock-order':status.includes('SIN STOCK')||status.includes('AGOTADO')?'stock-out':status.includes('EN STOCK')?'stock-in':'stock-other';
   const buy='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto USADO: '+label+' (Código '+p.id+').');
   const share='https://wa.me/?text='+encodeURIComponent('ImportArg\n'+label+'\nUSADO'+(p.battery?' · Batería '+p.battery+'%':'')+(p.condition?' · '+p.condition:'')+'\n'+price+'\n'+status+'\nhttps://importarg.com.ar/');
-  panel.innerHTML='<div class="used-info-top"><strong>'+usedHtml(label)+'</strong><span class="catalog-condition catalog-condition-used">USADO</span></div>'+
-    '<div class="used-info-specs">'+(p.battery?'<span>Batería <b>'+usedHtml(p.battery)+'%</b></span>':'')+(p.condition?'<span>Estado estético <b>'+usedHtml(p.condition)+'</b></span>':'')+'</div>'+
+  panel.innerHTML='<div class="premium-used-header"><span class="catalog-condition catalog-condition-used">USADO</span><span class="premium-used-eyebrow">EQUIPO REVISADO</span></div>'+ 
+    '<div class="used-info-top"><strong>'+usedHtml(label)+'</strong></div>'+ 
+    '<div class="premium-used-rule"></div>'+ 
+    '<div class="used-info-specs">'+(p.battery?'<div class="premium-spec"><span class="premium-spec-label">BATERÍA</span><strong class="premium-spec-value">'+usedHtml(p.battery)+'%</strong></div>':'')+(p.condition?'<div class="premium-spec"><span class="premium-spec-label">ESTADO ESTÉTICO</span><strong class="premium-spec-value premium-condition">'+usedHtml(p.condition)+'</strong></div>':'')+'</div>'+ 
     (p.notes?'<div class="used-info-notes">'+usedHtml(p.notes)+'</div>':'')+
-    '<div class="used-info-price"><strong>'+price+'</strong><span class="stock '+stockClass+'">'+usedHtml(status)+'</span></div>'+
-    '<div class="used-info-actions"><a href="'+buy+'" target="_blank" rel="noopener noreferrer">'+(available&&Number.isFinite(n)?'COMPRAR':'CONSULTAR')+'</a><a href="'+share+'" target="_blank" rel="noopener noreferrer">COMPARTIR</a></div>';
+    '<div class="premium-used-rule"></div>'+ 
+    '<div class="used-info-price"><strong>'+price+'</strong><span class="stock '+stockClass+'">'+usedHtml(status)+'</span></div>'+ 
+    '<div class="used-info-actions"><a href="'+buy+'" target="_blank" rel="noopener noreferrer">'+(available&&Number.isFinite(n)?'COMPRAR POR WHATSAPP':'CONSULTAR POR WHATSAPP')+'</a><a href="'+share+'" target="_blank" rel="noopener noreferrer">COMPARTIR PRODUCTO</a></div>';
 }
 function closeUsedGallery(){const modal=document.getElementById('usedGalleryModal');if(modal){modal.hidden=true;document.getElementById('usedGalleryMedia').replaceChildren();document.body.style.overflow='';}}
 document.addEventListener('click',e=>{
@@ -3845,4 +3848,45 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
 #catalogScreen .catalog-heading{color:#111!important;}
 #catalogScreen .back-home{background:#171717!important;color:#fff!important;}
 @media(max-width:760px){#catalogScreen .catalog-toolbar{padding:11px 12px!important;border-radius:14px!important;}}
+</style>
+<style id="importarg-premium-used-v3">
+/* Ficha premium: solo modifica la ventana de productos usados */
+#usedGalleryModal{background:rgba(10,10,12,.78);backdrop-filter:blur(5px)}
+#usedGalleryModal .used-gallery-shell{grid-template-columns:minmax(0,1.05fr) minmax(330px,.95fr);width:min(970px,100%);border-radius:22px;box-shadow:0 30px 90px rgba(0,0,0,.4)}
+#usedGalleryModal .used-gallery-visual{background:#151515;min-height:480px;padding:26px 48px 42px}
+#usedGalleryModal #usedGalleryInfo{display:flex;flex-direction:column;justify-content:center;align-self:stretch;padding:42px 37px 34px;background:#fff}
+#usedGalleryModal .premium-used-header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+#usedGalleryModal .catalog-condition-used{display:inline-flex!important;align-items:center;background:#ebebeb!important;color:#333!important;border:1px solid #dedede!important;border-radius:6px!important;font-size:10px!important;font-weight:900!important;padding:7px 10px!important;letter-spacing:.045em}
+#usedGalleryModal .premium-used-eyebrow{color:#929292;font-size:10px;letter-spacing:.13em;font-weight:800}
+#usedGalleryModal .used-info-top{display:block;font-size:25px;line-height:1.18;letter-spacing:-.6px;font-weight:950}
+#usedGalleryModal .used-info-top strong{font-weight:950}
+#usedGalleryModal .premium-used-rule{height:1px;background:#ebebeb;margin:21px 0}
+#usedGalleryModal .used-info-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+#usedGalleryModal .premium-spec{border:1px solid #e9e9e9;border-radius:12px;background:#fafafa;padding:15px 14px;min-width:0;display:flex;flex-direction:column;gap:7px}
+#usedGalleryModal .premium-spec-label{color:#777;font-size:10px;font-weight:850;letter-spacing:.08em}
+#usedGalleryModal .premium-spec-value{font-size:21px;color:#111;line-height:1.15;overflow-wrap:anywhere}
+#usedGalleryModal .premium-condition{font-size:15px}
+#usedGalleryModal .used-info-notes{margin-top:13px;line-height:1.5}
+#usedGalleryModal .used-info-price{margin:0;gap:12px;align-items:center}
+#usedGalleryModal .used-info-price strong{font-size:33px;letter-spacing:-.8px}
+#usedGalleryModal .used-info-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:21px}
+#usedGalleryModal .used-info-actions a{min-height:47px;border-radius:10px;font-size:11px;letter-spacing:.02em;text-align:center}
+#usedGalleryModal .used-info-actions a:first-child{background:#ffd400;color:#111}
+#usedGalleryModal .used-info-actions a+a{background:#f4f4f4;color:#111;border:1px solid #e3e3e3}
+#usedGalleryModal .used-gallery-close{right:16px;top:16px;width:38px;height:38px}
+@media(max-width:700px){
+ #usedGalleryModal{padding:10px}
+ #usedGalleryModal .used-gallery-shell{grid-template-columns:1fr;max-width:460px;max-height:calc(100dvh - 20px);border-radius:16px;overflow-y:auto}
+ #usedGalleryModal .used-gallery-visual{height:min(43dvh,380px);min-height:220px;padding:14px 43px 34px}
+ #usedGalleryModal #usedGalleryInfo{padding:23px 20px 24px}
+ #usedGalleryModal .premium-used-header{margin-bottom:12px}
+ #usedGalleryModal .used-info-top{font-size:21px}
+ #usedGalleryModal .premium-used-rule{margin:16px 0}
+ #usedGalleryModal .premium-spec{padding:12px 11px}
+ #usedGalleryModal .premium-spec-value{font-size:19px}
+ #usedGalleryModal .premium-condition{font-size:13px}
+ #usedGalleryModal .used-info-price strong{font-size:27px}
+ #usedGalleryModal .used-info-actions{margin-top:16px}
+}
+@media(max-width:370px){#usedGalleryModal .used-info-specs{grid-template-columns:1fr 1fr;gap:7px}#usedGalleryModal .premium-spec{padding:10px 8px}}
 </style>
