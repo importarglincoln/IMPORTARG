@@ -1356,6 +1356,19 @@ tbody tr:nth-child(even){background:#f7f7f8}
 }
 </style>
 
+<style id="importarg-v6-no-flicker">
+/* Navegación inmediata y tarjetas sin efectos de entrada. */
+#usedScreen, #usedScreen .used-grid, #usedScreen .used-card,
+#usedScreen .used-photo, #usedScreen .used-photo img {
+  animation:none!important;
+  transition:none!important;
+}
+#usedScreen .used-photo {background:#f4f4f6!important;}
+#usedScreen .used-photo img {opacity:1!important;filter:none!important;}
+@media(max-width:600px){
+  #usedScreen .used-card{contain:layout style;}
+}
+</style>
 </head>
 
 
@@ -3349,12 +3362,13 @@ const USED_CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTRPvBY4wW9X
 let usedProducts=[];
 let usedCategory="TODOS";
 let usedLoaded=false;
+let usedLoadingPromise=null;
 function usedNorm(v){return String(v??"").trim().toUpperCase();}
 function usedHtml(v){return safe(String(v??""));}
 function usedImage(url){
   const value=String(url||"").trim();
   if(!/^https:\/\//i.test(value))return '<div class="used-photo">FOTO PRÓXIMAMENTE</div>';
-  return '<div class="used-photo"><img loading="lazy" alt="Foto del equipo usado" src="'+usedHtml(value)+'" onerror="this.parentElement.textContent=\'FOTO PRÓXIMAMENTE\'"></div>';
+  return '<div class="used-photo"><img loading="eager" decoding="async" alt="Foto del equipo usado" src="'+usedHtml(value)+'" onerror="this.parentElement.textContent=\'FOTO PRÓXIMAMENTE\'"></div>';
 }
 function renderUsed(){
   const filters=document.getElementById('usedFilters');
@@ -3424,6 +3438,9 @@ function appendUsedToCatalog(newCount){
 function usedMediaUrl(v){const u=String(v||'').trim();return /^https:\/\//i.test(u)?u:'';}
 function usedCell(row,head,...names){for(const name of names){const i=head.indexOf(usedNorm(name));if(i>=0)return String(row[i]??'').trim();}return '';}
 async function loadUsedProducts(){
+  if(usedLoaded)return;
+  if(usedLoadingPromise)return usedLoadingPromise;
+  usedLoadingPromise=(async()=>{
   try{
     const response=await fetchWithTimeout(USED_CSV_URL+'&t='+Date.now(),12000);
     if(!response.ok)throw Error('Error HTTP '+response.status+' al cargar CSV de usados');
@@ -3441,7 +3458,9 @@ async function loadUsedProducts(){
   }catch(err){
     if(!usedLoaded)document.getElementById('usedGrid').innerHTML='<div class="used-empty">No se pudo cargar la lista de usados. Verificá la publicación de Google Sheets y probá desde la página web.</div>';
     console.warn('ImportArg usados:',err);
-  }
+  }finally{usedLoadingPromise=null;}
+  })();
+  return usedLoadingPromise;
 }
 let usedGalleryItems=[],usedGalleryIndex=0;
 let usedGalleryProduct=null;
@@ -3529,9 +3548,9 @@ function openUsed(){
   hideScreens();
   usedScreen.classList.add("active");
   usedCategory="TODOS";
-  renderUsed();
-  loadUsedProducts();
-  window.scrollTo({top:0,behavior:"smooth"});
+  if(usedLoaded)renderUsed();
+  else loadUsedProducts();
+  window.scrollTo({top:0,behavior:"instant"});
 }
 function openCatalog(){
   setConditionFilter("TODOS");
