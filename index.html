@@ -2889,7 +2889,7 @@ function render(){
     emptyState.hidden = !showEmpty;
     if (showEmpty) {
       const categoryName = currentFilter === "SONY" ? "PlayStation 5" : currentFilter;
-      const isSearch = Boolean((document.getElementById("searchInput")?.value || "").trim());
+      const isSearch = Boolean((document.getElementById("search")?.value || "").trim());
       document.getElementById("catalogEmptyTitle").textContent = isSearch
         ? "No encontramos productos con esa búsqueda"
         : "Sin stock por el momento";
@@ -3647,17 +3647,17 @@ function openComo(){
   comoScreen.classList.add("active");
   window.scrollTo({top:0,behavior:"smooth"});
 }
-document.getElementById("goNewProducts").addEventListener("click",openCatalog);
-document.getElementById("goUsedProducts").addEventListener("click",openUsed);
+document.getElementById("goNewProducts").addEventListener("click",()=>openCatalog());
+document.getElementById("goUsedProducts").addEventListener("click",()=>openUsed());
 document.getElementById("categoryGrid").addEventListener("click",e=>{
   const card=e.target.closest(".category-card"); if(!card)return;
   openCategory(card.dataset.category,card.querySelector("h2").textContent);
 });
-document.getElementById("navCatalogo").addEventListener("click",openCatalog);
-document.getElementById("navComo").addEventListener("click",openComo);
-document.getElementById("backHome").addEventListener("click",showHome);
-document.getElementById("usedBack").addEventListener("click",showHome);
-document.getElementById("backComo").addEventListener("click",showHome);
+document.getElementById("navCatalogo").addEventListener("click",()=>openCatalog());
+document.getElementById("navComo").addEventListener("click",()=>openComo());
+document.getElementById("backHome").addEventListener("click",()=>showHome());
+document.getElementById("usedBack").addEventListener("click",()=>showHome());
+document.getElementById("backComo").addEventListener("click",()=>showHome());
 
 
 /* Buscador de portada: abre el catálogo y reutiliza el buscador original. */
@@ -3674,7 +3674,7 @@ function searchFromHero(){
   render();
   window.scrollTo({top:0,behavior:"smooth"});
 }
-document.getElementById("heroSearchButton").addEventListener("click",searchFromHero);
+document.getElementById("heroSearchButton").addEventListener("click",()=>searchFromHero());
 document.getElementById("heroSearch").addEventListener("keydown",e=>{if(e.key==="Enter")searchFromHero();});
 
 /* Ofertas desde la portada. */
@@ -4144,6 +4144,7 @@ body > .hero-suggestions .hero-suggestion-title{display:block!important;font-siz
     if(restoring)return;
     const hash='#'+route;
     if(location.hash!==hash)history.pushState(null,'',hash);
+    lastRestoredHash=hash;
   }
   showHome=function(){original.showHome();save('inicio');};
   openCategory=function(category,label){
@@ -4173,14 +4174,18 @@ body > .hero-suggestions .hero-suggestion-title{display:block!important;font-siz
     }finally{restoring=false;}
   }
   document.getElementById('homeOffersButton')?.addEventListener('click',()=>save('ofertas'));
-  window.addEventListener('popstate',restore);
-  window.addEventListener('hashchange',restore);
-  if(location.hash)restore();
+  // popstate y hashchange pueden dispararse juntos; restaurar solo una vez por URL.
+  let lastRestoredHash=null;
+  function restoreOnce(){
+    if(location.hash===lastRestoredHash)return;
+    lastRestoredHash=location.hash;
+    restore();
+  }
+  window.addEventListener('popstate',restoreOnce);
+  window.addEventListener('hashchange',restoreOnce);
+  if(location.hash)restoreOnce();
 })();
 </script>
-</body>
-
-</html>
 
 <style id="portada-final-ajuste">
 header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.13) 70%,transparent 100%)!important}
@@ -4206,7 +4211,6 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
 #catalogScreen .mobile-price{font-size:15px}
 #catalogScreen .mobile-actions{gap:6px}
 </style>
-
 <style id="catalog-toolbar-yellow-final">
 #catalogScreen .catalog-toolbar{background:#ffd400!important;border:none!important;box-shadow:0 8px 24px rgba(0,0,0,.10)!important;padding:14px 18px!important;border-radius:18px!important;}
 #catalogScreen .catalog-heading{color:#111!important;}
@@ -4254,15 +4258,13 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
 }
 @media(max-width:370px){#usedGalleryModal .used-info-specs{grid-template-columns:1fr 1fr;gap:7px}#usedGalleryModal .premium-spec{padding:10px 8px}}
 </style>
-
-
 <style id="importarg-v6-retoques-premium-buscador">
 /* Ajustes estéticos puntuales: no alteran scroll, JS, datos ni galerías. */
 .home-hero .product-path.used{
-  background:#252932!important;
-  color:#fff!important;
+  background:linear-gradient(135deg,#e5e7eb 0%,#f2f3f5 53%,#ffffff 100%)!important;
+  color:#171717!important;
   border-color:#e8bd22!important;
-  box-shadow:0 9px 24px rgba(0,0,0,.18)!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.12)!important;
 }
 .home-hero .product-path.new{
   background:#fff!important;
@@ -4299,3 +4301,6 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
   .home-hero .product-path.new{box-shadow:0 5px 15px rgba(0,0,0,.12)!important}
 }
 </style>
+</body>
+
+</html>
