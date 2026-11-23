@@ -1381,10 +1381,6 @@ tbody tr:nth-child(even){background:#f7f7f8}
     <img src="logo-importarg.png" class="brand-logo" alt="ImportArg" onerror="this.style.display='none'">
     <div class="logo">import<span>Arg</span></div>
   </div>
-  <nav class="mobile-premium-nav" aria-label="Navegación rápida móvil">
-<button type="button" data-importarg-target="goNewProducts">Nuevos</button>
-<button type="button" data-importarg-target="goUsedProducts">Usados</button>
-</nav>
 <nav class="site-nav">
     <button id="navCatalogo">Catálogo</button>
     <button id="navComo">Cómo comprar</button>
@@ -4033,20 +4029,42 @@ body > .hero-suggestions .hero-suggestion-title{display:block!important;font-siz
 }
 @media(prefers-reduced-motion:reduce){.mobile-premium-nav *{transition:none!important;animation:none!important}}
 </style>
-<script id="importarg-v6-mobile-premium-navigation">
-(function(){
-  function bind(){
-    document.querySelectorAll('.mobile-premium-nav [data-importarg-target]').forEach(function(button){
-      button.addEventListener('click',function(){
-        var target=document.getElementById(button.getAttribute('data-importarg-target'));
-        if(target)target.click();
-      });
-    });
+
+
+<style id="importarg-v6-navigation-gallery-clarity">
+/* Navegación redundante eliminada; el acceso a nuevos/usados permanece en la portada. */
+.mobile-premium-nav{display:none!important}
+/* Galería visible como acción legible en el móvil, sin animaciones. */
+@media(max-width:700px){
+  #usedScreen .used-card-actions{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:6px!important;
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});
-  else bind();
-})();
-</script>
+  #usedScreen .used-card-actions .used-wa{grid-column:1;grid-row:1}
+  #usedScreen .used-card-actions .used-card-share{grid-column:2;grid-row:1}
+  #usedScreen .used-card-actions .used-gallery-btn{
+    grid-column:1 / -1!important;
+    grid-row:2!important;
+    width:100%!important;
+    min-height:34px!important;
+    padding:7px 9px!important;
+    margin:0!important;
+    font-size:10px!important;
+    font-weight:850!important;
+    line-height:1.2!important;
+    background:#f4f4f5!important;
+    color:#111!important;
+    border:1px solid #dedee1!important;
+    border-radius:8px!important;
+    position:relative;
+    transition:none!important;
+  }
+  #usedScreen .used-card-actions .used-gallery-btn::after{content:none!important;display:none!important}
+  #usedScreen .used-card-actions:not(:has(.used-gallery-btn)){
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  }
+}
+</style>
 </body>
 
 </html>
