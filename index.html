@@ -1864,18 +1864,7 @@ async function loadBlueRate(){
   render();
 }
 
-// Productos adicionales administrados en este HTML (precios finales en USD).
-const EXTRA_PRODUCTS = [
-  {product:"JBL",model:"BOOMBOX 4",color:"BLACK",price:"US$ 455"},
-  {product:"JBL",model:"PARTY BOX 520",price:"US$ 670"},
-  {product:"JBL",model:"ULTIMATE",price:"US$ 1270"},
-  {product:"DJI",model:"LITO",detail:"(RC-N3) + Fly More Combo",price:"US$ 790"},
-  {product:"DJI",model:"NEO 2 MOTION",detail:"Fly More Combo",price:"US$ 825"},
-  {product:"DJI",model:"MINI 5 PRO",detail:"(RC-N3)",price:"US$ 1125"},
-  {product:"DJI",model:"MINI 5 PRO",detail:"(RC 2) + Fly More Combo",price:"US$ 1325"},
-  {product:"DJI",model:"MINI 5 PRO",detail:"(RC 2) + Fly More Combo Plus",price:"US$ 1375"}
-].map((p,i)=>({id:"extra-"+i,capacity:"",color:"",detail:"",status:"CONSULTAR",offer:"",...p}));
-
+// Todos los productos del catálogo general se administran desde Google Sheets.
 
 
 let currentFilter =
@@ -2285,16 +2274,9 @@ async function loadProducts(){
 
 
     const response =
-      await fetch(
-
-        CSV_URL +
-        "&t=" +
-        Date.now(),
-
-        {
-          cache:"no-store"
-        }
-
+      await fetchWithTimeout(
+        CSV_URL + "&t=" + Date.now(),
+        12000
       );
 
 
@@ -2460,13 +2442,6 @@ async function loadProducts(){
 
       );
 
-
-    // Conservar los productos del CSV y sumar JBL/DJI sin duplicar modelos.
-    const key = p => [p.product,p.model,p.capacity,p.color,p.detail].map(v=>clean(v).toUpperCase()).join("|");
-    const existing = new Set(products.map(key));
-    for (const item of EXTRA_PRODUCTS) {
-      if (!existing.has(key(item))) products.push(item);
-    }
 
     document
     .getElementById(
@@ -3485,6 +3460,11 @@ let usedCategory="TODOS";
 let usedLoaded=false;
 let usedLoadingPromise=null;
 function usedNorm(v){return String(v??"").trim().toUpperCase();}
+// Interpretación consistente del stock en tarjetas, tablas y galería.
+function usedAvailable(stock){
+  const value=usedNorm(stock).normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g," ");
+  return value.includes("EN STOCK") || value.includes("ULTIMA UNIDAD");
+}
 function usedHtml(v){return safe(String(v??""));}
 function usedImage(url){
   const value=String(url||"").trim();
@@ -3502,7 +3482,7 @@ function renderUsed(){
   const stockClass=p=>{const v=usedNorm(p.stock);return v.includes('ÚLTIMA')||v.includes('ULTIMA')?'stock-last':v.includes('PEDIDO')?'stock-order':v.includes('SIN STOCK')||v.includes('AGOTADO')?'stock-out':v.includes('EN STOCK')?'stock-in':'stock-other';};
   grid.innerHTML=list.map(p=>{
     const label=[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ');
-    const available=usedNorm(p.stock)==='EN STOCK';
+    const available=usedAvailable(p.stock);
     const amount=usdNumber(p.price);
     const hasPrice=Number.isFinite(amount)&&amount>0;
     const price=available&&hasPrice?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(amount):'CONSULTAR';
@@ -3543,16 +3523,16 @@ function appendUsedToCatalog(newCount){
   const wa=p=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto USADO: '+[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ')+' (Código '+p.id+').');
   const share=p=>'https://wa.me/?text='+encodeURIComponent('ImportArg\n\n'+[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ')+'\nUSADO'+(p.battery?' · Batería '+p.battery+'%':'')+(p.condition?' · '+p.condition:'')+'\nPrecio: '+(Number.isFinite(usdNumber(p.price))?'US$ '+usdNumber(p.price):'CONSULTAR')+'\n'+p.stock+'\n\nVer catálogo: '+SITE_URL);
   const shareAction=p=>'<a class="whatsapp-share" href="'+share(p)+'" target="_blank" rel="noopener noreferrer" aria-label="Compartir producto usado" title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5l7 7-7 7v-4.2C7.8 14.8 4.6 16.8 2 20c.7-7.2 4.5-11 12-11V5Z"></path></svg></a>';
-  const buyLabel=p=>p.stock==='EN STOCK'&&Number.isFinite(usdNumber(p.price))?'COMPRAR':'CONSULTAR';
+  const buyLabel=p=>usedAvailable(p.stock)&&Number.isFinite(usdNumber(p.price))?'COMPRAR':'CONSULTAR';
   const usedStockClass=p=>{const v=String(p.stock||'').toUpperCase();return v.includes('ÚLTIMA')||v.includes('ULTIMA')?'stock-last':v.includes('PEDIDO')?'stock-order':v.includes('SIN STOCK')||v.includes('AGOTADO')?'stock-out':v.includes('EN STOCK')?'stock-in':'stock-other';};
   const gallery=p=>(p.photos.length+(p.video?1:0))?'<button type="button" class="catalog-used-gallery" data-used-gallery="'+usedHtml(p.id)+'" title="Ver fotos y video">📷 Ver fotos</button>':'';
   desktop.insertAdjacentHTML('beforeend',matches.map(p=>{
-    const n=usdNumber(p.price),available=p.stock==='EN STOCK';
+    const n=usdNumber(p.price),available=usedAvailable(p.stock);
     const detail=[p.battery?'Batería '+p.battery+'%':'',p.condition].filter(Boolean).join(' · ');
     return '<tr class="catalog-used-row"><td><strong>'+usedHtml(p.category)+'</strong></td><td>'+usedHtml(p.model)+'</td><td>'+usedHtml(p.capacity)+'</td><td>'+usedHtml(p.color)+'</td><td><span class="catalog-condition catalog-condition-used">USADO</span>'+(detail?' <span class="catalog-condition-detail">'+usedHtml(detail)+'</span>':'')+'</td><td class="desktop-price">'+(available?fmt(n):'SIN STOCK')+(available&&Number.isFinite(n)?arsEquivalent(n):'')+'</td><td><span class="stock '+usedStockClass(p)+'">'+usedHtml(p.stock)+'</span></td><td><div class="desktop-actions"><a class="desktop-buy" href="'+wa(p)+'" target="_blank" rel="noopener">'+buyLabel(p)+'</a>'+shareAction(p)+gallery(p)+'</div></td></tr>';
   }).join(''));
   mobile.insertAdjacentHTML('beforeend',matches.map(p=>{
-    const n=usdNumber(p.price),available=p.stock==='EN STOCK';
+    const n=usdNumber(p.price),available=usedAvailable(p.stock);
     return '<div class="product-row catalog-used-row"><div class="product-top"><span class="product-main">'+usedHtml(p.category+' '+p.model)+'</span><span class="catalog-used-tag">USADO</span><span class="product-meta">'+usedHtml([p.capacity,p.color].filter(Boolean).join(' · '))+'</span></div><div class="mobile-price">'+(available?fmt(n):'SIN STOCK')+(available&&Number.isFinite(n)?arsEquivalent(n):'')+'</div><div class="product-bottom"><span class="product-meta">'+usedHtml([p.battery?'Batería '+p.battery+'%':'',p.condition].filter(Boolean).join(' · '))+'</span><span class="stock '+usedStockClass(p)+'">'+usedHtml(p.stock)+'</span></div><div class="mobile-actions"><a class="buy-button" href="'+wa(p)+'" target="_blank" rel="noopener">'+buyLabel(p)+'</a>'+shareAction(p)+gallery(p)+'</div></div>';
   }).join(''));
 }
@@ -3603,7 +3583,7 @@ function showUsedGallery(){
 function renderUsedGalleryInfo(){
   const p=usedGalleryProduct, panel=document.getElementById('usedGalleryInfo');
   if(!p||!panel)return;
-  const n=usdNumber(p.price), available=p.stock==='EN STOCK';
+  const n=usdNumber(p.price), available=usedAvailable(p.stock);
   const label=[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ');
   const price=available&&Number.isFinite(n)?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(n):'CONSULTAR';
   const status=String(p.stock||'CONSULTAR').toUpperCase();
