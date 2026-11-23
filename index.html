@@ -4410,10 +4410,11 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
 .home-screen .home-hero .hero-scroll-block{position:relative!important;z-index:21!important;}
 </style>
 <style id="importarg-v6-fix-scroll-menu-20261123">
-/* El título, las opciones Nuevos/Usados y el buscador se desplazan con la página. */
+/* El título, Nuevos/Usados y el buscador acompañan el scroll SOLO dentro de la portada.
+   Al llegar al final del hero, el bloque se desplaza con la página. */
 .home-screen .home-hero .hero-scroll-block{
-  position:relative!important;
-  top:auto!important;
+  position:sticky!important;
+  top:clamp(68px, 11vh, 108px)!important;
   bottom:auto!important;
   transform:none!important;
 }
