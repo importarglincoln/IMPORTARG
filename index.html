@@ -2901,7 +2901,17 @@ function render(){
 
 
   const emptyState = document.getElementById("catalogEmptyMessage");
-  const showEmpty = catalogLoadState === "ready" && (list.length === 0 || (currentFilter === "RAYBAN META" && !list.some(p => getStockInfo(p.status).available)));
+  // Los usados se cargan desde otra hoja: no declarar vacío antes de contarlos.
+  const usedSearch = (document.getElementById("search")?.value || "").trim().toUpperCase();
+  const usedCategoryMap = {'IPHONE':'IPHONE','SAMSUNG':'SAMSUNG','MACBOOK':'MACBOOKS','MACBOOKS':'MACBOOKS','MAC':'MACBOOKS','IPAD':'IPAD','IPADS':'IPAD','XIAOMI':'XIAOMI','APPLE WATCH':'APPLE WATCH','AIRPODS':'AIRPODS'};
+  const matchingUsedCount = conditionFilter === "NUEVOS" ? 0 : usedProducts.filter(p => {
+    const category = usedCategoryMap[usedNorm(p.category)] || usedNorm(p.category);
+    if (currentFilter === 'OFERTAS' || currentFilter === 'RAYBAN META') return false;
+    if (currentFilter !== 'TODOS' && category !== currentFilter) return false;
+    return [p.category,p.model,p.capacity,p.color,p.battery,p.condition,p.price,'USADO'].join(' ').toUpperCase().includes(usedSearch);
+  }).length;
+  const hasCatalogItems = list.length + matchingUsedCount > 0;
+  const showEmpty = catalogLoadState === "ready" && (usedLoaded || conditionFilter === "NUEVOS") && (!hasCatalogItems || (currentFilter === "RAYBAN META" && !list.some(p => getStockInfo(p.status).available)));
   if (emptyState) {
     emptyState.hidden = !showEmpty;
     if (showEmpty) {
