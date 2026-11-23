@@ -4139,3 +4139,48 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
 }
 @media(max-width:370px){#usedGalleryModal .used-info-specs{grid-template-columns:1fr 1fr;gap:7px}#usedGalleryModal .premium-spec{padding:10px 8px}}
 </style>
+
+
+<style id="importarg-v6-retoques-premium-buscador">
+/* Ajustes estéticos puntuales: no alteran scroll, JS, datos ni galerías. */
+.home-hero .product-path.used{
+  background:#252932!important;
+  color:#fff!important;
+  border-color:#e8bd22!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.18)!important;
+}
+.home-hero .product-path.new{
+  background:#fff!important;
+  color:#171717!important;
+  border-color:#e8bd22!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.12)!important;
+}
+.home-hero .product-path-arrow,
+.home-hero .hero-search button{background:#ffda22!important;color:#151515!important}
+.home-hero .hero-search{
+  width:min(675px,calc(100% - 32px))!important;
+  max-width:675px!important;
+  height:50px!important;
+  margin:16px auto 0!important;
+  border:1px solid rgba(255,255,255,.75)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.16)!important;
+}
+.home-hero .hero-search input{font-size:14px!important}
+.home-hero .hero-search button{width:64px!important}
+/* Contraste y profundidad discretos, sin cambiar imágenes ni estructura. */
+.home-screen .category-card{
+  border:1px solid #e9e9ec!important;
+  box-shadow:0 8px 22px rgba(22,26,32,.085)!important;
+}
+@media(max-width:760px){
+  .home-hero .hero-search{
+    width:100%!important;
+    max-width:480px!important;
+    height:47px!important;
+    margin:16px auto 0!important;
+  }
+  .home-hero .hero-search button{width:57px!important}
+  .home-hero .product-path.used{box-shadow:0 5px 15px rgba(0,0,0,.16)!important}
+  .home-hero .product-path.new{box-shadow:0 5px 15px rgba(0,0,0,.12)!important}
+}
+</style>
