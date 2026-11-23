@@ -3081,8 +3081,7 @@ function renderMobile(list){
     >
 
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M22 2L11 13"></path>
-        <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+        <path d="M14 5l7 7-7 7v-4.2C7.8 14.8 4.6 16.8 2 20c.7-7.2 4.5-11 12-11V5Z"></path>
       </svg>
 
     </a>
@@ -3231,8 +3230,7 @@ function renderDesktop(list){
       >
 
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M22 2L11 13"></path>
-          <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+          <path d="M14 5l7 7-7 7v-4.2C7.8 14.8 4.6 16.8 2 20c.7-7.2 4.5-11 12-11V5Z"></path>
         </svg>
 
       </a>
@@ -3503,7 +3501,7 @@ function appendUsedToCatalog(newCount){
   const fmt=n=>Number.isFinite(n)?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(n):'CONSULTAR';
   const wa=p=>'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto USADO: '+[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ')+' (Código '+p.id+').');
   const share=p=>'https://wa.me/?text='+encodeURIComponent('ImportArg\n\n'+[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ')+'\nUSADO'+(p.battery?' · Batería '+p.battery+'%':'')+(p.condition?' · '+p.condition:'')+'\nPrecio: '+(Number.isFinite(usdNumber(p.price))?'US$ '+usdNumber(p.price):'CONSULTAR')+'\n'+p.stock+'\n\nVer catálogo: '+SITE_URL);
-  const shareAction=p=>'<a class="whatsapp-share" href="'+share(p)+'" target="_blank" rel="noopener noreferrer" aria-label="Compartir producto usado" title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg></a>';
+  const shareAction=p=>'<a class="whatsapp-share" href="'+share(p)+'" target="_blank" rel="noopener noreferrer" aria-label="Compartir producto usado" title="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5l7 7-7 7v-4.2C7.8 14.8 4.6 16.8 2 20c.7-7.2 4.5-11 12-11V5Z"></path></svg></a>';
   const buyLabel=p=>p.stock==='EN STOCK'&&Number.isFinite(usdNumber(p.price))?'COMPRAR':'CONSULTAR';
   const usedStockClass=p=>{const v=String(p.stock||'').toUpperCase();return v.includes('ÚLTIMA')||v.includes('ULTIMA')?'stock-last':v.includes('PEDIDO')?'stock-order':v.includes('SIN STOCK')||v.includes('AGOTADO')?'stock-out':v.includes('EN STOCK')?'stock-in':'stock-other';};
   const gallery=p=>(p.photos.length+(p.video?1:0))?'<button type="button" class="catalog-used-gallery" data-used-gallery="'+usedHtml(p.id)+'" title="Ver fotos y video">📷 Ver fotos</button>':'';
