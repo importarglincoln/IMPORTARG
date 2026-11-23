@@ -1345,7 +1345,8 @@ tbody tr:nth-child(even){background:#f7f7f8}
 <!-- Prueba tipográfica Inter: solo fuente y jerarquía, sin cambiar diseño ni lógica. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style id="importarg-inter-typography-test">
   html,body,button,input,select,textarea{font-family:"Inter",Arial,sans-serif!important;}
   .category-copy h2,.category-copy p{font-family:"Inter",Arial,sans-serif!important;}
