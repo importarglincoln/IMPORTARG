@@ -3800,7 +3800,7 @@ setInterval(loadBlueRate,300000);
     box.style.top="calc(100% + 6px)";
     box.style.width="100%";
     box.style.bottom="auto";
-    box.style.maxHeight=window.matchMedia("(max-width:760px)").matches?"152px":"330px";
+    box.style.maxHeight=window.matchMedia("(max-width:760px)").matches?"144px":"156px";
     box.style.overflowY="auto";
     box.style.visibility="visible";
   }
@@ -3830,7 +3830,7 @@ setInterval(loadBlueRate,300000);
       const key=norm(labelFor(p));
       if(!key||seen.has(key)) return false;
       seen.add(key); return true;
-    }).slice(0,window.matchMedia("(max-width:760px)").matches?4:8);
+    }).slice(0,60);
 
     if(!matches.length){close();return;}
     box.innerHTML=matches.map((p,i)=>`
@@ -4375,6 +4375,31 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
   .hero-search > .hero-suggestions,
   .hero-search > .hero-suggestions.open{max-height:152px!important;}
   .hero-search > .hero-suggestions .hero-suggestion{min-height:36px!important;}
+}
+</style>
+
+<style id="importarg-v6-search-final-3-scroll-no-ios-zoom">
+/* La portada se apila por delante de las categorías, sin moverlas ni modificar su diseño. */
+.home-screen .home-hero{z-index:20!important;overflow:visible!important;}
+.home-screen .home-hero .hero-scroll-block{z-index:21!important;overflow:visible!important;}
+.home-screen .category-grid{z-index:4!important;}
+/* Tres resultados a la vista; el resto se recorre dentro de la lista. */
+.home-hero .hero-search > .hero-suggestions{
+  position:absolute!important;top:calc(100% + 6px)!important;left:0!important;right:0!important;bottom:auto!important;
+  width:100%!important;height:auto!important;max-height:156px!important;
+  overflow-x:hidden!important;overflow-y:scroll!important;
+  scrollbar-width:thin!important;scrollbar-color:#888 #f1f1f1!important;
+  -webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important;
+  z-index:99999!important;background:#fff!important;
+}
+.home-hero .hero-search > .hero-suggestions::-webkit-scrollbar{width:8px!important;display:block!important;}
+.home-hero .hero-search > .hero-suggestions::-webkit-scrollbar-track{background:#f1f1f1!important;}
+.home-hero .hero-search > .hero-suggestions::-webkit-scrollbar-thumb{background:#888!important;border-radius:8px!important;}
+@media(max-width:760px){
+  /* Safari iOS hace zoom automático si el input tiene menos de 16px. */
+  .home-hero .hero-search input#heroSearch{font-size:16px!important;-webkit-text-size-adjust:100%!important;}
+  .home-hero .hero-search > .hero-suggestions{max-height:144px!important;}
+  .home-hero .hero-search > .hero-suggestions .hero-suggestion{min-height:46px!important;padding:9px 12px!important;}
 }
 </style>
 </body>
