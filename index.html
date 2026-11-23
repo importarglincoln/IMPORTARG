@@ -2534,7 +2534,9 @@ function getCategory(p){
   if(text.includes("MACBOOK") || text.includes("MAC BOOK")) return "MACBOOK";
   if(text.includes("IPAD")) return "IPAD";
   if(text.includes("AIRPOD") || text.includes("AIR POD")) return "AIRPODS";
+  // Relojes: Apple Watch queda separado de los smartwatch de otras marcas.
   if(text.includes("APPLE WATCH") || text.includes("APPLEWATCH") || (text.includes("WATCH") && text.includes("APPLE"))) return "APPLE WATCH";
+  if(text.includes("SMARTWATCH") || text.includes("SMART WATCH") || text.includes("GALAXY WATCH") || text.includes("GALAXY FIT") || text.includes("GARMIN") || text.includes("HUAWEI WATCH") || text.includes("WATCH FIT") || text.includes("WATCH GT") || text.includes("REDMI WATCH") || text.includes("XIAOMI WATCH") || text.includes("POCO WATCH") || text.includes("AMAZFIT") || text.includes("G-SHOCK SMART") || text.includes("RELOJ INTELIGENTE")) return "SMARTWATCH";
 
   // Ray-Ban Meta antes de categorías genéricas para evitar clasificaciones incorrectas.
   if(
@@ -2581,6 +2583,7 @@ function buildFilters(){
     "IPAD",
     "AIRPODS",
     "APPLE WATCH",
+    "SMARTWATCH",
     "ACCESORIOS",
     "JBL",
     "DJI"
