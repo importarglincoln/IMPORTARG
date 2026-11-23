@@ -3801,6 +3801,7 @@ setInterval(loadBlueRate,300000);
   function choose(value){
     input.value=value;
     close();
+    input.blur();
     searchFromHero();
   }
   function updateSuggestions(){
@@ -3816,7 +3817,7 @@ setInterval(loadBlueRate,300000);
       const key=norm(labelFor(p));
       if(!key||seen.has(key)) return false;
       seen.add(key); return true;
-    }).slice(0,8);
+    }).slice(0,window.matchMedia("(max-width:760px)").matches?4:8);
 
     if(!matches.length){close();return;}
     box.innerHTML=matches.map((p,i)=>`
@@ -4320,6 +4321,19 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
   .home-hero .hero-search button{width:57px!important}
   .home-hero .product-path.used{box-shadow:0 5px 15px rgba(0,0,0,.16)!important}
   .home-hero .product-path.new{box-shadow:0 5px 15px rgba(0,0,0,.12)!important}
+}
+</style>
+
+<style id="importarg-v6-ajustes-portada-buscador-20261123">
+/* Desktop: acerca las categorías al buscador sin alterar las tarjetas. */
+@media (min-width:761px){
+  .home-hero{min-height:605px!important;padding-bottom:85px!important;}
+  .home-screen .category-grid{margin-top:-55px!important;}
+}
+/* iPhone y Android: sugerencias compactas dentro del espacio visible. */
+@media (max-width:760px){
+  body > .hero-suggestions{max-height:min(150px, 25dvh)!important;overscroll-behavior:contain!important;}
+  body > .hero-suggestions .hero-suggestion{min-height:34px!important;padding:6px 10px!important;}
 }
 </style>
 </body>
