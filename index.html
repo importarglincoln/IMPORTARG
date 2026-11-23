@@ -1239,6 +1239,47 @@ tbody tr:nth-child(even){background:#f7f7f8}
 @media(max-width:600px){#usedScreen .used-grid{gap:10px}#usedScreen .used-photo{height:165px}#usedScreen .used-body{padding:12px}#usedScreen .used-card-kicker{gap:5px;font-size:8px;letter-spacing:0}#usedScreen .used-body h2{font-size:16px}#usedScreen .used-card-specs{gap:5px}#usedScreen .used-card-spec{padding:8px 6px}#usedScreen .used-card-spec span{font-size:8px}#usedScreen .used-card-spec strong{font-size:11px}#usedScreen .used-price{font-size:21px}#usedScreen .used-card-actions{grid-template-columns:1fr}#usedScreen .used-card-actions .used-gallery-btn{grid-column:1}#usedScreen .used-card-actions .used-wa,#usedScreen .used-card-actions .used-card-share{min-height:37px}}
 @media(max-width:360px){#usedScreen .used-grid{grid-template-columns:1fr}#usedScreen .used-photo{height:230px}}
 </style>
+
+<style id="importarg-used-final-polish-v4">
+/* Ajustes visuales exclusivos de las tarjetas de Productos Usados. */
+#usedScreen .used-grid{align-items:stretch;gap:18px}
+#usedScreen .used-card{border-color:#e9e9eb;border-radius:19px;box-shadow:0 5px 22px rgba(15,15,15,.045);transition:transform .18s ease,box-shadow .18s ease}
+@media(hover:hover){#usedScreen .used-card:hover{transform:translateY(-3px);box-shadow:0 13px 30px rgba(15,15,15,.09)}}
+#usedScreen .used-photo{position:relative;height:240px;background:#f5f5f6;overflow:hidden;isolation:isolate}
+#usedScreen .used-photo:has(img){background:linear-gradient(140deg,#f6f6f7,#eaeaec)}
+#usedScreen .used-photo img{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;object-position:center;display:block}
+/* Marcador discreto cuando no se dispone de una foto real. */
+#usedScreen .used-photo:not(:has(img)){font-size:0;color:transparent;letter-spacing:normal;flex-direction:column;gap:10px}
+#usedScreen .used-photo:not(:has(img))::before{content:"";display:block;width:45px;height:45px;opacity:.4;background:center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='none' stroke='%238b8b92' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='6' y='10' width='36' height='28' rx='5'/%3E%3Ccircle cx='17' cy='20' r='3'/%3E%3Cpath d='m9 33 10-9 7 6 6-5 7 8'/%3E%3C/svg%3E")}
+#usedScreen .used-photo:not(:has(img))::after{content:"IMAGEN NO DISPONIBLE";font-size:10px;font-weight:750;letter-spacing:.10em;color:#99999f}
+#usedScreen .used-body{padding:19px 19px 18px;gap:0}
+#usedScreen .used-card-kicker{margin-bottom:11px}
+#usedScreen .used-body h2{font-size:20px;letter-spacing:-.4px;margin-bottom:5px}
+#usedScreen .used-variant{color:#777;margin-bottom:12px}
+#usedScreen .used-card-specs{margin-bottom:12px}
+#usedScreen .used-card-spec{background:#fbfbfc;border-color:#ededee;padding:10px}
+#usedScreen .used-card-spec span{color:#89898e}
+#usedScreen .used-card-bottom{margin-top:8px;padding-top:13px;border-color:#efeff0}
+#usedScreen .used-price{font-size:25px}
+#usedScreen .used-ars{color:#888}
+#usedScreen .used-card-actions .used-gallery-btn{background:#f5f5f6;border-color:#e8e8ea}
+#usedScreen .used-card-actions .used-wa,#usedScreen .used-card-actions .used-card-share{border-radius:11px}
+@media(max-width:600px){
+ #usedScreen .used-grid{gap:10px}
+ #usedScreen .used-photo{height:165px}
+ #usedScreen .used-body{padding:12px 11px 13px}
+ #usedScreen .used-body h2{font-size:16px}
+ #usedScreen .used-card-kicker{margin-bottom:9px}
+ #usedScreen .used-variant{margin-bottom:10px}
+ #usedScreen .used-card-specs{margin-bottom:10px}
+ #usedScreen .used-card-spec{padding:8px 6px}
+ #usedScreen .used-card-bottom{margin-top:6px;padding-top:10px}
+ #usedScreen .used-price{font-size:21px}
+ #usedScreen .used-photo:not(:has(img))::before{width:35px;height:35px}
+ #usedScreen .used-photo:not(:has(img))::after{font-size:8px;letter-spacing:.05em}
+}
+</style>
+
 </head>
 
 
