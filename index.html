@@ -1324,6 +1324,37 @@ tbody tr:nth-child(even){background:#f7f7f8}
   #usedScreen .used-body h2{font-size:14px!important}
 }
 </style>
+<style id="importarg-used-mobile-image-stability-v6">
+/* Evita el salto de la fotografía al cargar: la imagen no participa
+   del cálculo de altura de la fila y el contenedor conserva su ancho. */
+@media(max-width:600px){
+  #usedScreen .used-card{transition:none!important;}
+  #usedScreen .used-photo{
+    position:relative!important;
+    align-self:stretch!important;
+    width:112px!important;
+    min-width:112px!important;
+    min-height:132px!important;
+    height:auto!important;
+    overflow:hidden!important;
+    contain:layout paint;
+  }
+  #usedScreen .used-photo img{
+    position:absolute!important;
+    inset:7px!important;
+    width:calc(100% - 14px)!important;
+    height:calc(100% - 14px)!important;
+    max-width:none!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    transform:none!important;
+    transition:none!important;
+  }
+}
+@media(max-width:360px){
+  #usedScreen .used-photo{width:92px!important;min-width:92px!important;min-height:125px!important;}
+}
+</style>
 
 </head>
 
