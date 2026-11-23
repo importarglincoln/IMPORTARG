@@ -4402,6 +4402,13 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
   .home-hero .hero-search > .hero-suggestions .hero-suggestion{min-height:46px!important;padding:9px 12px!important;}
 }
 </style>
+<style id="importarg-v6-correccion-tarjetas-portada">
+/* La foto de portada queda detrás de las tarjetas, sin recortarlas.
+   El bloque del buscador conserva prioridad para mostrar las sugerencias. */
+.home-screen .home-hero{z-index:auto!important;}
+.home-screen .category-grid{position:relative!important;z-index:10!important;}
+.home-screen .home-hero .hero-scroll-block{position:relative!important;z-index:21!important;}
+</style>
 </body>
 
 </html>
