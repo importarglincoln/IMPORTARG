@@ -3789,25 +3789,20 @@ setInterval(loadBlueRate,300000);
   const box=document.getElementById("heroSuggestions");
   if(!input||!box) return;
 
-  document.body.appendChild(box);
+  // Mantener sugerencias ancladas al buscador, no al viewport de Safari.
 
   function place(){
-    const r=input.closest(".hero-search").getBoundingClientRect();
-    const vv=window.visualViewport;
-    const mobile=window.matchMedia("(max-width:760px)").matches;
-    // El contenedor se mueve a body: sus coordenadas deben ser de viewport fijo,
-    // no absolutas del documento (en iOS se desalinean al abrir el teclado).
-    const top=r.bottom+6;
-    const visibleBottom=vv ? vv.offsetTop+vv.height : window.innerHeight;
-    const available=Math.max(0,visibleBottom-top-10);
-    box.style.position="fixed";
-    box.style.left=Math.max(8,r.left)+"px";
-    box.style.top=top+"px";
-    box.style.width=Math.min(r.width,window.innerWidth-16)+"px";
-    box.style.maxHeight=(mobile?Math.min(270,available):Math.min(330,available))+"px";
+    // Coordenadas locales al buscador: el teclado y el desplazamiento de Safari
+    // no pueden colocar las sugerencias encima del campo de escritura.
+    box.style.position="absolute";
+    box.style.left="0";
+    box.style.right="0";
+    box.style.top="calc(100% + 6px)";
+    box.style.width="100%";
+    box.style.bottom="auto";
+    box.style.maxHeight=window.matchMedia("(max-width:760px)").matches?"152px":"330px";
     box.style.overflowY="auto";
-    // No desplegar la lista encima del teclado o del propio campo.
-    box.style.visibility=available>=45?"visible":"hidden";
+    box.style.visibility="visible";
   }
 
   const norm=v=>String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
@@ -4361,6 +4356,25 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
 @media (max-width:760px){
   body > .hero-suggestions{max-height:min(150px, 25dvh)!important;overscroll-behavior:contain!important;}
   body > .hero-suggestions .hero-suggestion{min-height:34px!important;padding:6px 10px!important;}
+}
+</style>
+
+<style id="importarg-iphone-search-anchor-final">
+/* Sugerencias debajo de la barra, también con el teclado de iOS abierto. */
+.hero-search{position:relative!important;isolation:isolate;z-index:50!important;overflow:visible!important}
+.hero-search > .hero-suggestions,
+.hero-search > .hero-suggestions.open{
+  position:absolute!important;top:calc(100% + 6px)!important;
+  left:0!important;right:0!important;bottom:auto!important;
+  width:100%!important;max-height:330px!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;
+  z-index:99999!important;
+}
+@media(max-width:760px){
+  .hero-search > .hero-suggestions,
+  .hero-search > .hero-suggestions.open{max-height:152px!important;}
+  .hero-search > .hero-suggestions .hero-suggestion{min-height:36px!important;}
 }
 </style>
 </body>
