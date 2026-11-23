@@ -1280,6 +1280,51 @@ tbody tr:nth-child(even){background:#f7f7f8}
 }
 </style>
 
+
+<style id="importarg-used-mobile-horizontal-v5">
+/* Tarjetas horizontales compactas exclusivamente en Productos Usados, solo móvil. */
+@media(max-width:600px){
+  #usedScreen .used-grid{grid-template-columns:minmax(0,1fr)!important;gap:11px!important}
+  #usedScreen .used-card{display:grid!important;grid-template-columns:112px minmax(0,1fr);align-items:stretch;border-radius:16px;overflow:hidden;min-height:0;transform:none!important}
+  #usedScreen .used-photo{grid-column:1;grid-row:1;height:auto!important;min-height:145px;width:112px;background:#f4f4f6}
+  #usedScreen .used-photo img{height:100%;width:100%;object-fit:contain;object-position:center}
+  #usedScreen .used-photo:not(:has(img)){gap:5px;padding:7px}
+  #usedScreen .used-photo:not(:has(img))::before{width:26px;height:26px}
+  #usedScreen .used-photo:not(:has(img))::after{font-size:7px;letter-spacing:0;text-align:center;line-height:1.3}
+  #usedScreen .used-body{grid-column:2;grid-row:1;min-width:0;padding:11px 12px 10px!important;display:flex;flex-direction:column;gap:0}
+  #usedScreen .used-card-kicker{margin-bottom:5px!important;gap:5px;font-size:8px}
+  #usedScreen .used-card-kicker .catalog-condition-used{padding:3px 6px!important;font-size:8px!important}
+  #usedScreen .used-card-kicker>span:last-child{display:none}
+  #usedScreen .used-body h2{font-size:16px!important;line-height:1.15;margin:0 0 3px!important;letter-spacing:-.25px}
+  #usedScreen .used-variant{font-size:11px;margin:0 0 5px!important}
+  #usedScreen .used-card-specs{display:block;margin:0 0 4px!important}
+  #usedScreen .used-card-spec{display:inline;border:0;background:transparent;padding:0!important;border-radius:0;font-size:10px;line-height:1.4}
+  #usedScreen .used-card-spec+ .used-card-spec::before{content:' · ';color:#888}
+  #usedScreen .used-card-spec span{display:none}
+  #usedScreen .used-card-spec strong{font-size:10px;font-weight:650;color:#666;overflow-wrap:normal}
+  #usedScreen .used-card-spec:first-child strong::before{content:'Batería ';font-weight:400}
+  #usedScreen .used-card-spec:nth-child(2) strong::before{content:'Estado ';font-weight:400}
+  #usedScreen .used-notes{font-size:10px;line-height:1.3;margin-bottom:4px}
+  #usedScreen .used-card-bottom{margin-top:auto!important;padding-top:5px!important;border:0;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+  #usedScreen .used-price{font-size:20px!important;line-height:1.15;margin:0!important;white-space:nowrap}
+  #usedScreen .used-ars{display:none}
+  #usedScreen .used-card-bottom>.stock{margin:0!important;padding:3px 6px;font-size:8px}
+  #usedScreen .used-card-actions{flex:0 0 100%;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px!important;gap:5px!important;margin-top:5px}
+  #usedScreen .used-card-actions .used-wa{grid-column:1;grid-row:1;min-height:34px!important;padding:6px 3px!important;font-size:9px!important}
+  #usedScreen .used-card-actions .used-card-share{grid-column:2;grid-row:1;min-height:34px!important;padding:6px 3px!important;font-size:9px!important}
+  #usedScreen .used-card-actions .used-gallery-btn{grid-column:3!important;grid-row:1;width:36px;min-height:34px!important;padding:0!important;font-size:0!important;position:relative}
+  #usedScreen .used-card-actions .used-gallery-btn::after{content:'▣';font-size:19px;line-height:1;color:#222;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  #usedScreen .used-card-actions:not(:has(.used-gallery-btn)){grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+}
+@media(max-width:360px){
+  #usedScreen .used-grid{grid-template-columns:minmax(0,1fr)!important}
+  #usedScreen .used-card{grid-template-columns:92px minmax(0,1fr)}
+  #usedScreen .used-photo{width:92px;height:auto!important;min-height:135px}
+  #usedScreen .used-body{padding:9px!important}
+  #usedScreen .used-body h2{font-size:14px!important}
+}
+</style>
+
 </head>
 
 
@@ -3298,7 +3343,7 @@ function renderUsed(){
     const wa='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto usado: '+label+' (Código '+p.id+').');
     const share='https://wa.me/?text='+encodeURIComponent('ImportArg\n'+label+'\nUSADO'+(p.battery?' · Batería '+p.battery+'%':'')+(p.condition?' · '+p.condition:'')+'\nPrecio: '+price+'\n'+p.stock+'\n'+SITE_URL);
     const mediaCount=p.photos.length+(p.video?1:0);
-    const gallery=mediaCount?'<button type="button" class="used-gallery-btn" data-used-gallery="'+usedHtml(p.id)+'">VER FOTOS'+(p.video?' Y VIDEO':'')+' ('+mediaCount+')</button>':'';
+    const gallery=mediaCount?'<button type="button" class="used-gallery-btn" title="Ver fotos y videos" aria-label="Ver fotos y videos" data-used-gallery="'+usedHtml(p.id)+'">VER FOTOS'+(p.video?' Y VIDEO':'')+' ('+mediaCount+')</button>':'';
     return '<article class="used-card">'+usedImage(p.photos[0])+'<div class="used-body">'+
       '<div class="used-card-kicker"><span class="catalog-condition catalog-condition-used">USADO</span><span>EQUIPO REVISADO</span></div>'+
       '<h2>'+usedHtml([p.category,p.model].filter(Boolean).join(' '))+'</h2>'+
