@@ -4168,6 +4168,50 @@ body > .hero-suggestions .hero-suggestion-title{display:block!important;font-siz
   }
 }
 </style>
+
+<script id="importarg-v6-navigation-persistence">
+/* Conserva la sección al recargar, sin modificar el catálogo ni los datos. */
+(function(){
+  const original={showHome,openCategory,openUsed,openCatalog,openComo,searchFromHero};
+  let restoring=false;
+  function save(route){
+    if(restoring)return;
+    const hash='#'+route;
+    if(location.hash!==hash)history.pushState(null,'',hash);
+  }
+  showHome=function(){original.showHome();save('inicio');};
+  openCategory=function(category,label){
+    if(category==='USADOS'){openUsed();return;}
+    original.openCategory(category,label);
+    save('categoria='+encodeURIComponent(category));
+  };
+  openUsed=function(){original.openUsed();save('usados');};
+  openCatalog=function(){original.openCatalog();save('catalogo');};
+  openComo=function(){original.openComo();save('como-comprar');};
+  searchFromHero=function(){original.searchFromHero();save('catalogo');};
+  function restore(){
+    const route=decodeURIComponent(location.hash.slice(1));
+    restoring=true;
+    try{
+      if(route==='usados')original.openUsed();
+      else if(route==='catalogo')original.openCatalog();
+      else if(route==='como-comprar')original.openComo();
+      else if(route.startsWith('categoria=')){
+        const category=route.slice('categoria='.length);
+        const card=[...document.querySelectorAll('#categoryGrid .category-card')].find(el=>el.dataset.category===category);
+        if(card)original.openCategory(category,card.querySelector('h2')?.textContent||category);
+        else original.openCategory(category,category);
+      }else if(route==='ofertas'){
+        document.getElementById('homeOffersButton')?.click();
+      }else original.showHome();
+    }finally{restoring=false;}
+  }
+  document.getElementById('homeOffersButton')?.addEventListener('click',()=>save('ofertas'));
+  window.addEventListener('popstate',restore);
+  window.addEventListener('hashchange',restore);
+  if(location.hash)restore();
+})();
+</script>
 </body>
 
 </html>
