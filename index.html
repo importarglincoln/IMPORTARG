@@ -1209,6 +1209,36 @@ tbody tr:nth-child(even){background:#f7f7f8}
 }
 @media(max-width:390px){.home-hero .product-path-icon{display:none}.home-hero .product-path-copy strong{font-size:10px}}
 </style>
+<style id="importarg-used-cards-minimal-v4">
+/* Solo sección independiente de usados; catálogo y ficha premium intactos */
+#usedScreen .used-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+#usedScreen .used-card{display:flex;flex-direction:column;border:1px solid #e5e5e7;border-radius:20px;box-shadow:0 7px 24px rgba(0,0,0,.045);transition:transform .18s,box-shadow .18s}
+#usedScreen .used-card:hover{transform:translateY(-3px);box-shadow:0 16px 35px rgba(0,0,0,.09)}
+#usedScreen .used-photo{height:255px;background:#f4f4f6;overflow:hidden;font-size:11px;letter-spacing:.08em;color:#8a8a90}
+#usedScreen .used-photo img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
+#usedScreen .used-body{display:flex;flex:1;flex-direction:column;padding:20px 20px 19px}
+#usedScreen .used-card-kicker{display:flex;align-items:center;gap:10px;margin-bottom:13px;font-size:9px;font-weight:850;letter-spacing:.11em;color:#929292}
+#usedScreen .used-card-kicker .catalog-condition-used{display:inline-flex!important;padding:5px 9px!important;border-radius:6px!important;background:#ebebeb!important;color:#333!important;border:1px solid #dedede!important;font-size:9px!important;letter-spacing:.02em!important}
+#usedScreen .used-body h2{font-size:21px;line-height:1.18;letter-spacing:-.45px;margin:0 0 5px;font-weight:950}
+#usedScreen .used-variant{font-size:12px;color:#666;margin:0 0 15px}
+#usedScreen .used-card-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:14px}
+#usedScreen .used-card-spec{min-width:0;border:1px solid #e9e9eb;background:#fafafa;border-radius:11px;padding:11px 10px;display:flex;flex-direction:column;gap:6px}
+#usedScreen .used-card-spec span{font-size:9px;font-weight:800;letter-spacing:.06em;color:#888}
+#usedScreen .used-card-spec strong{font-size:14px;font-weight:900;overflow-wrap:anywhere}
+#usedScreen .used-notes{font-size:11px;line-height:1.45;color:#777}
+#usedScreen .used-card-bottom{margin-top:auto;padding-top:14px;border-top:1px solid #ededed}
+#usedScreen .used-price{font-size:26px;line-height:1.1;letter-spacing:-.5px;margin:0 0 4px}
+#usedScreen .used-ars{margin:0 0 9px}
+#usedScreen .used-card-bottom>.stock{margin:5px 0 13px}
+#usedScreen .used-card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#usedScreen .used-card-actions .used-gallery-btn{grid-column:1/-1;margin:0;min-height:41px;border-radius:10px;background:#f3f3f3;color:#111;border:1px solid #e1e1e1;font-size:11px;font-weight:900;cursor:pointer}
+#usedScreen .used-card-actions .used-wa,#usedScreen .used-card-actions .used-card-share{display:flex;align-items:center;justify-content:center;min-height:42px;margin:0;border-radius:10px;text-decoration:none;font-size:10px;font-weight:900;text-align:center;padding:8px 6px}
+#usedScreen .used-card-actions .used-wa{background:#ffd400;color:#111}
+#usedScreen .used-card-actions .used-card-share{background:#fff;color:#111;border:1px solid #dedede}
+@media(max-width:900px){#usedScreen .used-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#usedScreen .used-grid{gap:10px}#usedScreen .used-photo{height:165px}#usedScreen .used-body{padding:12px}#usedScreen .used-card-kicker{gap:5px;font-size:8px;letter-spacing:0}#usedScreen .used-body h2{font-size:16px}#usedScreen .used-card-specs{gap:5px}#usedScreen .used-card-spec{padding:8px 6px}#usedScreen .used-card-spec span{font-size:8px}#usedScreen .used-card-spec strong{font-size:11px}#usedScreen .used-price{font-size:21px}#usedScreen .used-card-actions{grid-template-columns:1fr}#usedScreen .used-card-actions .used-gallery-btn{grid-column:1}#usedScreen .used-card-actions .used-wa,#usedScreen .used-card-actions .used-card-share{min-height:37px}}
+@media(max-width:360px){#usedScreen .used-grid{grid-template-columns:1fr}#usedScreen .used-photo{height:230px}}
+</style>
 </head>
 
 
@@ -3217,22 +3247,28 @@ function renderUsed(){
   const list=usedProducts.filter(p=>usedCategory==='TODOS'||p.category===usedCategory);
   const grid=document.getElementById('usedGrid');
   if(!list.length){grid.innerHTML='<div class="used-empty">No hay productos usados publicados en esta categoría por el momento.</div>';return;}
+  const stockClass=p=>{const v=usedNorm(p.stock);return v.includes('ÚLTIMA')||v.includes('ULTIMA')?'stock-last':v.includes('PEDIDO')?'stock-order':v.includes('SIN STOCK')||v.includes('AGOTADO')?'stock-out':v.includes('EN STOCK')?'stock-in':'stock-other';};
   grid.innerHTML=list.map(p=>{
     const label=[p.category,p.model,p.capacity,p.color].filter(Boolean).join(' ');
-    const available=p.stock==='EN STOCK';
+    const available=usedNorm(p.stock)==='EN STOCK';
     const amount=usdNumber(p.price);
-    const price=Number.isFinite(amount)?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(amount):'Consultar precio';
+    const hasPrice=Number.isFinite(amount)&&amount>0;
+    const price=available&&hasPrice?'US$ '+new Intl.NumberFormat('es-AR',{maximumFractionDigits:0}).format(amount):'CONSULTAR';
     const wa='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Hola ImportArg, quiero consultar por este producto usado: '+label+' (Código '+p.id+').');
+    const share='https://wa.me/?text='+encodeURIComponent('ImportArg\n'+label+'\nUSADO'+(p.battery?' · Batería '+p.battery+'%':'')+(p.condition?' · '+p.condition:'')+'\nPrecio: '+price+'\n'+p.stock+'\n'+SITE_URL);
     const mediaCount=p.photos.length+(p.video?1:0);
-    return '<article class="used-card">'+usedImage(p.photos[0])+'<div class="used-body"><h2>'+usedHtml(p.category+' '+p.model)+'</h2><div class="used-detail">'+usedHtml([p.capacity,p.color].filter(Boolean).join(' · '))+'</div>'+
-      (p.battery?'<div class="used-detail">Batería: '+usedHtml(p.battery)+'%</div>':'')+
-      (p.condition?'<div class="used-detail">Estado estético: '+usedHtml(p.condition)+'</div>':'')+
-      (p.notes?'<div class="used-detail">'+usedHtml(p.notes)+'</div>':'')+
-      '<div class="used-price">'+(available?price:'Sin stock')+'</div>'+
-      (available&&Number.isFinite(amount)&&blueRate?'<span class="used-ars">≈ '+usedHtml(ARS_FORMAT.format(Math.round(amount*blueRate)))+'</span>':'')+
-      '<div class="used-status" style="color:'+(available?'#167d39':'#777')+'">'+usedHtml(p.stock)+'</div>'+
-      (mediaCount?'<button type="button" class="used-gallery-btn" data-used-gallery="'+usedHtml(p.id)+'">VER FOTOS'+(p.video?' Y VIDEO':'')+' ('+mediaCount+')</button>':'')+
-      '<a class="used-wa" href="'+wa+'" target="_blank" rel="noopener">CONSULTAR POR WHATSAPP</a></div></article>';
+    const gallery=mediaCount?'<button type="button" class="used-gallery-btn" data-used-gallery="'+usedHtml(p.id)+'">VER FOTOS'+(p.video?' Y VIDEO':'')+' ('+mediaCount+')</button>':'';
+    return '<article class="used-card">'+usedImage(p.photos[0])+'<div class="used-body">'+
+      '<div class="used-card-kicker"><span class="catalog-condition catalog-condition-used">USADO</span><span>EQUIPO REVISADO</span></div>'+
+      '<h2>'+usedHtml([p.category,p.model].filter(Boolean).join(' '))+'</h2>'+
+      '<div class="used-detail used-variant">'+usedHtml([p.capacity,p.color].filter(Boolean).join(' · '))+'</div>'+
+      '<div class="used-card-specs">'+(p.battery?'<div class="used-card-spec"><span>BATERÍA</span><strong>'+usedHtml(p.battery)+'%</strong></div>':'')+
+      (p.condition?'<div class="used-card-spec"><span>ESTADO ESTÉTICO</span><strong>'+usedHtml(p.condition)+'</strong></div>':'')+'</div>'+
+      (p.notes?'<div class="used-detail used-notes">'+usedHtml(p.notes)+'</div>':'')+
+      '<div class="used-card-bottom"><div class="used-price">'+price+'</div>'+
+      (available&&hasPrice&&blueRate?'<span class="used-ars">≈ '+usedHtml(ARS_FORMAT.format(Math.round(amount*blueRate)))+'</span>':'')+
+      '<span class="stock '+stockClass(p)+'">'+usedHtml(p.stock||'CONSULTAR')+'</span>'+
+      '<div class="used-card-actions">'+gallery+'<a class="used-wa" href="'+wa+'" target="_blank" rel="noopener noreferrer">'+(available&&hasPrice?'COMPRAR':'CONSULTAR')+'</a><a class="used-card-share" href="'+share+'" target="_blank" rel="noopener noreferrer" aria-label="Compartir producto">COMPARTIR</a></div></div></div></article>';
   }).join('');
 }
 /* Integración de usados en el catálogo de nuevos: sin fotos en las filas. */
