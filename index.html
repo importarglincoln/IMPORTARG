@@ -3775,6 +3775,10 @@ setInterval(loadBlueRate,300000);
   .hero-suggestion{padding:10px 12px}
   .hero-suggestion-title{font-size:12px}
   .hero-suggestion-meta{font-size:10px}
+  .hero-suggestions{overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#888 #f1f1f1}
+  .hero-suggestions::-webkit-scrollbar{width:6px;-webkit-appearance:none}
+  .hero-suggestions::-webkit-scrollbar-track{background:#f1f1f1;border-radius:6px}
+  .hero-suggestions::-webkit-scrollbar-thumb{background:#888;border-radius:6px}
 }
 </style>
 
@@ -3789,7 +3793,21 @@ setInterval(loadBlueRate,300000);
 
   function place(){
     const r=input.closest(".hero-search").getBoundingClientRect();
-    box.style.left=r.left+"px"; box.style.top=(r.bottom+6)+"px"; box.style.width=r.width+"px";
+    const vv=window.visualViewport;
+    const mobile=window.matchMedia("(max-width:760px)").matches;
+    // El contenedor se mueve a body: sus coordenadas deben ser de viewport fijo,
+    // no absolutas del documento (en iOS se desalinean al abrir el teclado).
+    const top=r.bottom+6;
+    const visibleBottom=vv ? vv.offsetTop+vv.height : window.innerHeight;
+    const available=Math.max(0,visibleBottom-top-10);
+    box.style.position="fixed";
+    box.style.left=Math.max(8,r.left)+"px";
+    box.style.top=top+"px";
+    box.style.width=Math.min(r.width,window.innerWidth-16)+"px";
+    box.style.maxHeight=(mobile?Math.min(270,available):Math.min(330,available))+"px";
+    box.style.overflowY="auto";
+    // No desplegar la lista encima del teclado o del propio campo.
+    box.style.visibility=available>=45?"visible":"hidden";
   }
 
   const norm=v=>String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
@@ -3837,7 +3855,16 @@ setInterval(loadBlueRate,300000);
   }
 
   input.addEventListener("input",updateSuggestions,{passive:true});
-  input.addEventListener("focus",updateSuggestions);
+  input.addEventListener("focus",()=>{
+    updateSuggestions();
+    // Safari puede desplazar la página después de mostrar el teclado.
+    setTimeout(()=>{if(box.classList.contains("open")) place();},120);
+    setTimeout(()=>{if(box.classList.contains("open")) place();},350);
+  });
+  if(window.visualViewport){
+    window.visualViewport.addEventListener("resize",()=>{if(box.classList.contains("open"))place();},{passive:true});
+    window.visualViewport.addEventListener("scroll",()=>{if(box.classList.contains("open"))place();},{passive:true});
+  }
   input.addEventListener("keydown",e=>{if(e.key==="Escape") close();});
   window.addEventListener("resize",()=>{if(box.classList.contains("open")) place();},{passive:true});
   window.addEventListener("scroll",()=>{if(box.classList.contains("open")) place();},{passive:true});
