@@ -1423,6 +1423,27 @@ tbody tr:nth-child(even){background:#f7f7f8}
 .catalog-empty-contact{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 19px;border-radius:10px;border:1px solid #dfb935;background:#fff6d4;color:#262626;font-size:12px;font-weight:700;letter-spacing:.015em;text-decoration:none}
 @media(max-width:700px){.catalog-empty-message{margin:18px 12px 32px;padding:30px 18px}.catalog-empty-contact{width:100%;max-width:300px}}
 </style>
+
+<style id="importarg-table-readability-wa-buy">
+/* Solo legibilidad del catálogo: sin alterar estructura ni paleta. */
+@media (min-width:701px) {
+ .catalog-screen td {font-size:13px!important;line-height:1.4!important;}
+ .catalog-screen td:first-child strong {font-size:13.5px!important;}
+}
+.catalog-screen .desktop-buy,.catalog-screen .buy-button {
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ gap:5px!important;white-space:nowrap!important;
+}
+.catalog-screen .desktop-buy .buy-wa-icon,.catalog-screen .buy-button .buy-wa-icon {
+ width:13px!important;height:13px!important;flex:0 0 13px!important;display:block!important;
+}
+@media(max-width:700px){
+ .catalog-screen .product-main {font-size:13px!important;}
+ .catalog-screen .product-meta {font-size:11.5px!important;}
+ .catalog-screen .buy-button {padding:0 9px!important;}
+ .catalog-screen .buy-button .buy-wa-icon {width:12px!important;height:12px!important;flex-basis:12px!important;}
+}
+</style>
 </head>
 
 
@@ -3045,7 +3066,7 @@ function renderMobile(list){
       rel="noopener noreferrer"
     >
 
-      ${buyText}
+      <svg class="buy-wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2C6.54 2 2.07 6.47 2.06 11.97c0 1.76.46 3.48 1.33 5L2 22l5.16-1.35a9.95 9.95 0 0 0 4.87 1.24h.01c5.5 0 9.97-4.47 9.97-9.97A9.9 9.9 0 0 0 19.1 4.9 9.9 9.9 0 0 0 12.04 2Zm0 18.21a8.26 8.26 0 0 1-4.21-1.15l-.3-.18-3.06.8.82-2.98-.2-.31a8.3 8.3 0 0 1-1.27-4.42 8.22 8.22 0 0 1 8.22-8.22c2.2 0 4.27.86 5.82 2.42a8.17 8.17 0 0 1 2.4 5.81 8.23 8.23 0 0 1-8.22 8.23Zm4.51-6.16c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.17.25-.64.8-.79.96-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.45-1.37-1.7-.15-.24-.02-.38.1-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.06s.89 2.38 1.01 2.55c.12.16 1.75 2.68 4.24 3.75.59.25 1.05.4 1.41.51.59.19 1.12.16 1.54.1.47-.07 1.46-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg><span>${buyText}</span>
 
     </a>
 
@@ -3195,7 +3216,7 @@ function renderDesktop(list){
         rel="noopener noreferrer"
       >
 
-        ${buyText}
+        <svg class="buy-wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.04 2C6.54 2 2.07 6.47 2.06 11.97c0 1.76.46 3.48 1.33 5L2 22l5.16-1.35a9.95 9.95 0 0 0 4.87 1.24h.01c5.5 0 9.97-4.47 9.97-9.97A9.9 9.9 0 0 0 19.1 4.9 9.9 9.9 0 0 0 12.04 2Zm0 18.21a8.26 8.26 0 0 1-4.21-1.15l-.3-.18-3.06.8.82-2.98-.2-.31a8.3 8.3 0 0 1-1.27-4.42 8.22 8.22 0 0 1 8.22-8.22c2.2 0 4.27.86 5.82 2.42a8.17 8.17 0 0 1 2.4 5.81 8.23 8.23 0 0 1-8.22 8.23Zm4.51-6.16c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.17.25-.64.8-.79.96-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.45-1.37-1.7-.15-.24-.02-.38.1-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.06s.89 2.38 1.01 2.55c.12.16 1.75 2.68 4.24 3.75.59.25 1.05.4 1.41.51.59.19 1.12.16 1.54.1.47-.07 1.46-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg><span>${buyText}</span>
 
       </a>
 
