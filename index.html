@@ -3782,10 +3782,10 @@ setInterval(loadBlueRate,300000);
       ticking=false;
       const rect=hero.getBoundingClientRect();
       const scrolled=Math.max(0,-rect.top);
-      // Movimiento sutil: acompaña la portada sin quedarse "pegado" al deslizar.
-      // El desplazamiento de la página sigue siendo 100% nativo de Safari.
-      const maxTravel=Math.min(75,Math.max(0,hero.offsetHeight-block.offsetHeight-80));
-      const travel=Math.min(scrolled*.16,maxTravel);
+      // El contenido acompaña el gesto casi 1:1 durante la portada,
+      // hasta el borde inferior, sin bloquear el scroll nativo.
+      const maxTravel=Math.max(0,hero.offsetHeight-block.offsetHeight-24);
+      const travel=Math.min(scrolled*.92,maxTravel);
       block.style.transform='translate3d(0,'+travel.toFixed(2)+'px,0)';
     }
     function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update)}}
