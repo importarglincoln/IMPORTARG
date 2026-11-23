@@ -1441,6 +1441,15 @@ tbody tr:nth-child(even){background:#f7f7f8}
 }
 </style>
 
+<style id="catalog-empty-styles">
+.catalog-empty-message{max-width:650px;margin:24px auto 48px;padding:38px 24px;text-align:center;background:#fff;border:1px solid #e3e5e9;border-radius:18px;box-shadow:0 8px 28px rgba(15,23,42,.055);font-family:Inter,system-ui,sans-serif}
+.catalog-empty-message[hidden]{display:none!important}
+.catalog-empty-symbol{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 16px;border:1px solid #e9e1bb;background:#fff9e5;border-radius:16px;color:#9a780b;font-size:35px;line-height:1}
+.catalog-empty-message h2{margin:0 0 10px;color:#20252d;font-size:clamp(19px,2.4vw,23px);font-weight:700;letter-spacing:-.035em;line-height:1.25}
+.catalog-empty-message p{margin:0 auto 22px;max-width:460px;color:#626a75;font-size:14px;line-height:1.65}
+.catalog-empty-contact{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:10px 19px;border-radius:10px;border:1px solid #dfb935;background:#fff6d4;color:#262626;font-size:12px;font-weight:700;letter-spacing:.015em;text-decoration:none}
+@media(max-width:700px){.catalog-empty-message{margin:18px 12px 32px;padding:30px 18px}.catalog-empty-contact{width:100%;max-width:300px}}
+</style>
 </head>
 
 
@@ -1699,7 +1708,12 @@ tbody tr:nth-child(even){background:#f7f7f8}
   id="mobileList"
 ></div>
 
-
+<div id="catalogEmptyMessage" class="catalog-empty-message" hidden aria-live="polite">
+  <div class="catalog-empty-symbol" aria-hidden="true">▢</div>
+  <h2 id="catalogEmptyTitle">Sin stock por el momento</h2>
+  <p id="catalogEmptyDescription">Estamos actualizando nuestro catálogo. Consultanos por disponibilidad.</p>
+  <a class="catalog-empty-contact" href="https://wa.me/5491124014722?text=Hola%20ImportArg%2C%20quiero%20consultar%20por%20productos%20de%20PlayStation%205" target="_blank" rel="noopener noreferrer">CONSULTAR DISPONIBILIDAD</a>
+</div>
 
 </section>
 
@@ -2651,7 +2665,9 @@ function buildFilters(){
     !categories.includes(
       currentFilter
     ) &&
-    currentFilter !== "RAYBAN META"
+    // Las categorías de portada deben conservar su filtro incluso sin stock.
+    // De otro modo PS5/SONY se convierte en TODOS y muestra el catálogo entero.
+    !["SONY", "RAYBAN META"].includes(currentFilter)
   ){
 
     currentFilter =
@@ -2882,11 +2898,28 @@ function render(){
   );
 
 
+  const emptyState = document.getElementById("catalogEmptyMessage");
+  const showEmpty = list.length === 0 && currentFilter !== "RAYBAN META";
+  if (emptyState) {
+    emptyState.hidden = !showEmpty;
+    if (showEmpty) {
+      const categoryName = currentFilter === "SONY" ? "PlayStation 5" : currentFilter;
+      const isSearch = Boolean((document.getElementById("searchInput")?.value || "").trim());
+      document.getElementById("catalogEmptyTitle").textContent = isSearch
+        ? "No encontramos productos con esa búsqueda"
+        : "Sin stock por el momento";
+      document.getElementById("catalogEmptyDescription").textContent = isSearch
+        ? "Probá con otro nombre o consultanos por disponibilidad."
+        : "Estamos actualizando nuestro catálogo. Consultanos por disponibilidad.";
+      emptyState.querySelector(".catalog-empty-contact").href = "https://wa.me/5491124014722?text=" + encodeURIComponent("Hola ImportArg, quiero consultar por " + (currentFilter === "SONY" ? "PlayStation 5" : (currentFilter === "TODOS" ? "un producto" : categoryName)));
+    }
+  }
+
   const raybanEmpty = currentFilter === "RAYBAN META" &&
     !list.some(p => getStockInfo(p.status).available);
   // Ocultar la tabla vacía solo cuando Ray-Ban Meta no tiene stock.
   const tableWrap = document.getElementById("tableWrap");
-  if(tableWrap) tableWrap.style.display = raybanEmpty ? "none" : (window.innerWidth > 700 ? "block" : "none");
+  if(tableWrap) tableWrap.style.display = (raybanEmpty || showEmpty) ? "none" : (window.innerWidth > 700 ? "block" : "none");
   const emptyMessage = document.getElementById("raybanEmptyMessage");
   if(emptyMessage){
     emptyMessage.hidden = !raybanEmpty;
