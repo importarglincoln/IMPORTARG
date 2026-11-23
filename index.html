@@ -3792,17 +3792,11 @@ setInterval(loadBlueRate,300000);
   // Mantener sugerencias ancladas al buscador, no al viewport de Safari.
 
   function place(){
-    // Coordenadas locales al buscador: el teclado y el desplazamiento de Safari
-    // no pueden colocar las sugerencias encima del campo de escritura.
-    box.style.position="absolute";
-    box.style.left="0";
-    box.style.right="0";
-    box.style.top="calc(100% + 6px)";
-    box.style.width="100%";
-    box.style.bottom="auto";
-    box.style.maxHeight=window.matchMedia("(max-width:760px)").matches?"152px":"330px";
-    box.style.overflowY="auto";
-    box.style.visibility="visible";
+    // La lista forma parte del flujo normal del buscador en móvil.
+    // No asignar coordenadas de pantalla ni estilos inline de posición.
+    if(window.matchMedia("(max-width:760px)").matches){
+      ["position","top","left","right","bottom","width","maxHeight","overflowY","visibility"].forEach(k=>box.style[k]="");
+    }
   }
 
   const norm=v=>String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
@@ -4375,6 +4369,68 @@ header::before{background:linear-gradient(180deg,rgba(0,0,0,.36) 0%,rgba(0,0,0,.
   .hero-search > .hero-suggestions,
   .hero-search > .hero-suggestions.open{max-height:152px!important;}
   .hero-search > .hero-suggestions .hero-suggestion{min-height:36px!important;}
+}
+</style>
+
+<style id="importarg-iphone-search-flow-fix">
+/* iOS: las sugerencias ocupan su propia fila, sin superponerse al campo. */
+@media(max-width:760px){
+  .home-hero .hero-search{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    align-content:flex-start!important;
+    align-items:flex-start!important;
+    height:auto!important;
+    min-height:47px!important;
+    overflow:visible!important;
+    isolation:isolate;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+    gap:0!important;
+  }
+  .home-hero .hero-search > input{
+    order:1!important;
+    flex:1 1 0%!important;
+    width:0!important;
+    height:47px!important;
+    min-width:0!important;
+    background:#fff!important;
+    border-radius:24px 0 0 24px!important;
+    padding-left:16px!important;
+  }
+  .home-hero .hero-search > #heroSearchButton{
+    order:2!important;
+    flex:0 0 57px!important;
+    width:57px!important;
+    height:47px!important;
+    border-radius:0 24px 24px 0!important;
+  }
+  .home-hero .hero-search > #heroSuggestions,
+  .home-hero .hero-search > #heroSuggestions.open{
+    order:3!important;
+    position:static!important;
+    display:none!important;
+    flex:0 0 100%!important;
+    width:100%!important;
+    height:auto!important;
+    max-height:156px!important;
+    margin:6px 0 0!important;
+    inset:auto!important;
+    transform:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior:contain!important;
+    border-radius:13px!important;
+    box-shadow:0 8px 20px rgba(0,0,0,.15)!important;
+    z-index:80!important;
+  }
+  .home-hero .hero-search > #heroSuggestions.open{display:block!important;}
+  .home-hero .hero-search > #heroSuggestions .hero-suggestion{
+    min-height:38px!important;
+    padding:7px 10px!important;
+  }
 }
 </style>
 </body>
