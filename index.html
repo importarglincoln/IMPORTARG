@@ -1286,18 +1286,18 @@ tbody tr:nth-child(even){background:#f7f7f8}
 @media(max-width:600px){
   #usedScreen .used-grid{grid-template-columns:minmax(0,1fr)!important;gap:11px!important}
   #usedScreen .used-card{display:grid!important;grid-template-columns:112px minmax(0,1fr);align-items:stretch;border-radius:16px;overflow:hidden;min-height:0;transform:none!important}
-  #usedScreen .used-photo{grid-column:1;grid-row:1;height:auto!important;min-height:145px;width:112px;background:#f4f4f6}
-  #usedScreen .used-photo img{height:100%;width:100%;object-fit:contain;object-position:center}
+  #usedScreen .used-photo{grid-column:1;grid-row:1;height:auto!important;min-height:132px;width:112px;background:#f4f4f6;padding:7px!important;box-sizing:border-box}
+  #usedScreen .used-photo img{height:100%;width:100%;object-fit:contain;object-position:center;border-radius:8px}
   #usedScreen .used-photo:not(:has(img)){gap:5px;padding:7px}
   #usedScreen .used-photo:not(:has(img))::before{width:26px;height:26px}
   #usedScreen .used-photo:not(:has(img))::after{font-size:7px;letter-spacing:0;text-align:center;line-height:1.3}
-  #usedScreen .used-body{grid-column:2;grid-row:1;min-width:0;padding:11px 12px 10px!important;display:flex;flex-direction:column;gap:0}
-  #usedScreen .used-card-kicker{margin-bottom:5px!important;gap:5px;font-size:8px}
+  #usedScreen .used-body{grid-column:2;grid-row:1;min-width:0;padding:9px 11px 9px!important;display:flex;flex-direction:column;gap:0}
+  #usedScreen .used-card-kicker{margin-bottom:3px!important;gap:5px;font-size:8px}
   #usedScreen .used-card-kicker .catalog-condition-used{padding:3px 6px!important;font-size:8px!important}
   #usedScreen .used-card-kicker>span:last-child{display:none}
   #usedScreen .used-body h2{font-size:16px!important;line-height:1.15;margin:0 0 3px!important;letter-spacing:-.25px}
-  #usedScreen .used-variant{font-size:11px;margin:0 0 5px!important}
-  #usedScreen .used-card-specs{display:block;margin:0 0 4px!important}
+  #usedScreen .used-variant{font-size:11px;margin:0 0 3px!important}
+  #usedScreen .used-card-specs{display:block;margin:0 0 2px!important}
   #usedScreen .used-card-spec{display:inline;border:0;background:transparent;padding:0!important;border-radius:0;font-size:10px;line-height:1.4}
   #usedScreen .used-card-spec+ .used-card-spec::before{content:' · ';color:#888}
   #usedScreen .used-card-spec span{display:none}
@@ -1305,21 +1305,21 @@ tbody tr:nth-child(even){background:#f7f7f8}
   #usedScreen .used-card-spec:first-child strong::before{content:'Batería ';font-weight:400}
   #usedScreen .used-card-spec:nth-child(2) strong::before{content:'Estado ';font-weight:400}
   #usedScreen .used-notes{font-size:10px;line-height:1.3;margin-bottom:4px}
-  #usedScreen .used-card-bottom{margin-top:auto!important;padding-top:5px!important;border:0;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+  #usedScreen .used-card-bottom{margin-top:auto!important;padding-top:3px!important;border:0;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
   #usedScreen .used-price{font-size:20px!important;line-height:1.15;margin:0!important;white-space:nowrap}
   #usedScreen .used-ars{display:none}
   #usedScreen .used-card-bottom>.stock{margin:0!important;padding:3px 6px;font-size:8px}
-  #usedScreen .used-card-actions{flex:0 0 100%;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px!important;gap:5px!important;margin-top:5px}
+  #usedScreen .used-card-actions{flex:0 0 100%;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px!important;gap:5px!important;margin-top:3px}
   #usedScreen .used-card-actions .used-wa{grid-column:1;grid-row:1;min-height:34px!important;padding:6px 3px!important;font-size:9px!important}
   #usedScreen .used-card-actions .used-card-share{grid-column:2;grid-row:1;min-height:34px!important;padding:6px 3px!important;font-size:9px!important}
   #usedScreen .used-card-actions .used-gallery-btn{grid-column:3!important;grid-row:1;width:36px;min-height:34px!important;padding:0!important;font-size:0!important;position:relative}
-  #usedScreen .used-card-actions .used-gallery-btn::after{content:'▣';font-size:19px;line-height:1;color:#222;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  #usedScreen .used-card-actions .used-gallery-btn::after{content:'';position:absolute;inset:0;background:center / 19px 19px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23222' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpath d='m21 15-5-5L5 21'/%3E%3C/svg%3E")}
   #usedScreen .used-card-actions:not(:has(.used-gallery-btn)){grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
 }
 @media(max-width:360px){
   #usedScreen .used-grid{grid-template-columns:minmax(0,1fr)!important}
   #usedScreen .used-card{grid-template-columns:92px minmax(0,1fr)}
-  #usedScreen .used-photo{width:92px;height:auto!important;min-height:135px}
+  #usedScreen .used-photo{width:92px;height:auto!important;min-height:125px}
   #usedScreen .used-body{padding:9px!important}
   #usedScreen .used-body h2{font-size:14px!important}
 }
