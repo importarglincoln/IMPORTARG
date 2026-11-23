@@ -3755,7 +3755,47 @@ setInterval(loadBlueRate,300000);
 </script>
 
 
-
+<style id="hero-scroll-motion">
+/* El bloque de búsqueda acompaña suavemente el scroll dentro de la portada. */
+.home-hero{overflow:visible!important}
+.home-hero .hero-scroll-block{position:relative;z-index:3;will-change:transform;transition:none}
+@media (prefers-reduced-motion:reduce){.home-hero .hero-scroll-block{transition:none!important;transform:none!important}}
+</style>
+<script id="hero-scroll-motion-js">
+(function(){
+  function initHeroScroll(){
+    const hero=document.querySelector('.home-hero');
+    if(!hero) return;
+    const h1=hero.querySelector('h1');
+    const paths=hero.querySelector('.product-paths');
+    const search=hero.querySelector('.hero-search');
+    if(!h1||!paths||!search) return;
+    let block=hero.querySelector('.hero-scroll-block');
+    if(!block){
+      block=document.createElement('div');
+      block.className='hero-scroll-block';
+      hero.insertBefore(block,h1);
+      block.append(h1,paths,search);
+    }
+    let ticking=false;
+    function update(){
+      ticking=false;
+      const rect=hero.getBoundingClientRect();
+      const scrolled=Math.max(0,-rect.top);
+      // Movimiento sutil: acompaña la portada sin quedarse "pegado" al deslizar.
+      // El desplazamiento de la página sigue siendo 100% nativo de Safari.
+      const maxTravel=Math.min(75,Math.max(0,hero.offsetHeight-block.offsetHeight-80));
+      const travel=Math.min(scrolled*.16,maxTravel);
+      block.style.transform='translate3d(0,'+travel.toFixed(2)+'px,0)';
+    }
+    function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update)}}
+    update();
+    addEventListener('scroll',onScroll,{passive:true});
+    addEventListener('resize',update);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initHeroScroll); else initHeroScroll();
+})();
+</script>
 
 <style id="category-order-fix-final">
 /* Corrección de composición: texto, botón e imagen ocupan zonas independientes. */
