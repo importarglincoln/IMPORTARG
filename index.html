@@ -2667,7 +2667,11 @@ function buildFilters(){
     ) &&
     // Las categorías de portada deben conservar su filtro incluso sin stock.
     // De otro modo PS5/SONY se convierte en TODOS y muestra el catálogo entero.
-    !["SONY", "RAYBAN META"].includes(currentFilter)
+    !["SONY", "RAYBAN META"].includes(currentFilter) &&
+    // Mantener la categoría elegida desde la portada, incluso antes de
+    // que termine de cargarse Google Sheets o si está temporalmente vacía.
+    !Array.from(document.querySelectorAll("#categoryGrid .category-card"))
+      .some(card => card.dataset.category === currentFilter)
   ){
 
     currentFilter =
